@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/books-reading-tracker/static/css/main.7acaea2f.css",
+    "main.js": "/books-reading-tracker/static/js/main.07d3183d.js",
+    "index.html": "/books-reading-tracker/index.html",
+    "main.7acaea2f.css.map": "/books-reading-tracker/static/css/main.7acaea2f.css.map",
+    "main.07d3183d.js.map": "/books-reading-tracker/static/js/main.07d3183d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.07d3183d.js"
+  ]
+}
