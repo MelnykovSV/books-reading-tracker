@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getErrorMessage } from '../../getErrorMessage';
 // import toast from 'react-toastify';
-import { ISignUpData, ISignInData } from '../../interfaces';
+import { ISignUpData, ISignInData, ISignUpPayload } from '../../interfaces';
 
 axios.defaults.baseURL = 'https://bookread-backend.goit.global';
 
@@ -16,12 +16,17 @@ const token = {
   },
 };
 
-export const signUp = createAsyncThunk(
+export const signUp = createAsyncThunk<ISignUpPayload, ISignUpData>(
   'auth/signUp',
   async ({ name, email, password }: ISignUpData, thunkAPI) => {
     try {
-      const response = axios.post('/auth/register', { name, email, password });
-      console.log(response);
+      const response = await axios.post('/auth/register', {
+        name,
+        email,
+        password,
+      });
+      console.log(response.data);
+      return response.data;
     } catch (error) {
       console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
       return thunkAPI.rejectWithValue(getErrorMessage(error));
