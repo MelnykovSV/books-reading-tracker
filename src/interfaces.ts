@@ -10,14 +10,34 @@ export interface ISignInData {
 }
 
 export interface IUserPayload {
-  user: {
+  userData: {
     name: string;
     email: string;
+    id: string;
   };
-  token: string;
+  accessToken: string;
+  refreshToken: string;
+  sid: string;
 }
 
 export interface ISignUpPayload {
   email: string;
   id: string;
 }
+
+export interface IAuthState {
+  user: { name: null | string; email: null | string; id: null | string };
+  accessToken: null | string;
+  refreshToken: null | string;
+  sid: null | string;
+  isLoggedIn: boolean;
+  isLoading: boolean;
+  error: null | string;
+  status: 'indle' | 'pending' | 'fulfilled' | 'rejected';
+}
+
+export interface IRouteProps {
+  children: React.ReactNode;
+}
+
+// export interface IRefreshResponse
