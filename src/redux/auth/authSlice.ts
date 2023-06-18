@@ -1,5 +1,5 @@
-import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { signUp, signIn, logOut, refresh, getUserData } from './operations';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { signUp, signIn, logOut, getUserData } from './operations';
 import { isError, isPending } from '../statusCheckers';
 import { IUserPayload, IAuthState } from '../../interfaces';
 
