@@ -1,13 +1,23 @@
 {
   "files": {
     "main.css": "/books-reading-tracker/static/css/main.7acaea2f.css",
-    "main.js": "/books-reading-tracker/static/js/main.07d3183d.js",
+    "main.js": "/books-reading-tracker/static/js/main.28409750.js",
+    "static/js/278.635f78dd.chunk.js": "/books-reading-tracker/static/js/278.635f78dd.chunk.js",
+    "static/js/105.e3b4f84e.chunk.js": "/books-reading-tracker/static/js/105.e3b4f84e.chunk.js",
+    "static/js/940.b06690c4.chunk.js": "/books-reading-tracker/static/js/940.b06690c4.chunk.js",
+    "static/js/998.74220cbb.chunk.js": "/books-reading-tracker/static/js/998.74220cbb.chunk.js",
+    "static/js/568.e6eac7c8.chunk.js": "/books-reading-tracker/static/js/568.e6eac7c8.chunk.js",
     "index.html": "/books-reading-tracker/index.html",
     "main.7acaea2f.css.map": "/books-reading-tracker/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/books-reading-tracker/static/js/main.07d3183d.js.map"
+    "main.28409750.js.map": "/books-reading-tracker/static/js/main.28409750.js.map",
+    "278.635f78dd.chunk.js.map": "/books-reading-tracker/static/js/278.635f78dd.chunk.js.map",
+    "105.e3b4f84e.chunk.js.map": "/books-reading-tracker/static/js/105.e3b4f84e.chunk.js.map",
+    "940.b06690c4.chunk.js.map": "/books-reading-tracker/static/js/940.b06690c4.chunk.js.map",
+    "998.74220cbb.chunk.js.map": "/books-reading-tracker/static/js/998.74220cbb.chunk.js.map",
+    "568.e6eac7c8.chunk.js.map": "/books-reading-tracker/static/js/568.e6eac7c8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/js/main.28409750.js"
   ]
 }
