@@ -4,11 +4,11 @@ import { lazy, useEffect } from 'react';
 import { getUserData } from '../../redux/auth/operations';
 import { SharedLayout } from '../SharedLayout/SharedLayout';
 import { Route, Routes } from 'react-router';
-import { Container } from '@mui/material';
 import { PrivateRoute } from '../../userMenu/PrivateRoute';
 import { PublicRoute } from '../../userMenu/PublicRoute';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getSid } from '../../redux/auth/authSlice';
+import { Container } from './App.styled';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 

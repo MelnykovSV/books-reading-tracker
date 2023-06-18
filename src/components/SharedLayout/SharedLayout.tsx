@@ -13,8 +13,13 @@ export const SharedLayout = () => {
   return (
     <Container>
       <header>
-        <Link to="/">BR</Link>
-        {isLoggedIn ? <UserPanel /> : null}
+        <div className="container header-body">
+          <Link to="/" className="logo">
+            BR
+          </Link>
+          {isLoggedIn ? <UserPanel /> : null}
+        </div>
+
         {/* <nav>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/training">Training</NavLink>

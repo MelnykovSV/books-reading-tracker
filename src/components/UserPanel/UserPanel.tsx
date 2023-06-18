@@ -5,6 +5,10 @@ import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { getUser } from '../../redux/auth/authSlice';
 import { logOut } from '../../redux/auth/operations';
 
+import { ReactComponent as IconHome } from '../../images/icons/home.svg';
+
+import { ReactComponent as IconTraining } from '../../images/icons/library.svg';
+
 export const UserPanel = () => {
   const user = useAppSelector(getUser);
 
@@ -24,8 +28,12 @@ export const UserPanel = () => {
         <p className="user__name">{user.name}</p>
       </div>
       <nav>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/training">Training</NavLink>
+        <NavLink to="/">
+          <IconHome />
+        </NavLink>
+        <NavLink to="/training">
+          <IconTraining />
+        </NavLink>
       </nav>
 
       <button type="button" onClick={logOutHandler}>
