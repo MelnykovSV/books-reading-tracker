@@ -1,7 +1,7 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { lazy, useEffect } from 'react';
 
-import { signUp, signIn, getUserData } from '../../redux/auth/operations';
+import { getUserData } from '../../redux/auth/operations';
 import { SharedLayout } from '../SharedLayout/SharedLayout';
 import { Route, Routes } from 'react-router';
 import { Container } from '@mui/material';
@@ -36,6 +36,7 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(getUserData(sid));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

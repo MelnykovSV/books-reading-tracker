@@ -1,14 +1,14 @@
 import { Container } from './SharedLayout.styled';
 import { Outlet } from 'react-router';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Suspense } from 'react';
 import { UserPanel } from '../UserPanel/UserPanel';
-import { getIsLoggedIn, getStatus } from '../../redux/auth/authSlice';
+import { getIsLoggedIn } from '../../redux/auth/authSlice';
 import { useAppSelector } from '../../redux/hooks';
 
 export const SharedLayout = () => {
   const isLoggedIn = useAppSelector(getIsLoggedIn);
-  const status = useAppSelector(getStatus);
+  // const status = useAppSelector(getStatus);
 
   return (
     <Container>

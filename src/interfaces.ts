@@ -40,4 +40,12 @@ export interface IRouteProps {
   children: React.ReactNode;
 }
 
+export interface ILoginSubmitHandler {
+  loginSubmitHandler: (value: ISignInData) => void;
+}
+
+export interface IRegistrationSubmitHandler {
+  registrationSubmitHandler: (value: ISignUpData) => void;
+}
+
 // export interface IRefreshResponse

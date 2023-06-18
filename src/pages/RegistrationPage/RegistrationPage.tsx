@@ -3,10 +3,16 @@ import { RegistrationForm } from '../../components/RegistrationForm/Registration
 import { useAppDispatch } from '../../redux/hooks';
 import { signUp } from '../../redux/auth/operations';
 
+import { ISignUpData } from '../../interfaces';
+
 const RegistrationPage = () => {
   const dispatch = useAppDispatch();
 
-  const registrationSubmitHandler = ({ name, email, password }) => {
+  const registrationSubmitHandler = ({
+    name,
+    email,
+    password,
+  }: ISignUpData) => {
     dispatch(signUp({ name, email, password }));
   };
 

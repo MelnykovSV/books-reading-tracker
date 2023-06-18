@@ -108,7 +108,7 @@ export const refresh = createAsyncThunk(
   }
 );
 
-export const getUserData = createAsyncThunk(
+export const getUserData = createAsyncThunk<any, any>(
   'auth/getUserData',
   async (sid, thunkAPI) => {
     const state = thunkAPI.getState() as { auth: IAuthState };

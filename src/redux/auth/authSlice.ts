@@ -59,7 +59,7 @@ const authSlice = createSlice({
     });
     builder.addCase(
       getUserData.fulfilled,
-      (state, action: PayloadAction<IUserInfo>) => {
+      (state, action: PayloadAction<any>) => {
         if (!action.payload) {
           state.user = { name: null, email: null, id: null };
           state.accessToken = null;
