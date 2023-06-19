@@ -12,11 +12,10 @@ export const Container = styled.div`
     display: block;
     width: min(100%, 320px);
     padding: 32px 20px;
-    /* background-color: gray; */
     background: linear-gradient(
         to right,
-        rgba(9, 30, 63, 0.8),
-        rgba(9, 30, 63, 0.8)
+        ${props => props.theme.colors.transparent.formBg},
+        ${props => props.theme.colors.transparent.formBg}
       ),
       url(${bg});
 
@@ -25,17 +24,16 @@ export const Container = styled.div`
       (min-resolution: 2dppx) {
       background: linear-gradient(
           to right,
-          rgba(9, 30, 63, 0.8),
-          rgba(9, 30, 63, 0.8)
+          ${props => props.theme.colors.transparent.formBg},
+          ${props => props.theme.colors.transparent.formBg}
         ),
         url(${bg2x});
     }
 
     @media screen and (min-width: 768px) {
       width: 400px;
-
       background: none;
-      background-color: #ffffff;
+      background-color: ${props => props.theme.colors.bg.primary};
     }
 
     .google-button {
@@ -46,7 +44,7 @@ export const Container = styled.div`
       display: flex;
       gap: 16px;
       align-items: center;
-      background-color: white;
+      background-color: ${props => props.theme.colors.bg.primary};
       border: none;
       margin: 0 auto;
       margin-bottom: 28px;
@@ -60,19 +58,14 @@ export const Container = styled.div`
         display: block;
         width: 100%;
         margin-bottom: 8px;
-
-        font-family: 'Montserrat';
-        font-style: normal;
         font-weight: 400;
-        font-size: 14px;
-        line-height: calc(17 / 14);
         padding: 13px 8px;
       }
       .registration-form__input-label {
         display: block;
         margin-bottom: 8px;
         span {
-          color: #f25137;
+          color: ${props => props.theme.colors.bg.accentDark};
         }
       }
       .registration-form__error-message-container {
@@ -82,14 +75,12 @@ export const Container = styled.div`
     .registration-form__submir-button {
       cursor: pointer;
       display: block;
-      font-family: 'Montserrat';
-      font-style: normal;
       font-weight: 600;
       font-size: 16px;
       line-height: calc(20 / 16);
       text-align: center;
-      color: #ffffff;
-      background-color: #ff6b08;
+      color: ${props => props.theme.colors.bg.primary};
+      background-color: ${props => props.theme.colors.bg.accent};
       border: none;
       width: 100%;
       height: 60px;
@@ -97,16 +88,14 @@ export const Container = styled.div`
     }
 
     .registration-form__redirrect {
-      font-family: 'Montserrat';
-      font-style: normal;
       font-weight: 500;
       font-size: 13px;
       line-height: calc(16 / 13);
       text-align: center;
-      color: #898f9f;
+      color: ${props => props.theme.colors.text.secondaryDark};
 
       a {
-        color: #ff6b08;
+        color: ${props => props.theme.colors.bg.accent};
       }
     }
   }

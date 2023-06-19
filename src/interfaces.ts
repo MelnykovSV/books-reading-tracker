@@ -47,5 +47,3 @@ export interface ILoginSubmitHandler {
 export interface IRegistrationSubmitHandler {
   registrationSubmitHandler: (value: ISignUpData) => void;
 }
-
-// export interface IRefreshResponse

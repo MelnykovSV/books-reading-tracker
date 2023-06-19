@@ -8,9 +8,8 @@ import { ISignInData } from '../../interfaces';
 const LoginPage = () => {
   const dispatch = useAppDispatch();
 
-  const loginSubmitHandler = async ({ email, password }: ISignInData) => {
-    await dispatch(signIn({ email, password }));
-    console.log(dispatch(signIn({ email, password })));
+  const loginSubmitHandler = ({ email, password }: ISignInData) => {
+    dispatch(signIn({ email, password }));
   };
 
   return (

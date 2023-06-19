@@ -7,16 +7,13 @@ export const Container = styled.div`
     .header-body {
       position: relative;
       display: flex;
-      justify-content: center;
+
+      justify-content: space-between;
 
       align-items: start;
       padding-top: 17px;
       padding-bottom: 17px;
-      /* padding: 17px 0; */
 
-      @media screen and (min-width: 768px) {
-        justify-content: space-between;
-      }
       .logo {
         font-family: 'Abril Fatface';
         font-style: normal;
@@ -24,9 +21,12 @@ export const Container = styled.div`
         font-size: 20px;
         line-height: 27px;
         text-decoration: none;
-        /* identical to box height */
 
         color: #242a37;
+
+        :last-child {
+          margin: 0 auto;
+        }
       }
     }
   }
