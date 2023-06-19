@@ -6,6 +6,6 @@ import { IRouteProps } from '../interfaces';
 export const PrivateRoute = ({ children, ...routeProps }: IRouteProps) => {
   const token = useAppSelector(getAccessToken);
   return (
-    <div {...routeProps}>{token ? children : <Navigate to="/login" />}</div>
+    <div {...routeProps}>{token ? children : <Navigate to="/info" />}</div>
   );
 };

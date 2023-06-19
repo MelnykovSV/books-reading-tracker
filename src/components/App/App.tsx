@@ -10,6 +10,8 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getSid } from '../../redux/auth/authSlice';
 import { Container } from './App.styled';
 import { ModernNormalize } from 'emotion-modern-normalize';
+import { useMediaContext } from '../../mediaContext';
+import { InfoPage } from '../../pages/InfoPage/InfoPage';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 
@@ -27,13 +29,9 @@ export const App = () => {
   const sid = useAppSelector(getSid);
   const dispatch = useAppDispatch();
 
-  // dispatch(
-  //   signIn({
-  //     // name: 'Qweewqrr',
-  //     email: 'qwerqwt131313@mail.com',
-  //     password: 'aA111111',
-  //   })
-  // );
+  const media = useMediaContext();
+
+  console.log(media);
 
   useEffect(() => {
     dispatch(getUserData(sid));
@@ -59,6 +57,15 @@ export const App = () => {
               <PrivateRoute>
                 <TrainingPage />
               </PrivateRoute>
+            }
+          ></Route>
+
+          <Route
+            path="/info"
+            element={
+              <PublicRoute>
+                <InfoPage />
+              </PublicRoute>
             }
           ></Route>
 

@@ -11,20 +11,24 @@ import { ThemeProvider } from '@emotion/react';
 
 import { theme } from './theme';
 
+import { MediaContextProvider } from './components/MediaContextProvider';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter basename="/books-reading-tracker">
-            <App />
-          </BrowserRouter>
-        </PersistGate>
-      </Provider>
-    </ThemeProvider>
+    <MediaContextProvider>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <BrowserRouter basename="/books-reading-tracker">
+              <App />
+            </BrowserRouter>
+          </PersistGate>
+        </Provider>
+      </ThemeProvider>
+    </MediaContextProvider>
   </React.StrictMode>
 );
