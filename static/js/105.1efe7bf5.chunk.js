@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkbooks_reading_tracker=self.webpackChunkbooks_reading_tracker||[]).push([[105],{8105:function(n,r,e){e.r(r),e.d(r,{default:function(){return c}});var a,i=e(168),t=e(9549).Z.div(a||(a=(0,i.Z)([""]))),u=e(184),c=function(){return(0,u.jsx)(t,{children:"TrainingPage"})}}}]);
+//# sourceMappingURL=105.1efe7bf5.chunk.js.map
