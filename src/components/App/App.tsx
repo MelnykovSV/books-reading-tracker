@@ -9,6 +9,7 @@ import { PublicRoute } from '../../userMenu/PublicRoute';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getSid } from '../../redux/auth/authSlice';
 import { Container } from './App.styled';
+import { ModernNormalize } from 'emotion-modern-normalize';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 
@@ -41,6 +42,7 @@ export const App = () => {
 
   return (
     <Container>
+      <ModernNormalize />
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route

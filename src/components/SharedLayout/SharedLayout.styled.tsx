@@ -7,12 +7,16 @@ export const Container = styled.div`
     .header-body {
       position: relative;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
 
       align-items: start;
       padding-top: 17px;
       padding-bottom: 17px;
       /* padding: 17px 0; */
+
+      @media screen and (min-width: 768px) {
+        justify-content: space-between;
+      }
       .logo {
         font-family: 'Abril Fatface';
         font-style: normal;

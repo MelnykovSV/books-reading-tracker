@@ -53,45 +53,74 @@ export const RegistrationForm = ({
             <span className="google-button__text">Google</span>
           </button>
           <label htmlFor="registration-form__name-input">
-            Name:
+            <span className="registration-form__input-label">
+              Name <span>*</span>
+            </span>
+
             <Field
               name="name"
               type="text"
               id="registration-form__name-input"
               placeholder="..."
             />
-            <span>
+            <span className="registration-form__error-message-container">
               <ErrorMessage name="name" />
             </span>
           </label>
           <label htmlFor="registration-form__email-input">
-            Email:
+            <span className="registration-form__input-label">
+              {' '}
+              Email <span>*</span>
+            </span>
+
             <Field
               name="email"
               type="text"
               id="registration-form__email-input"
               placeholder="your@email.com"
             />
-            <span>
+            <span className="registration-form__error-message-container">
               <ErrorMessage name="email" />
             </span>
           </label>
           <label htmlFor="registration-form__password-input">
-            Password:
+            <span className="registration-form__input-label">
+              Password <span>*</span>
+            </span>
+
             <Field
               name="password"
               type="password"
               id="registration-form__password-input"
               placeholder="..."
             />
-            <span>
+            <span className="registration-form__error-message-container">
               <ErrorMessage name="password" />
             </span>
           </label>
-          <p>
+
+          {/* <label htmlFor="registration-form__password-confirm-input">
+            <span className="registration-form__input-label">
+              Password <span>*</span>
+            </span>
+
+            <Field
+              name="password-confirm"
+              type="password-confirm"
+              id="registration-form__password-confirm-input"
+              placeholder="..."
+            />
+            <span className="registration-form__error-message-container">
+              <ErrorMessage name="password-confirm" />
+            </span>
+          </label> */}
+
+          <button className="registration-form__submir-button" type="submit">
+            Register
+          </button>
+          <p className="registration-form__redirrect">
             Already have an account? <Link to="/login">Log in</Link>
           </p>
-          <button type="submit">Register</button>
         </FormikForm>
       </Formik>
     </Container>
