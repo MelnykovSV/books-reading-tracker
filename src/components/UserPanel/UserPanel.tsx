@@ -20,13 +20,6 @@ export const UserPanel = () => {
 
   return (
     <Container>
-      <div className="user__label">
-        <div className="user__icon-container">
-          <span className="user__icon">{user.name ? user.name[0] : ''}</span>
-        </div>
-
-        <p className="user__name">{user.name}</p>
-      </div>
       <nav>
         <NavLink to="/">
           <IconHome />
@@ -35,6 +28,14 @@ export const UserPanel = () => {
           <IconTraining />
         </NavLink>
       </nav>
+
+      <div className="user__label">
+        <div className="user__icon-container">
+          <span className="user__icon">{user.name ? user.name[0] : ''}</span>
+        </div>
+
+        <p className="user__name">{user.name}</p>
+      </div>
 
       <button type="button" onClick={logOutHandler}>
         Logout

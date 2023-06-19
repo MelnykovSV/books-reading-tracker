@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 import { Formik, Field, Form as FormikForm, ErrorMessage } from 'formik';
 import { IRegistrationSubmitHandler } from '../../interfaces';
+import { ReactComponent as GoogleIcon } from '../../images/icons/google.svg';
 export const RegistrationForm = ({
   registrationSubmitHandler,
 }: IRegistrationSubmitHandler) => {
@@ -45,7 +46,12 @@ export const RegistrationForm = ({
         initialValues={{ name: '', email: '', password: '' }}
       >
         <FormikForm>
-          <h2>RegistrationForm</h2>
+          <button type="button" className="google-button">
+            <span className="google-button__icon-container">
+              <GoogleIcon className="google-button__icon" />
+            </span>
+            <span className="google-button__text">Google</span>
+          </button>
           <label htmlFor="registration-form__name-input">
             Name:
             <Field
