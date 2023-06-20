@@ -8,17 +8,17 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: ${props => props.theme.sizes.desktop}) {
     flex-direction: row;
   }
   .form-container {
     width: 100%;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: ${props => props.theme.sizes.tablet}) {
       background: linear-gradient(
           to right,
-          rgba(9, 30, 63, 0.8),
-          rgba(9, 30, 63, 0.8)
+          ${props => props.theme.colors.transparent.formBg},
+          ${props => props.theme.colors.transparent.formBg}
         ),
         url(${bgTablet});
 
@@ -27,18 +27,18 @@ export const Container = styled.div`
         (min-resolution: 2dppx) {
         background: linear-gradient(
             to right,
-            rgba(9, 30, 63, 0.8),
-            rgba(9, 30, 63, 0.8)
+            ${props => props.theme.colors.transparent.formBg},
+            ${props => props.theme.colors.transparent.formBg}
           ),
           url(${bgTablet2x});
       }
     }
-    @media screen and (min-width: 1280px) {
+    @media screen and (min-width: ${props => props.theme.sizes.desktop}) {
       width: 549px;
       background: linear-gradient(
           to right,
-          rgba(9, 30, 63, 0.8),
-          rgba(9, 30, 63, 0.8)
+          ${props => props.theme.colors.transparent.formBg},
+          ${props => props.theme.colors.transparent.formBg}
         ),
         url(${bgDesktop});
 
@@ -47,8 +47,8 @@ export const Container = styled.div`
         (min-resolution: 2dppx) {
         background: linear-gradient(
             to right,
-            rgba(9, 30, 63, 0.8),
-            rgba(9, 30, 63, 0.8)
+            ${props => props.theme.colors.transparent.formBg},
+            ${props => props.theme.colors.transparent.formBg}
           ),
           url(${bgDesktop2x});
       }
@@ -59,12 +59,12 @@ export const Container = styled.div`
     max-width: 450px;
     margin: 0 auto;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: ${props => props.theme.sizes.tablet}) {
       display: block;
       padding-top: 64px;
     }
 
-    @media screen and (min-width: 1280px) {
+    @media screen and (min-width: ${props => props.theme.sizes.desktop}) {
       padding-top: 206px;
       width: 450px;
       display: flex;
@@ -88,10 +88,10 @@ export const Container = styled.div`
         line-height: calc(80 / 59);
         text-align: center;
 
-        color: #ff6b08;
+        color: ${props => props.theme.colors.bg.accent};
         margin: 0 auto;
 
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: ${props => props.theme.sizes.tablet}) {
           font-size: 69px;
           top: -4px;
         }
@@ -101,12 +101,12 @@ export const Container = styled.div`
         font-size: 13px;
         line-height: calc(16 / 13);
         text-align: center;
-        color: #242a37;
+        color: ${props => props.theme.colors.text.primary};
         width: 229px;
         margin: 0 auto;
         margin-bottom: 28px;
 
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: ${props => props.theme.sizes.tablet}) {
           width: 397px;
           font-size: 24px;
           line-height: calc(38 / 24);
@@ -117,11 +117,11 @@ export const Container = styled.div`
       .text-author {
         position: relative;
         text-align: center;
-        color: #898f9f;
+        color: ${props => props.theme.colors.text.secondaryDark};
         margin: 0 auto;
         width: fit-content;
 
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: ${props => props.theme.sizes.tablet}) {
           font-size: 20px;
           line-height: calc(24 / 20);
         }
@@ -133,7 +133,8 @@ export const Container = styled.div`
           left: 0;
           width: 100%;
           height: 1px;
-          background-color: rgba(36, 42, 55, 0.5);
+          background-color: ${props =>
+            props.theme.colors.transparent.decoration};
         }
       }
     }

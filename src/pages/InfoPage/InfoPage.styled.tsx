@@ -16,7 +16,7 @@ export const Container = styled.div`
   }
 
   ul {
-    color: #898f9f;
+    color: ${props => props.theme.colors.text.secondaryDark};
     list-style-position: inside;
 
     :last-of-type {
@@ -36,7 +36,7 @@ export const Container = styled.div`
       width: 130px;
       padding: 12px;
       text-align: center;
-      background-color: white;
+      background-color: ${props => props.theme.colors.bg.primary};
       border: 1px solid #000000;
     }
     .register-button {
@@ -45,7 +45,7 @@ export const Container = styled.div`
       padding: 12px;
       text-align: center;
       background-color: #ff6b08;
-      color: white;
+      color: ${props => props.theme.colors.bg.primary};
       /* border: 1px solid #000000; */
       border: none;
     }

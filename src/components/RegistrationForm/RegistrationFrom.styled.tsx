@@ -3,14 +3,14 @@ import bg from '../../images/form-bg.jpg';
 import bg2x from '../../images/form-bg@2x.jpg';
 
 export const Container = styled.div`
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: ${props => props.theme.sizes.tablet}) {
     display: flex;
     align-items: center;
     padding-top: 64px;
     padding-bottom: 64px;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: ${props => props.theme.sizes.desktop}) {
     min-height: 790px;
   }
   form {
@@ -36,7 +36,7 @@ export const Container = styled.div`
         url(${bg2x});
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: ${props => props.theme.sizes.tablet}) {
       width: 400px;
       background: none;
       background-color: ${props => props.theme.colors.bg.primary};
@@ -55,8 +55,8 @@ export const Container = styled.div`
       margin: 0 auto;
       margin-bottom: 28px;
 
-      @media screen and (min-width: 768px) {
-        background: #f5f7fa;
+      @media screen and (min-width: ${props => props.theme.sizes.tablet}) {
+        background: ${props => props.theme.colors.bg.secondary};
         box-shadow: 0px 2px 2px rgba(9, 30, 63, 0.15);
       }
     }
@@ -65,9 +65,9 @@ export const Container = styled.div`
       display: block;
       width: 100%;
       margin-bottom: 20px;
-      color: white;
-      @media screen and (min-width: 768px) {
-        color: #898f9f;
+      color: ${props => props.theme.colors.bg.primary};
+      @media screen and (min-width: ${props => props.theme.sizes.tablet}) {
+        color: ${props => props.theme.colors.text.secondaryDark};
       }
       input {
         display: block;
@@ -76,8 +76,8 @@ export const Container = styled.div`
         font-weight: 400;
         padding: 13px 8px;
 
-        @media screen and (min-width: 768px) {
-          background: #f5f7fa;
+        @media screen and (min-width: ${props => props.theme.sizes.tablet}) {
+          background: ${props => props.theme.colors.bg.secondary};
           box-shadow: inset 0px 1px 2px rgba(29, 29, 27, 0.15);
           border: none;
         }
@@ -91,7 +91,7 @@ export const Container = styled.div`
       }
       .registration-form__error-message-container {
         display: block;
-        color: #f25137;
+        color: ${props => props.theme.colors.bg.accentDark};
       }
     }
     .registration-form__submit-button {

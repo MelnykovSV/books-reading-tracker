@@ -22,14 +22,14 @@ export const Container = styled.div`
         line-height: 27px;
         text-decoration: none;
 
-        color: #242a37;
+        color: ${props => props.theme.colors.text.primary};
 
         :last-child {
           margin: 0 auto;
-          @media screen and (min-width: 768px) {
+          @media screen and (min-width: ${props => props.theme.sizes.tablet}) {
             margin: 0 0 0 32px;
           }
-          @media screen and (min-width: 1280px) {
+          @media screen and (min-width: ${props => props.theme.sizes.desktop}) {
             margin: 0 0 0 16px;
           }
         }

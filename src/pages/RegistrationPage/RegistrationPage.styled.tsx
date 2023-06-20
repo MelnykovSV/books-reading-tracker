@@ -8,17 +8,17 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: ${props => props.theme.sizes.desktop}) {
     flex-direction: row;
   }
   .form-container {
     width: 100%;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: ${props => props.theme.sizes.tablet}) {
       background: linear-gradient(
           to right,
-          rgba(9, 30, 63, 0.8),
-          rgba(9, 30, 63, 0.8)
+          ${props => props.theme.colors.transparent.formBg},
+          ${props => props.theme.colors.transparent.formBg}
         ),
         url(${bgTablet});
 
@@ -27,8 +27,8 @@ export const Container = styled.div`
         (min-resolution: 2dppx) {
         background: linear-gradient(
             to right,
-            rgba(9, 30, 63, 0.8),
-            rgba(9, 30, 63, 0.8)
+            ${props => props.theme.colors.transparent.formBg},
+            ${props => props.theme.colors.transparent.formBg}
           ),
           url(${bgTablet2x});
       }
@@ -37,8 +37,8 @@ export const Container = styled.div`
       width: 549px;
       background: linear-gradient(
           to right,
-          rgba(9, 30, 63, 0.8),
-          rgba(9, 30, 63, 0.8)
+          ${props => props.theme.colors.transparent.formBg},
+          ${props => props.theme.colors.transparent.formBg}
         ),
         url(${bgDesktop});
 
@@ -47,8 +47,8 @@ export const Container = styled.div`
         (min-resolution: 2dppx) {
         background: linear-gradient(
             to right,
-            rgba(9, 30, 63, 0.8),
-            rgba(9, 30, 63, 0.8)
+            ${props => props.theme.colors.transparent.formBg},
+            ${props => props.theme.colors.transparent.formBg}
           ),
           url(${bgDesktop2x});
       }
@@ -61,11 +61,11 @@ export const Container = styled.div`
     margin: 0 auto;
     display: none;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: ${props => props.theme.sizes.tablet}) {
       display: block;
     }
 
-    @media screen and (min-width: 1280px) {
+    @media screen and (min-width: ${props => props.theme.sizes.desktop}) {
       padding-top: 0;
       width: 450px;
       display: flex;
@@ -79,7 +79,7 @@ export const Container = styled.div`
       font-weight: 400;
       font-size: 34px;
       line-height: calc(38 / 34);
-      color: #242a37;
+      color: ${props => props.theme.colors.text.primary};
       margin-bottom: 32px;
       text-align: center;
     }
@@ -89,7 +89,7 @@ export const Container = styled.div`
       font-weight: 500;
       font-size: 20px;
       line-height: calc(38 / 20);
-      color: #242a37;
+      color: ${props => props.theme.colors.text.primary};
       margin-bottom: 14px;
     }
 
@@ -101,7 +101,7 @@ export const Container = styled.div`
       font-size: 14px;
       line-height: calc(17 / 14);
 
-      color: #898f9f;
+      color: ${props => props.theme.colors.text.secondaryDark};
       margin-bottom: 24px;
       li {
         margin-bottom: 12px;
