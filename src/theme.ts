@@ -28,4 +28,8 @@ export const theme = {
     time: '0.3s',
     cubic: 'linear',
   },
+  sizes: {
+    tablet: '768px',
+    desktop: '1280px',
+  },
 };

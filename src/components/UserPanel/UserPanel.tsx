@@ -21,11 +21,11 @@ export const UserPanel = () => {
   return (
     <Container>
       <nav>
-        <NavLink to="/">
-          <IconHome />
-        </NavLink>
         <NavLink to="/training">
           <IconTraining />
+        </NavLink>
+        <NavLink to="/">
+          <IconHome />
         </NavLink>
       </nav>
 

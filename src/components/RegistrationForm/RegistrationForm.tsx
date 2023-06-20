@@ -44,6 +44,7 @@ export const RegistrationForm = ({
       <Formik
         onSubmit={submitHandler}
         initialValues={{ name: '', email: '', password: '' }}
+        validationSchema={schema}
       >
         <FormikForm>
           <button type="button" className="google-button">
@@ -115,7 +116,7 @@ export const RegistrationForm = ({
             </span>
           </label> */}
 
-          <button className="registration-form__submir-button" type="submit">
+          <button className="registration-form__submit-button" type="submit">
             Register
           </button>
           <p className="registration-form__redirrect">

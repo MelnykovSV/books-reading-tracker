@@ -26,6 +26,12 @@ export const Container = styled.div`
 
         :last-child {
           margin: 0 auto;
+          @media screen and (min-width: 768px) {
+            margin: 0 0 0 32px;
+          }
+          @media screen and (min-width: 1280px) {
+            margin: 0 0 0 16px;
+          }
         }
       }
     }

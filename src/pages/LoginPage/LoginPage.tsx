@@ -13,9 +13,21 @@ const LoginPage = () => {
   };
 
   return (
-    <Container>
-      LoginPage
-      <LoginForm loginSubmitHandler={loginSubmitHandler}></LoginForm>
+    <Container className="container">
+      <div className="form-container">
+        <LoginForm loginSubmitHandler={loginSubmitHandler}></LoginForm>
+      </div>
+
+      <div className="text-container">
+        <div className="text">
+          <b>“</b>
+          <p className="text-body">
+            Books are the ships of thoughts, wandering through the waves of
+            time.
+          </p>
+          <p className="text-author">Francis Bacon</p>
+        </div>
+      </div>
     </Container>
   );
 };

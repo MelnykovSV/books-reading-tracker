@@ -65,5 +65,9 @@ declare module '@emotion/react' {
       time: string;
       cubic: string;
     };
+    sizes: {
+      tablet: string;
+      desktop: string;
+    };
   }
 }

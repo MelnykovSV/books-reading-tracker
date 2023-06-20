@@ -4,8 +4,14 @@ import bg2x from '../../images/form-bg@2x.jpg';
 
 export const Container = styled.div`
   @media screen and (min-width: 768px) {
+    display: flex;
+    align-items: center;
     padding-top: 64px;
     padding-bottom: 64px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    min-height: 790px;
   }
   form {
     margin: 0 auto;
@@ -59,6 +65,10 @@ export const Container = styled.div`
       display: block;
       width: 100%;
       margin-bottom: 20px;
+      color: white;
+      @media screen and (min-width: 768px) {
+        color: #898f9f;
+      }
       input {
         display: block;
         width: 100%;
@@ -81,9 +91,10 @@ export const Container = styled.div`
       }
       .registration-form__error-message-container {
         display: block;
+        color: #f25137;
       }
     }
-    .registration-form__submir-button {
+    .registration-form__submit-button {
       cursor: pointer;
       display: block;
       font-weight: 600;
