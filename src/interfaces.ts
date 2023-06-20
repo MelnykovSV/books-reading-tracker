@@ -47,3 +47,10 @@ export interface ILoginSubmitHandler {
 export interface IRegistrationSubmitHandler {
   registrationSubmitHandler: (value: ISignUpData) => void;
 }
+
+export interface IBookFormData {
+  title: string;
+  author: string;
+  date: string;
+  pages: string;
+}
