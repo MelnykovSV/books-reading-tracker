@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/books-reading-tracker/static/css/main.e788fc23.css",
-    "main.js": "/books-reading-tracker/static/js/main.def7ad2f.js",
+    "main.js": "/books-reading-tracker/static/js/main.c93764fb.js",
     "static/js/278.bc21fdf4.chunk.js": "/books-reading-tracker/static/js/278.bc21fdf4.chunk.js",
     "static/js/105.d2405366.chunk.js": "/books-reading-tracker/static/js/105.d2405366.chunk.js",
-    "static/js/281.fb7c4120.chunk.js": "/books-reading-tracker/static/js/281.fb7c4120.chunk.js",
+    "static/js/281.d395c60f.chunk.js": "/books-reading-tracker/static/js/281.d395c60f.chunk.js",
     "static/js/998.8426ce53.chunk.js": "/books-reading-tracker/static/js/998.8426ce53.chunk.js",
     "static/js/568.e6eac7c8.chunk.js": "/books-reading-tracker/static/js/568.e6eac7c8.chunk.js",
     "static/media/Montserrat-Light.svg": "/books-reading-tracker/static/media/Montserrat-Light.aa8aa3301acfa877e95f.svg",
@@ -54,15 +54,15 @@
     "index.html": "/books-reading-tracker/index.html",
     "static/media/home.svg": "/books-reading-tracker/static/media/home.b3cc0a6a4d8a1f2461a5a0058dafff68.svg",
     "main.e788fc23.css.map": "/books-reading-tracker/static/css/main.e788fc23.css.map",
-    "main.def7ad2f.js.map": "/books-reading-tracker/static/js/main.def7ad2f.js.map",
+    "main.c93764fb.js.map": "/books-reading-tracker/static/js/main.c93764fb.js.map",
     "278.bc21fdf4.chunk.js.map": "/books-reading-tracker/static/js/278.bc21fdf4.chunk.js.map",
     "105.d2405366.chunk.js.map": "/books-reading-tracker/static/js/105.d2405366.chunk.js.map",
-    "281.fb7c4120.chunk.js.map": "/books-reading-tracker/static/js/281.fb7c4120.chunk.js.map",
+    "281.d395c60f.chunk.js.map": "/books-reading-tracker/static/js/281.d395c60f.chunk.js.map",
     "998.8426ce53.chunk.js.map": "/books-reading-tracker/static/js/998.8426ce53.chunk.js.map",
     "568.e6eac7c8.chunk.js.map": "/books-reading-tracker/static/js/568.e6eac7c8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e788fc23.css",
-    "static/js/main.def7ad2f.js"
+    "static/js/main.c93764fb.js"
   ]
 }
