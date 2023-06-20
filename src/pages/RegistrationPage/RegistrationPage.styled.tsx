@@ -59,6 +59,20 @@ export const Container = styled.div`
     width: 100%;
     max-width: 450px;
     margin: 0 auto;
+    display: none;
+
+    @media screen and (min-width: 768px) {
+      display: block;
+    }
+
+    @media screen and (min-width: 1280px) {
+      padding-top: 0;
+      width: 450px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     h2 {
       font-family: 'Abril Fatface';
       font-style: normal;

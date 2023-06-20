@@ -18,7 +18,7 @@ export const InfoPage = () => {
   }
 
   return (
-    <Container>
+    <Container className="container">
       <h2>Books Reading</h2>
       <b>Will help you to</b>
       <ul>
@@ -37,14 +37,16 @@ export const InfoPage = () => {
       <div className="buttons-container">
         <button
           type="button"
+          className="login-button"
           onClick={() => {
             navigate('/login');
           }}
         >
-          log in
+          Log in
         </button>
         <button
           type="button"
+          className="register-button"
           onClick={() => {
             navigate('/registration');
           }}

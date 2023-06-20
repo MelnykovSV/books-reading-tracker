@@ -48,6 +48,11 @@ export const Container = styled.div`
       border: none;
       margin: 0 auto;
       margin-bottom: 28px;
+
+      @media screen and (min-width: 768px) {
+        background: #f5f7fa;
+        box-shadow: 0px 2px 2px rgba(9, 30, 63, 0.15);
+      }
     }
 
     label {
@@ -60,6 +65,12 @@ export const Container = styled.div`
         margin-bottom: 8px;
         font-weight: 400;
         padding: 13px 8px;
+
+        @media screen and (min-width: 768px) {
+          background: #f5f7fa;
+          box-shadow: inset 0px 1px 2px rgba(29, 29, 27, 0.15);
+          border: none;
+        }
       }
       .registration-form__input-label {
         display: block;
