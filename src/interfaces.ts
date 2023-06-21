@@ -14,6 +14,7 @@ export interface IUserPayload {
     name: string;
     email: string;
     id: string;
+    goingToRead: IBookData[];
   };
   accessToken: string;
   refreshToken: string;
@@ -26,7 +27,12 @@ export interface ISignUpPayload {
 }
 
 export interface IAuthState {
-  user: { name: null | string; email: null | string; id: null | string };
+  user: {
+    name: null | string;
+    email: null | string;
+    id: null | string;
+    goingToRead: IBookData[];
+  };
   accessToken: null | string;
   refreshToken: null | string;
   sid: null | string;
@@ -51,6 +57,32 @@ export interface IRegistrationSubmitHandler {
 export interface IBookFormData {
   title: string;
   author: string;
-  date: string;
-  pages: string;
+  publishYear: string;
+  pagesTotal: string;
+}
+
+export interface IBookData {
+  title: string;
+  author: string;
+  publishYear: number;
+  pagesTotal: number;
+  _id: string;
+  pagesFinished: number;
+}
+
+export interface IFormikResetForm {
+  resetForm: () => void;
+}
+
+export interface ISingleBookProps {
+  title: string;
+  author: string;
+  publishYear: number;
+  pagesTotal: number;
+  id: string;
+  status: 'read' | 'going to read' | 'reading now';
+}
+
+export interface IBooksListProps {
+  status: 'read' | 'going to read' | 'reading now';
 }

@@ -3,47 +3,58 @@ import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { IBookFormData } from '../../interfaces';
 import { ReactComponent as BackIcon } from '../../images/icons/back.svg';
+import { useAppDispatch } from '../../redux/hooks';
+import { addBook } from '../../redux/auth/operations';
+import { IFormikResetForm } from '../../interfaces';
 
 export const BookForm = () => {
+  const dispatch = useAppDispatch();
   const schema = yup.object().shape({
     title: yup
       .string()
       .min(3, 'Minimum input length 3 symbols')
-      .matches(/^[a-zA-Z0-9]+$/, 'Invalid format')
       .required('This field is required')
       .trim(),
     author: yup
       .string()
       .min(3, 'Minimum input length 3 symbols')
-      .matches(/^[a-zA-Z0-9]+$/, 'Invalid format')
+      .matches(/^[a-zA-Z0-9 ]+$/, 'Invalid format')
       .required('This field is required')
       .trim(),
-    date: yup
+    publishYear: yup
       .string()
-      .min(3, 'Minimum input length 3 symbols')
-      .matches(/^[a-zA-Z0-9]+$/, 'Invalid format')
+      .matches(/^[0-9]+$/, 'Invalid format')
       .required('This field is required')
       .trim(),
-    pages: yup
+    pagesTotal: yup
       .string()
-      .min(3, 'Minimum input length 3 symbols')
-      .matches(/^[a-zA-Z0-9]+$/, 'Invalid format')
+      .matches(/^[0-9]+$/, 'Invalid format')
       .required('This field is required')
       .trim(),
   });
 
-  const submithandler = async (values: IBookFormData): Promise<void> => {
+  const submithandler = async (
+    values: IBookFormData,
+    { resetForm }: IFormikResetForm
+  ): Promise<void> => {
     const isValid = await schema.isValid(values);
 
     if (isValid) {
       const result = { ...values };
-      console.log(result);
+      dispatch(addBook(result));
     }
+
+    resetForm();
   };
   return (
     <Container className="book-form-container">
       <Formik
-        initialValues={{ title: '', author: '', date: '', pages: '' }}
+        initialValues={{
+          title: '',
+          author: '',
+          publishYear: '',
+          pagesTotal: '',
+        }}
         onSubmit={submithandler}
         validationSchema={schema}
         className="book-form"
@@ -87,36 +98,38 @@ export const BookForm = () => {
           </label>
 
           <label
-            htmlFor="book-form__book-date-input"
-            className="book-form__book-date-label"
+            htmlFor="book-form__book-publishYear-input"
+            className="book-form__book-publishYear-label"
           >
-            <span className="book-form__label-text">Publication date</span>
+            <span className="book-form__label-text">
+              Publication publishYear
+            </span>
 
             <Field
-              name="date"
+              name="publishYear"
               type="text"
-              id="book-form__book-date-input"
+              id="book-form__book-publishYear-input"
               placeholder="..."
             />
             <span className="book-form__error-message-container">
-              <ErrorMessage name="date" />
+              <ErrorMessage name="publishYear" />
             </span>
           </label>
 
           <label
-            htmlFor="book-form__book-pages-input"
-            className="book-form__book-pages-label"
+            htmlFor="book-form__book-pagesTotal-input"
+            className="book-form__book-pagesTotal-label"
           >
             <span className="book-form__label-text">Amount of pages</span>
 
             <Field
-              name="pages"
+              name="pagesTotal"
               type="text"
-              id="book-form__book-pages-input"
+              id="book-form__book-pagesTotal-input"
               placeholder="..."
             />
             <span className="book-form__error-message-container">
-              <ErrorMessage name="pages" />
+              <ErrorMessage name="pagesTotal" />
             </span>
           </label>
 

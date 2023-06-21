@@ -75,8 +75,8 @@ export const Container = styled.div`
       .book-form__book-author-label {
         width: 250px;
       }
-      .book-form__book-date-label,
-      .book-form__book-pages-label {
+      .book-form__book-publishYear-label,
+      .book-form__book-pagesTotal-label {
         width: 134px;
       }
     }

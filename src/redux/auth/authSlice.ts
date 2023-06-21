@@ -1,10 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { signUp, signIn, logOut, getUserData } from './operations';
+import {
+  signUp,
+  signIn,
+  logOut,
+  getUserData,
+  addBook,
+  deleteBook,
+} from './operations';
 import { isError, isPending } from '../statusCheckers';
-import { IUserPayload, IAuthState } from '../../interfaces';
+import { IUserPayload, IAuthState, IBookData } from '../../interfaces';
 
 const initialState: IAuthState = {
-  user: { name: null, email: null, id: null },
+  user: { name: null, email: null, id: null, goingToRead: [] },
   accessToken: null,
   refreshToken: null,
   sid: null,
@@ -49,7 +56,7 @@ const authSlice = createSlice({
     );
     builder.addCase(logOut.fulfilled, state => {
       // clearUserData(state);
-      state.user = { name: null, email: null, id: null };
+      state.user = { name: null, email: null, id: null, goingToRead: [] };
       state.accessToken = null;
       state.refreshToken = null;
       state.isLoggedIn = false;
@@ -61,7 +68,7 @@ const authSlice = createSlice({
       getUserData.fulfilled,
       (state, action: PayloadAction<any>) => {
         if (!action.payload) {
-          state.user = { name: null, email: null, id: null };
+          state.user = { name: null, email: null, id: null, goingToRead: [] };
           state.accessToken = null;
           state.refreshToken = null;
           state.isLoggedIn = false;
@@ -85,6 +92,25 @@ const authSlice = createSlice({
         }
       }
     );
+    builder.addCase(
+      addBook.fulfilled,
+      (state, action: PayloadAction<IBookData>) => {
+        state.user.goingToRead.push(action.payload);
+
+        state.isLoading = false;
+        state.status = 'fulfilled';
+        state.error = null;
+      }
+    );
+    builder.addCase(deleteBook.fulfilled, (state, action) => {
+      state.user.goingToRead = state.user.goingToRead.filter(
+        item => item._id !== action.payload
+      );
+
+      state.isLoading = false;
+      state.status = 'fulfilled';
+      state.error = null;
+    });
     builder.addMatcher(isPending, state => {
       state.isLoading = true;
       state.status = 'pending';
@@ -124,4 +150,7 @@ export const getAccessToken = (state: { auth: IAuthState }) =>
   state.auth.accessToken;
 export const getSid = (state: { auth: IAuthState }) => state.auth.sid;
 export const getStatus = (state: { auth: IAuthState }) => state.auth.status;
+
+export const getGoingToRead = (state: { auth: IAuthState }) =>
+  state.auth.user.goingToRead;
 // export const getIsLoading = (state: IStore) => state.auth.isLoading;

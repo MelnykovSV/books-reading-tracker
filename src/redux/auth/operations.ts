@@ -7,6 +7,7 @@ import {
   ISignInData,
   IUserPayload,
   IAuthState,
+  IBookFormData,
 } from '../../interfaces';
 
 axios.defaults.baseURL = 'https://bookread-backend.goit.global';
@@ -149,6 +150,45 @@ export const getUserData = createAsyncThunk<any, any>(
         console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
         return thunkAPI.rejectWithValue(getErrorMessage(error));
       }
+    }
+  }
+);
+
+export const addBook = createAsyncThunk(
+  'auth/addBook',
+  async (
+    { title, author, publishYear, pagesTotal }: IBookFormData,
+    thunkAPI
+  ) => {
+    console.log(axios.defaults);
+    try {
+      const response = await axios.post('/book', {
+        title,
+        author,
+        publishYear,
+        pagesTotal,
+      });
+
+      console.log(response);
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const deleteBook = createAsyncThunk(
+  'auth/deleteBook',
+  async (id: string, thunkAPI) => {
+    console.log(axios.defaults);
+    try {
+      const response = await axios.delete(`/book/${id}`);
+
+      console.log(response);
+      return id;
+    } catch (error) {
+      console.log(error);
     }
   }
 );
