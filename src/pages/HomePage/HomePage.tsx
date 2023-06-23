@@ -10,6 +10,8 @@ const HomePage = () => {
       <div className="container">
         {' '}
         <BookForm></BookForm>
+        <BooksList status="read" />
+        <BooksList status="reading now" />
         <BooksList status="going to read" />
       </div>
     </Container>

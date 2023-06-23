@@ -101,9 +101,7 @@ export const BookForm = () => {
             htmlFor="book-form__book-publishYear-input"
             className="book-form__book-publishYear-label"
           >
-            <span className="book-form__label-text">
-              Publication publishYear
-            </span>
+            <span className="book-form__label-text">Publication year</span>
 
             <Field
               name="publishYear"

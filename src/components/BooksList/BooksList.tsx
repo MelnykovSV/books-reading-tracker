@@ -88,7 +88,7 @@ export const BooksList = ({ status }: IBooksListProps) => {
         <Container>
           <h3>Already read</h3>
           <div className="books-list__body">
-            <div className="books-list__header">
+            <div className="books-list__header read">
               <p>Book title</p>
               <p>Author</p>
               <p>Year</p>
