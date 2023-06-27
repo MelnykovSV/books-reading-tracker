@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../redux/hooks';
 import { deleteBook } from '../../redux/auth/operations';
 // import { Rating, Button } from '@mui/material';
 import Rating from '@mui/material/Rating';
-import { Button } from '@mui/material';
+
 import { ReactComponent as DeleteIcon } from '../../images/icons/delete.svg';
 
 export const SingleBook = ({

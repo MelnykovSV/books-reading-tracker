@@ -1,4 +1,5 @@
 import '@mui/material/styles';
+// import { ITheme } from './src/interfaces';
 
 declare module '@mui/material/styles' {
   interface ITheme {
@@ -38,6 +39,6 @@ declare module '@mui/material/styles' {
   }
 
   // allow configuration using `createTheme`
-  // interface ITheme extends ThemeOptions {}
+  interface ITheme extends ThemeOptions {}
   export function createTheme(options?: ITheme): CustomTheme;
 }

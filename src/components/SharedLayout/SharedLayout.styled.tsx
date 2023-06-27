@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
+import { IStyledProps } from '../../interfaces';
 
-export const Container = styled.div`
+export const Container = styled.div<IStyledProps>`
   header {
     box-shadow: 0px 2px 3px rgba(9, 30, 63, 0.1);
 

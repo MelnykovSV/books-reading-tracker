@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div`
+import { IStyledProps } from '../../interfaces';
+
+export const Container = styled.div<IStyledProps>`
   form {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 import bg from '../../images/form-bg.jpg';
 import bg2x from '../../images/form-bg@2x.jpg';
+import { IStyledProps } from '../../interfaces';
 
-export const Container = styled.div`
+export const Container = styled.div<IStyledProps>`
   @media screen and (min-width: ${props => props.theme.sizes.tablet}) {
     display: flex;
     align-items: center;

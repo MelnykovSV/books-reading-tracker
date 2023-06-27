@@ -2,7 +2,43 @@ import styled from '@emotion/styled';
 import bg from '../../images/form-bg.jpg';
 import bg2x from '../../images/form-bg@2x.jpg';
 
-export const Container = styled.div`
+type ITheme = {
+  colors: {
+    text: {
+      primary: string;
+      primaryDark: string;
+      secondary: string;
+      secondaryDark: string;
+      placeholder: string;
+      google: string;
+    };
+    bg: {
+      primary: string;
+      secondary: string;
+      decoration: string;
+      title: string;
+      accent: string;
+      accentDark: string;
+      accentSecondary: string;
+    };
+    transparent: {
+      overlay: string;
+      scroll: string;
+      formBg: string;
+      decoration: string;
+    };
+  };
+  animation: {
+    time: string;
+    cubic: string;
+  };
+  sizes: {
+    tablet: string;
+    desktop: string;
+  };
+};
+
+export const Container = styled.div<ITheme>`
   @media screen and (min-width: ${props => props.theme.sizes.tablet}) {
     display: flex;
     align-items: center;
