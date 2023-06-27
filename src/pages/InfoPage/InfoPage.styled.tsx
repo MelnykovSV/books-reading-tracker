@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
+import { IStyledProps } from '../../interfaces';
 
-export const Container = styled.div`
+export const Container = styled.div<IStyledProps>`
   h2 {
     font-family: 'Abril Fatface';
     font-weight: 400;

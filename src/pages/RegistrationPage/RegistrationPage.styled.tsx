@@ -3,8 +3,9 @@ import bgTablet from '../../images/form-bg.jpg';
 import bgTablet2x from '../../images/form-bg@2x.jpg';
 import bgDesktop from '../../images/form-bg.jpg';
 import bgDesktop2x from '../../images/form-bg@2x.jpg';
+import { IStyledProps } from '../../interfaces';
 
-export const Container = styled.div`
+export const Container = styled.div<IStyledProps>`
   display: flex;
   flex-direction: column;
 

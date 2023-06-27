@@ -1,6 +1,5 @@
 import { Container } from './HomePage.styled';
 import { BookForm } from '../../components/BookForm/BookForm';
-import { SingleBook } from '../../components/SingleBook/SingleBook';
 
 import { BooksList } from '../../components/BooksList/BooksList';
 
