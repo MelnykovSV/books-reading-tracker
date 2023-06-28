@@ -126,3 +126,18 @@ export interface ITheme {
 export interface IStyledProps {
   theme?: ITheme;
 }
+
+export interface IMyTrainingProps {
+  trainingList: IBookData[];
+  addToTrainingListHandler: (bookData: IBookData) => void;
+  removeFromTrainingListHandler: (id: string) => void;
+}
+
+export interface ITrainingForm {
+  addToTrainingListHandler: (bookData: IBookData) => void;
+}
+
+export interface ITrainingList {
+  trainingList: IBookData[];
+  removeFromTrainingListHandler: (id: string) => void;
+}
