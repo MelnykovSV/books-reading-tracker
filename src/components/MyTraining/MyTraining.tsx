@@ -14,12 +14,11 @@ import { IBookData } from '../../interfaces';
 import { useAppSelector } from '../../redux/hooks';
 
 import { getGoingToRead } from '../../redux/auth/authSlice';
-// import { useForm } from 'react-hook-form';
 
 const initialState = [] as IBookData[];
 const initialCurrentBook = {} as IBookData;
+
 export const MyTraining = () => {
-  const formSubmitHandler = () => {};
   const getCurrentDate = () => {
     const date = new Date();
 
@@ -27,9 +26,19 @@ export const MyTraining = () => {
   };
 
   const [trainingBookList, setTrainingBookList] = useState(initialState);
-  // const [startDate, setStartDate] = useState(getCurrentDate());
-  // const [endDate, setEndDate] = useState('');
+  const [startDate, setStartDate] = useState(getCurrentDate());
+  const [endDate, setEndDate] = useState('');
   const [currentBook, setCurrentBook] = useState(initialCurrentBook);
+
+  const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const queryBody = {
+      startDate,
+      endDate,
+      books: trainingBookList.map(item => item._id),
+    };
+    console.log(queryBody);
+  };
 
   const goingToRead = useAppSelector(getGoingToRead);
 
@@ -64,7 +73,7 @@ export const MyTraining = () => {
             defaultValue={dayjs(getCurrentDate())}
             onChange={newValue => {
               if (newValue) {
-                console.log(newValue.format('YYYY-MM-DD'));
+                setStartDate(newValue.format('YYYY-MM-DD'));
               }
             }}
             disabled
@@ -75,7 +84,7 @@ export const MyTraining = () => {
             label="Finish"
             onChange={newValue => {
               if (newValue) {
-                console.log(newValue.format('YYYY-MM-DD'));
+                setEndDate(newValue.format('YYYY-MM-DD'));
               }
             }}
             disablePast
