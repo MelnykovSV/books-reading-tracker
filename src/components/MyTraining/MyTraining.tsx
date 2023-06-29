@@ -1,7 +1,7 @@
 import { Container } from './MyTraining.styled';
-// import { TrainingForm } from '../TrainingFrom/TrainingForm';
+
 import { TrainingList } from '../TrainingList/TrainingList';
-import { IMyTrainingProps } from '../../interfaces';
+
 import dayjs from 'dayjs';
 import { useState } from 'react';
 
@@ -10,19 +10,16 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Autocomplete } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { ITrainingForm, IBookData } from '../../interfaces';
+import { IBookData } from '../../interfaces';
 import { useAppSelector } from '../../redux/hooks';
 
 import { getGoingToRead } from '../../redux/auth/authSlice';
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 
 const initialState = [] as IBookData[];
-export const MyTraining = ({
-  trainingList,
-  addToTrainingListHandler,
-  removeFromTrainingListHandler,
-  formSubmitHandler,
-}: IMyTrainingProps) => {
+const initialCurrentBook = {} as IBookData;
+export const MyTraining = () => {
+  const formSubmitHandler = () => {};
   const getCurrentDate = () => {
     const date = new Date();
 
@@ -30,14 +27,10 @@ export const MyTraining = ({
   };
 
   const [trainingBookList, setTrainingBookList] = useState(initialState);
-  const [startDate, setStartDate] = useState(getCurrentDate());
-  const [endDate, setEndDate] = useState('');
-  const [currentBook, setCurrentBook] = useState(null);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  // const [startDate, setStartDate] = useState(getCurrentDate());
+  // const [endDate, setEndDate] = useState('');
+  const [currentBook, setCurrentBook] = useState(initialCurrentBook);
+
   const goingToRead = useAppSelector(getGoingToRead);
 
   const booksList = goingToRead.map(item => ({ ...item, label: item.title }));
@@ -54,18 +47,6 @@ export const MyTraining = ({
     }
   };
 
-  // function addToTrainingBookListHandler(bookData: IBookData) {
-  //   console.log('addToTrainingBookListHandler');
-  //   if (bookData && !trainingBookList.find(item => item._id === bookData._id)) {
-  //     const { title, author, publishYear, pagesTotal, _id, pagesFinished } =
-  //       bookData;
-  //     setTrainingBookList([
-  //       ...trainingBookList,
-  //       { title, author, publishYear, pagesTotal, _id, pagesFinished },
-  //     ]);
-  //   }
-  // }
-
   const removeFromTrainingBookListHandler = (id: string) => {
     setTrainingBookList(
       trainingBookList.filter((item: IBookData) => item._id !== id)
@@ -73,7 +54,7 @@ export const MyTraining = ({
   };
 
   return (
-    <Container onSubmit={handleSubmit(formSubmitHandler)}>
+    <Container onSubmit={formSubmitHandler}>
       <h2>My training</h2>
 
       <div className="date-input-container">
@@ -81,18 +62,22 @@ export const MyTraining = ({
           <DatePicker
             label="Start"
             defaultValue={dayjs(getCurrentDate())}
-            onChange={newValue =>
-              console.log(`${newValue.$y}-${newValue.$M + 1}-${newValue.$D}`)
-            }
+            onChange={newValue => {
+              if (newValue) {
+                console.log(newValue.format('YYYY-MM-DD'));
+              }
+            }}
             disabled
           />
         </LocalizationProvider>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="Finish"
-            onChange={newValue =>
-              setEndDate(`${newValue.$y}-${newValue.$M + 1}-${newValue.$D}`)
-            }
+            onChange={newValue => {
+              if (newValue) {
+                console.log(newValue.format('YYYY-MM-DD'));
+              }
+            }}
             disablePast
             minDate={dayjs().add(1, 'day')}
           />
@@ -100,14 +85,12 @@ export const MyTraining = ({
       </div>
       <div className="books-input-container">
         <Autocomplete
-          ///TODO: ДЕЛАТЬ ЭТО ПО НАЖАТИЮ КНОПКИ А НЕ ПО ИЗМЕНЕНИЮ ИНПУТА!
           onChange={(event: any, book: IBookData | null) => {
-            // if (book) {
-            console.log(book);
-            setCurrentBook(book);
-            // }
+            if (book) {
+              console.log(book);
+              setCurrentBook(book);
+            }
           }}
-          ref={ref}
           disablePortal
           isOptionEqualToValue={(option, value) => {
             return option._id === value._id;
@@ -122,7 +105,9 @@ export const MyTraining = ({
         <button
           type="button"
           onClick={() => {
-            addToTrainingBookListHandler(currentBook);
+            if (currentBook) {
+              addToTrainingBookListHandler(currentBook);
+            }
           }}
         >
           Add

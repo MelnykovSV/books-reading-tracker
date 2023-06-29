@@ -128,9 +128,9 @@ export interface IStyledProps {
 }
 
 export interface IMyTrainingProps {
-  trainingList: IBookData[];
-  addToTrainingListHandler: (bookData: IBookData) => void;
-  removeFromTrainingListHandler: (id: string) => void;
+  // trainingList: IBookData[];
+  // addToTrainingListHandler: (bookData: IBookData) => void;
+  // removeFromTrainingListHandler: (id: string) => void;
 }
 
 export interface ITrainingForm {
@@ -140,4 +140,10 @@ export interface ITrainingForm {
 export interface ITrainingList {
   trainingList: IBookData[];
   removeFromTrainingListHandler: (id: string) => void;
+}
+
+export interface IAutocompleteNewValue {
+  $y: string;
+  $M: string;
+  $D: string;
 }
