@@ -127,12 +127,6 @@ export interface IStyledProps {
   theme?: ITheme;
 }
 
-export interface IMyTrainingProps {
-  // trainingList: IBookData[];
-  // addToTrainingListHandler: (bookData: IBookData) => void;
-  // removeFromTrainingListHandler: (id: string) => void;
-}
-
 export interface ITrainingForm {
   addToTrainingListHandler: (bookData: IBookData) => void;
 }
@@ -142,8 +136,27 @@ export interface ITrainingList {
   removeFromTrainingListHandler: (id: string) => void;
 }
 
-export interface IAutocompleteNewValue {
-  $y: string;
-  $M: string;
-  $D: string;
+export interface IPlanningSingleBook {
+  title: string;
+  author: string;
+  publishYear: number | null;
+  totalPages: number | null;
+  pagesFinished: number | null;
+  rating: number | null;
+  feedback: string;
+  _id: string;
+  __v: number | null;
+}
+
+export interface IPlanning {
+  startDate: string;
+  endDate: string;
+  books: IPlanningSingleBook[];
+  duration: number | null;
+  pagesPerDay: number | null;
+  stats: {
+    date: string;
+    pagesCount: string;
+  };
+  _id: string;
 }

@@ -3,7 +3,7 @@ import { Container } from './MyTraining.styled';
 import { TrainingList } from '../TrainingList/TrainingList';
 
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -11,18 +11,34 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Autocomplete } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { IBookData } from '../../interfaces';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 
 import { getGoingToRead } from '../../redux/auth/authSlice';
+
+import { createPlanning, getPlanning } from '../../redux/planning/operations';
+import { getIsLoggedIn } from '../../redux/auth/authSlice';
 
 const initialState = [] as IBookData[];
 const initialCurrentBook = {} as IBookData;
 
 export const MyTraining = () => {
+  const isLoggedIn = useAppSelector(getIsLoggedIn);
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(getPlanning());
+      console.log('something');
+    }
+  }, [isLoggedIn]);
+
   const getCurrentDate = () => {
     const date = new Date();
 
-    return `${date.getFullYear()}-${date.getUTCMonth() + 1}-${date.getDate()}`;
+    return `${date.getFullYear()}-${`${date.getUTCMonth() + 1}`.padStart(
+      2,
+      '0'
+    )}-${date.getDate()}`;
   };
 
   const [trainingBookList, setTrainingBookList] = useState(initialState);
@@ -37,6 +53,8 @@ export const MyTraining = () => {
       endDate,
       books: trainingBookList.map(item => item._id),
     };
+
+    dispatch(createPlanning(queryBody));
     console.log(queryBody);
   };
 

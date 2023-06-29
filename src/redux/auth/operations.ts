@@ -9,18 +9,7 @@ import {
   IAuthState,
   IBookFormData,
 } from '../../interfaces';
-
-axios.defaults.baseURL = 'https://bookread-backend.goit.global';
-
-const token = {
-  set(token: string) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
+import { token } from '../../api';
 
 export const signUp = createAsyncThunk<IUserPayload, ISignUpData>(
   'auth/signUp',

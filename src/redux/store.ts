@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { userReducer } from './auth/authSlice';
+import { planningReducer } from './planning/planningSlice';
 import storage from 'redux-persist/lib/storage';
 import {
   persistStore,
@@ -20,7 +21,8 @@ const persistConfig = {
 
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(persistConfig, userReducer),
+    auth: persistReducer<any>(persistConfig, userReducer),
+    planning: planningReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

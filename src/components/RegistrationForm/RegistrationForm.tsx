@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { Formik, Field, Form as FormikForm, ErrorMessage } from 'formik';
 import { IRegistrationSubmitHandler } from '../../interfaces';
 import { ReactComponent as GoogleIcon } from '../../images/icons/google.svg';
+
 export const RegistrationForm = ({
   registrationSubmitHandler,
 }: IRegistrationSubmitHandler) => {
