@@ -41,6 +41,21 @@ export const signIn = createAsyncThunk(
     try {
       const response = await axios.post('auth/login', { email, password });
       token.set(response.data.accessToken);
+      console.log('response.data');
+      console.log(response.data);
+
+      const response1 = await axios.get('user/books');
+      console.log('response1.data');
+      console.log(response1.data);
+
+      response.data.userData.goingToRead = [...response1.data.goingToRead];
+      response.data.userData.currentlyReading = [
+        ...response1.data.currentlyReading,
+      ];
+      response.data.userData.finishedReading = [
+        ...response1.data.finishedReading,
+      ];
+
       return response.data;
     } catch (error) {
       console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));

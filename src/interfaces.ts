@@ -15,6 +15,8 @@ export interface IUserPayload {
     email: string;
     id: string;
     goingToRead: IBookData[];
+    currentlyReading: IBookData[];
+    finishedReading: IBookData[];
   };
   accessToken: string;
   refreshToken: string;
@@ -32,6 +34,8 @@ export interface IAuthState {
     email: null | string;
     id: null | string;
     goingToRead: IBookData[];
+    currentlyReading: IBookData[];
+    finishedReading: IBookData[];
   };
   accessToken: null | string;
   refreshToken: null | string;
@@ -159,4 +163,10 @@ export interface IPlanning {
     pagesCount: string;
   };
   _id: string;
+}
+
+export interface ICreatePlanningQueryBody {
+  startDate: string;
+  endDate: string;
+  books: string[];
 }

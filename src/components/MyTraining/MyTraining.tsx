@@ -16,7 +16,7 @@ import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { getGoingToRead } from '../../redux/auth/authSlice';
 
 import { createPlanning, getPlanning } from '../../redux/planning/operations';
-import { getIsLoggedIn } from '../../redux/auth/authSlice';
+import { getIsLoggedIn, getCurrentlyReading } from '../../redux/auth/authSlice';
 
 const initialState = [] as IBookData[];
 const initialCurrentBook = {} as IBookData;
@@ -30,6 +30,7 @@ export const MyTraining = () => {
       dispatch(getPlanning());
       console.log('something');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
 
   const getCurrentDate = () => {
@@ -59,8 +60,12 @@ export const MyTraining = () => {
   };
 
   const goingToRead = useAppSelector(getGoingToRead);
+  const currentlyReading = useAppSelector(getCurrentlyReading);
 
-  const booksList = goingToRead.map(item => ({ ...item, label: item.title }));
+  const booksList = [
+    ...goingToRead.map(item => ({ ...item, label: item.title })),
+    ...currentlyReading.map(item => ({ ...item, label: item.title })),
+  ];
 
   const addToTrainingBookListHandler = (bookData: IBookData) => {
     console.log('addToTrainingBookListHandler');

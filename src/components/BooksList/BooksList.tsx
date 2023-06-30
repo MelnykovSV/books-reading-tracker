@@ -1,11 +1,15 @@
 import { Container } from './BooksList.styled';
 import { useAppSelector } from '../../redux/hooks';
-import { getGoingToRead } from '../../redux/auth/authSlice';
+import {
+  getGoingToRead,
+  getCurrentlyReading,
+} from '../../redux/auth/authSlice';
 import { SingleBook } from '../SingleBook/SingleBook';
 import { IBookData, IBooksListProps } from '../../interfaces';
 
 export const BooksList = ({ status }: IBooksListProps) => {
   const goingToRead = useAppSelector(getGoingToRead);
+  const currentlyReading = useAppSelector(getCurrentlyReading);
 
   switch (status) {
     case 'going to read':
@@ -46,7 +50,7 @@ export const BooksList = ({ status }: IBooksListProps) => {
       );
 
     case 'reading now':
-      console.log(goingToRead);
+      console.log(currentlyReading);
       return (
         <Container>
           <h3>Reading now</h3>
@@ -58,7 +62,7 @@ export const BooksList = ({ status }: IBooksListProps) => {
               <p>Pages</p>
             </div>
             <ul className="books-list__main">
-              {goingToRead.map(
+              {currentlyReading.map(
                 ({
                   title,
                   author,

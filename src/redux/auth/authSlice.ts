@@ -11,7 +11,14 @@ import { isError, isPending } from '../statusCheckers';
 import { IUserPayload, IAuthState, IBookData } from '../../interfaces';
 
 const initialState: IAuthState = {
-  user: { name: null, email: null, id: null, goingToRead: [] },
+  user: {
+    name: null,
+    email: null,
+    id: null,
+    goingToRead: [],
+    currentlyReading: [],
+    finishedReading: [],
+  },
   accessToken: null,
   refreshToken: null,
   sid: null,
@@ -56,7 +63,14 @@ const authSlice = createSlice({
     );
     builder.addCase(logOut.fulfilled, state => {
       // clearUserData(state);
-      state.user = { name: null, email: null, id: null, goingToRead: [] };
+      state.user = {
+        name: null,
+        email: null,
+        id: null,
+        goingToRead: [],
+        currentlyReading: [],
+        finishedReading: [],
+      };
       state.accessToken = null;
       state.refreshToken = null;
       state.isLoggedIn = false;
@@ -68,7 +82,14 @@ const authSlice = createSlice({
       getUserData.fulfilled,
       (state, action: PayloadAction<any>) => {
         if (!action.payload) {
-          state.user = { name: null, email: null, id: null, goingToRead: [] };
+          state.user = {
+            name: null,
+            email: null,
+            id: null,
+            goingToRead: [],
+            currentlyReading: [],
+            finishedReading: [],
+          };
           state.accessToken = null;
           state.refreshToken = null;
           state.isLoggedIn = false;
@@ -153,4 +174,6 @@ export const getStatus = (state: { auth: IAuthState }) => state.auth.status;
 
 export const getGoingToRead = (state: { auth: IAuthState }) =>
   state.auth.user.goingToRead;
+export const getCurrentlyReading = (state: { auth: IAuthState }) =>
+  state.auth.user.currentlyReading;
 // export const getIsLoading = (state: IStore) => state.auth.isLoading;

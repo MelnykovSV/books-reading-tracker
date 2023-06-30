@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getErrorMessage } from '../../getErrorMessage';
+import { ICreatePlanningQueryBody } from '../../interfaces';
 
 export const createPlanning = createAsyncThunk(
   '/planning/createPlanning',
-  async (planningData, thunkAPI) => {
+  async (planningData: ICreatePlanningQueryBody, thunkAPI) => {
     try {
       console.log(planningData);
       const response = await axios.post('/planning', planningData);
