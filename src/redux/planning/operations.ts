@@ -9,6 +9,7 @@ export const createPlanning = createAsyncThunk(
     try {
       console.log(planningData);
       const response = await axios.post('/planning', planningData);
+      console.log('response.data');
       console.log(response.data);
       return response.data;
     } catch (error) {

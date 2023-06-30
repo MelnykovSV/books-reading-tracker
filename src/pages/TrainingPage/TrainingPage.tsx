@@ -1,11 +1,13 @@
 import { Container } from './TrainingPage.styled';
 
 import { MyTraining } from '../../components/MyTraining/MyTraining';
+import { MyGoals } from '../../components/MyGoals/MyGoals';
 
 const TrainingPage = () => {
   return (
     <Container>
       <MyTraining></MyTraining>
+      <MyGoals></MyGoals>
 
       {/* <LineChart
         xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
