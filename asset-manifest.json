@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/books-reading-tracker/static/css/main.e788fc23.css",
-    "main.js": "/books-reading-tracker/static/js/main.e435b45c.js",
+    "main.js": "/books-reading-tracker/static/js/main.f8aec5bf.js",
     "static/js/910.8955605b.chunk.js": "/books-reading-tracker/static/js/910.8955605b.chunk.js",
-    "static/js/707.d552e103.chunk.js": "/books-reading-tracker/static/js/707.d552e103.chunk.js",
+    "static/js/196.c9d4c187.chunk.js": "/books-reading-tracker/static/js/196.c9d4c187.chunk.js",
     "static/js/940.cad513e2.chunk.js": "/books-reading-tracker/static/js/940.cad513e2.chunk.js",
     "static/js/998.e6ca5173.chunk.js": "/books-reading-tracker/static/js/998.e6ca5173.chunk.js",
     "static/js/568.e6eac7c8.chunk.js": "/books-reading-tracker/static/js/568.e6eac7c8.chunk.js",
@@ -60,9 +60,9 @@
     "static/media/delete.svg": "/books-reading-tracker/static/media/delete.8531d922dd06278f9c9a827cfeebc767.svg",
     "static/media/home.svg": "/books-reading-tracker/static/media/home.b3cc0a6a4d8a1f2461a5a0058dafff68.svg",
     "main.e788fc23.css.map": "/books-reading-tracker/static/css/main.e788fc23.css.map",
-    "main.e435b45c.js.map": "/books-reading-tracker/static/js/main.e435b45c.js.map",
+    "main.f8aec5bf.js.map": "/books-reading-tracker/static/js/main.f8aec5bf.js.map",
     "910.8955605b.chunk.js.map": "/books-reading-tracker/static/js/910.8955605b.chunk.js.map",
-    "707.d552e103.chunk.js.map": "/books-reading-tracker/static/js/707.d552e103.chunk.js.map",
+    "196.c9d4c187.chunk.js.map": "/books-reading-tracker/static/js/196.c9d4c187.chunk.js.map",
     "940.cad513e2.chunk.js.map": "/books-reading-tracker/static/js/940.cad513e2.chunk.js.map",
     "998.e6ca5173.chunk.js.map": "/books-reading-tracker/static/js/998.e6ca5173.chunk.js.map",
     "568.e6eac7c8.chunk.js.map": "/books-reading-tracker/static/js/568.e6eac7c8.chunk.js.map",
@@ -73,6 +73,6 @@
   },
   "entrypoints": [
     "static/css/main.e788fc23.css",
-    "static/js/main.e435b45c.js"
+    "static/js/main.f8aec5bf.js"
   ]
 }
