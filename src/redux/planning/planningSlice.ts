@@ -26,7 +26,7 @@ const initialState = {
     pagesCount: '',
   },
   _id: '',
-  status: 'indle',
+  status: 'idle',
 
   isLoading: false,
   error: null,
