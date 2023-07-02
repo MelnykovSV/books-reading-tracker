@@ -88,3 +88,4 @@ export const getError = (state: any) => state.planning.error;
 export const getPlanningFromStore = (state: any) => state.planning;
 export const getStartDate = (state: any) => state.planning.startDate;
 export const getEndDate = (state: any) => state.planning.endDate;
+export const getPlanningLoadingStatus = (state: any) => state.planning.status;
