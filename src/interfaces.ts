@@ -152,7 +152,7 @@ export interface IPlanningSingleBook {
   __v: number | null;
 }
 
-export interface IPlanning {
+export interface IPlanningSlice {
   startDate: string;
   endDate: string;
   books: IPlanningSingleBook[];
@@ -161,12 +161,35 @@ export interface IPlanning {
   stats: {
     date: string;
     pagesCount: string;
-  };
+  }[];
   _id: string;
+  status: 'idle' | 'pending' | 'fulfilled' | 'rejected';
+  planningStatus: null | 'none' | 'active' | 'success' | 'fail';
+  isLoading: boolean;
+  error: null | string;
 }
 
 export interface ICreatePlanningQueryBody {
   startDate: string;
   endDate: string;
   books: string[];
+}
+
+export interface IMyTrainingProps {
+  trainingBookList: IBookData[];
+  startDate: string;
+  endDate: string;
+  updateTrainingBookList: (value: IBookData[]) => void;
+  updateStartDate: (value: string) => void;
+  updateEndDate: (value: string) => void;
+}
+
+export interface IMyGoalsProps {
+  trainingBookList: IBookData[];
+  planningStartDate: string;
+  planningEndDate: string;
+}
+
+export interface IModalProps {
+  modalType: string;
 }

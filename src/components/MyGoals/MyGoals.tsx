@@ -4,43 +4,54 @@ import {
   getPlanningFromStore,
   getStartDate,
   getEndDate,
+  getPlanningId,
 } from '../../redux/planning/planningSlice';
-import { IBookData } from '../../interfaces';
+import { IBookData, IMyGoalsProps } from '../../interfaces';
+import { getCurrentBookNumber } from '../../helpers';
 
 import dayjs from 'dayjs';
 
-export const MyGoals = () => {
+export const MyGoals = ({
+  trainingBookList,
+  planningStartDate,
+  planningEndDate,
+}: IMyGoalsProps) => {
   const planning = useAppSelector(getPlanningFromStore);
+  console.log(trainingBookList);
 
   const startDate = useAppSelector(getStartDate);
   const endDate = useAppSelector(getEndDate);
+  const planningId = useAppSelector(getPlanningId);
+
+  if (planningId) {
+    console.log('BOOKS COUNTER');
+    console.log(getCurrentBookNumber(planning.books));
+  }
 
   return (
     <Container>
       <h2>My goals</h2>
       <ul className="goals-body">
         <li className="goal">
-          <p>{planning.status === 'fulfilled' ? planning.books.length : 0}</p>
+          <p>{planningId ? planning.books.length : trainingBookList.length}</p>
           <p>Amount of books</p>
         </li>
         <li className="goal">
           <p>
-            {planning.status === 'fulfilled'
+            {planningId
               ? dayjs(endDate).diff(dayjs(startDate), 'day')
-              : 0}
+              : dayjs(planningEndDate).diff(planningStartDate, 'day') || 0}
           </p>
           <p>Amount of days</p>
         </li>
-        <li className="goal">
-          <p>
-            {planning.status === 'fulfilled'
-              ? planning.books.filter(
-                  (item: IBookData) => item.pagesTotal !== item.pagesFinished
-                ).length
-              : 0}
-          </p>
-          <p>Books left</p>
-        </li>
+        {planningId && (
+          <li className="goal">
+            <p>
+              {planning.books.length - getCurrentBookNumber(planning.books) + 1}
+            </p>
+            <p>Books left</p>
+          </li>
+        )}
       </ul>
     </Container>
   );

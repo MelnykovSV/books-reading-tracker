@@ -10,7 +10,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Autocomplete } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { IBookData } from '../../interfaces';
+import { IBookData, IMyTrainingProps } from '../../interfaces';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 
 import { getGoingToRead } from '../../redux/auth/authSlice';
@@ -18,11 +18,20 @@ import { getGoingToRead } from '../../redux/auth/authSlice';
 import { createPlanning, getPlanning } from '../../redux/planning/operations';
 import { getIsLoggedIn, getCurrentlyReading } from '../../redux/auth/authSlice';
 
-const initialState = [] as IBookData[];
+// const initialState = [] as IBookData[];
 const initialCurrentBook = {} as IBookData;
 
-export const MyTraining = () => {
+export const MyTraining = ({
+  trainingBookList,
+  startDate,
+  endDate,
+  updateTrainingBookList,
+  updateStartDate,
+  updateEndDate,
+}: IMyTrainingProps) => {
   const isLoggedIn = useAppSelector(getIsLoggedIn);
+
+  console.log(trainingBookList);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -34,17 +43,13 @@ export const MyTraining = () => {
   }, [isLoggedIn]);
 
   const getCurrentDate = () => {
-    const date = new Date();
-
-    return `${date.getFullYear()}-${`${date.getUTCMonth() + 1}`.padStart(
-      2,
-      '0'
-    )}-${date.getDate()}`;
+    return dayjs().format('YYYY-MM-DD');
   };
 
-  const [trainingBookList, setTrainingBookList] = useState(initialState);
-  const [startDate, setStartDate] = useState(getCurrentDate());
-  const [endDate, setEndDate] = useState('');
+  // const [trainingBookList, setTrainingBookList] = useState(initialState);
+  // const [startDate, setStartDate] = useState(getCurrentDate());
+  // const [endDate, setEndDate] = useState('');
+
   const [currentBook, setCurrentBook] = useState(initialCurrentBook);
 
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -72,7 +77,7 @@ export const MyTraining = () => {
     if (bookData && !trainingBookList.find(item => item._id === bookData._id)) {
       const { title, author, publishYear, pagesTotal, _id, pagesFinished } =
         bookData;
-      setTrainingBookList([
+      updateTrainingBookList([
         ...trainingBookList,
         { title, author, publishYear, pagesTotal, _id, pagesFinished },
       ]);
@@ -80,7 +85,7 @@ export const MyTraining = () => {
   };
 
   const removeFromTrainingBookListHandler = (id: string) => {
-    setTrainingBookList(
+    updateTrainingBookList(
       trainingBookList.filter((item: IBookData) => item._id !== id)
     );
   };
@@ -96,7 +101,7 @@ export const MyTraining = () => {
             defaultValue={dayjs(getCurrentDate())}
             onChange={newValue => {
               if (newValue) {
-                setStartDate(newValue.format('YYYY-MM-DD'));
+                updateStartDate(newValue.format('YYYY-MM-DD'));
               }
             }}
             disabled
@@ -107,7 +112,7 @@ export const MyTraining = () => {
             label="Finish"
             onChange={newValue => {
               if (newValue) {
-                setEndDate(newValue.format('YYYY-MM-DD'));
+                updateEndDate(newValue.format('YYYY-MM-DD'));
               }
             }}
             disablePast

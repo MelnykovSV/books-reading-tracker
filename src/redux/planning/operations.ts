@@ -19,18 +19,21 @@ export const createPlanning = createAsyncThunk(
   }
 );
 
-// export const updatePlanning = createAsyncThunk(
-//   '/planning/create',
-//   async (planningData, thunkAPI) => {
-//     try {
-//       const response = await axios.patch('/planning', planningData);
-//       console.log(response);
-//     } catch (error) {
-//       console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
-//       return thunkAPI.rejectWithValue(getErrorMessage(error));
-//     }
-//   }
-// );
+export const updatePlanning = createAsyncThunk(
+  '/planning/updatePlanning',
+  async (planningData, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState();
+      console.log(state);
+      const response = await axios.patch('/planning', planningData);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
+    }
+  }
+);
 
 export const getPlanning = createAsyncThunk(
   '/planning/getPlanning',
@@ -45,5 +48,12 @@ export const getPlanning = createAsyncThunk(
       console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
       return thunkAPI.rejectWithValue(getErrorMessage(error));
     }
+  }
+);
+
+export const finishPlanning = createAsyncThunk(
+  '/planning/finishPlanning',
+  (result: 'success' | 'fail') => {
+    return result;
   }
 );

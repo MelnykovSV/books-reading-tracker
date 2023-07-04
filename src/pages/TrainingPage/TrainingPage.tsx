@@ -1,26 +1,148 @@
 import { Container } from './TrainingPage.styled';
+import { useState, useEffect } from 'react';
+import dayjs from 'dayjs';
 
 import { MyTraining } from '../../components/MyTraining/MyTraining';
 import { MyGoals } from '../../components/MyGoals/MyGoals';
 import { MyTrainingResults } from '../../components/MyTrainingResults/MyTrainingResults';
+import {
+  getPlanningStats,
+  getPlanningId,
+  getPlanningStatus,
+  getPlanningBooks,
+} from '../../redux/planning/planningSlice';
+import { useAppSelector } from '../../redux/hooks';
+import { getPlanningLoadingStatus } from '../../redux/planning/planningSlice';
+import { LineChart } from '@mui/x-charts';
+import { Modal } from '../../components/Modal/Modal';
+
+import { processBooksData, arraySum } from '../../helpers';
+import { IBookData } from '../../interfaces';
+import { getCurrentBookNumber } from '../../helpers';
 
 const TrainingPage = () => {
+  const stats = useAppSelector(getPlanningStats);
+  const status = useAppSelector(getPlanningLoadingStatus);
+  const planningId = useAppSelector(getPlanningId);
+  const planningStatus = useAppSelector(getPlanningStatus);
+  const books = useAppSelector(getPlanningBooks);
+
+  const initialState = [] as IBookData[];
+  const getCurrentDate = () => {
+    return dayjs().format('YYYY-MM-DD');
+  };
+
+  const [trainingBookList, setTrainingBookList] = useState(initialState);
+  const [startDate, setStartDate] = useState(getCurrentDate());
+  const [endDate, setEndDate] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState('');
+
+  useEffect(() => {
+    switch (planningStatus) {
+      case 'none':
+        break;
+      case 'active':
+        break;
+      case 'success':
+        setModalType('success');
+        setIsModalOpen(true);
+        break;
+      case 'fail':
+        setModalType('fail');
+        setIsModalOpen(true);
+        break;
+      default:
+    }
+  }, [planningStatus]);
+
+  useEffect(() => {
+    if (planningStatus === 'active') {
+      const bookNumber = getCurrentBookNumber(books);
+      if (!bookNumber || bookNumber === 1) {
+        return;
+      }
+      setModalType('book read');
+      setIsModalOpen(true);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [books]);
+
+  const updateTrainingBookList = value => {
+    setTrainingBookList(value);
+  };
+
+  const updateStartDate = value => {
+    setStartDate(value);
+  };
+
+  const updateEndDate = value => {
+    setEndDate(value);
+  };
+
+  console.log('STATS!');
+
+  if (status === 'fulfilled') {
+    console.log(
+      Object.values(processBooksData(Object.values(stats))).map(
+        (item, i, arr) => {
+          const result = (338 - arraySum(arr, i)) / (10 - i);
+          return result;
+        }
+      )
+    );
+  }
+
   return (
     <Container>
-      <MyTraining></MyTraining>
-      <MyGoals></MyGoals>
-      <MyTrainingResults></MyTrainingResults>
+      <MyTraining
+        trainingBookList={trainingBookList}
+        startDate={startDate}
+        endDate={endDate}
+        updateTrainingBookList={updateTrainingBookList}
+        updateStartDate={updateStartDate}
+        updateEndDate={updateEndDate}
+      />
+      <MyGoals
+        trainingBookList={trainingBookList}
+        planningStartDate={startDate}
+        planningEndDate={endDate}
+      ></MyGoals>
+      {planningId && <MyTrainingResults></MyTrainingResults>}
 
-      {/* <LineChart
-        xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
-        series={[
-          {
-            data: [2, 5.5, 2, 8.5, 1.5, 5],
-          },
-        ]}
-        width={500}
-        height={300}
-      /> */}
+      {/* {status === 'fulfilled' ? (
+        <LineChart
+          xAxis={[
+            {
+              data: Object.keys(processBooksData(Object.values(stats))).map(
+                (item, i) => i + 1
+              ),
+
+              min: 0,
+              max: 10,
+            },
+          ]}
+          series={[
+            {
+              data: Object.values(processBooksData(Object.values(stats))),
+              curve: 'natural',
+            },
+            {
+              data: Object.values(processBooksData(Object.values(stats))).map(
+                (item, i, arr) => {
+                  const result = (338 - arraySum(arr, i)) / (10 - i);
+                  return result;
+                }
+              ),
+              curve: 'natural',
+            },
+          ]}
+          width={500}
+          height={300}
+        />
+      ) : null} */}
+      {isModalOpen && <Modal modalType={modalType} />}
     </Container>
   );
 };
