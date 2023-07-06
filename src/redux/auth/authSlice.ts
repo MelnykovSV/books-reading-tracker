@@ -8,7 +8,13 @@ import {
   deleteBook,
 } from './operations';
 import { isError, isPending } from '../statusCheckers';
-import { IUserPayload, IAuthState, IBookData } from '../../interfaces';
+import {
+  IUserPayload,
+  IAuthState,
+  IBookData,
+  IStore,
+  IGetUserDataPayloadAction,
+} from '../../interfaces';
 
 const initialState: IAuthState = {
   user: {
@@ -80,7 +86,7 @@ const authSlice = createSlice({
     });
     builder.addCase(
       getUserData.fulfilled,
-      (state, action: PayloadAction<any>) => {
+      (state, action: PayloadAction<IGetUserDataPayloadAction>) => {
         if (!action.payload) {
           state.user = {
             name: null,
@@ -164,16 +170,15 @@ const authSlice = createSlice({
 // }
 
 export const userReducer = authSlice.reducer;
-export const getIsLoggedIn = (state: { auth: IAuthState }) =>
-  state.auth.isLoggedIn;
-export const getUser = (state: { auth: IAuthState }) => state.auth.user;
-export const getAccessToken = (state: { auth: IAuthState }) =>
-  state.auth.accessToken;
-export const getSid = (state: { auth: IAuthState }) => state.auth.sid;
-export const getStatus = (state: { auth: IAuthState }) => state.auth.status;
+export const getIsLoggedIn = (state: IStore) => state.auth.isLoggedIn;
+export const getUser = (state: IStore) => state.auth.user;
+export const getAccessToken = (state: IStore) => state.auth.accessToken;
+export const getSid = (state: IStore) => state.auth.sid;
+export const getStatus = (state: IStore) => state.auth.status;
 
-export const getGoingToRead = (state: { auth: IAuthState }) =>
-  state.auth.user.goingToRead;
-export const getCurrentlyReading = (state: { auth: IAuthState }) =>
+export const getGoingToRead = (state: IStore) => state.auth.user.goingToRead;
+export const getCurrentlyReading = (state: IStore) =>
   state.auth.user.currentlyReading;
-// export const getIsLoading = (state: IStore) => state.auth.isLoading;
+
+export const getFinishedReading = (state: IStore) =>
+  state.auth.user.finishedReading;

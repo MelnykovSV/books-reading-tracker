@@ -21,7 +21,7 @@ export const createPlanning = createAsyncThunk(
 
 export const updatePlanning = createAsyncThunk(
   '/planning/updatePlanning',
-  async (planningData, thunkAPI) => {
+  async (planningData: { pages: number }, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
       console.log(state);

@@ -6,7 +6,7 @@ import {
   getEndDate,
   getPlanningId,
 } from '../../redux/planning/planningSlice';
-import { IBookData, IMyGoalsProps } from '../../interfaces';
+import { IMyGoalsProps } from '../../interfaces';
 import { getCurrentBookNumber } from '../../helpers';
 
 import dayjs from 'dayjs';

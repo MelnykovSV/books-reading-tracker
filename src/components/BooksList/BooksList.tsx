@@ -3,6 +3,7 @@ import { useAppSelector } from '../../redux/hooks';
 import {
   getGoingToRead,
   getCurrentlyReading,
+  getFinishedReading,
 } from '../../redux/auth/authSlice';
 import { SingleBook } from '../SingleBook/SingleBook';
 import { IBookData, IBooksListProps } from '../../interfaces';
@@ -10,6 +11,7 @@ import { IBookData, IBooksListProps } from '../../interfaces';
 export const BooksList = ({ status }: IBooksListProps) => {
   const goingToRead = useAppSelector(getGoingToRead);
   const currentlyReading = useAppSelector(getCurrentlyReading);
+  const finishedReading = useAppSelector(getFinishedReading);
 
   switch (status) {
     case 'going to read':
@@ -100,7 +102,7 @@ export const BooksList = ({ status }: IBooksListProps) => {
               <p className="header-rating">Rating</p>
             </div>
             <ul className="books-list__main">
-              {goingToRead.map(
+              {finishedReading.map(
                 ({
                   title,
                   author,

@@ -7,7 +7,6 @@ import {
   // getPlanningStatus,
   deletePlanning,
 } from '../../redux/planning/planningSlice';
-import { redirect } from 'react-router';
 import { useNavigate } from 'react-router';
 const modalRoot: Element | DocumentFragment =
   document.querySelector('#modal-root')!;

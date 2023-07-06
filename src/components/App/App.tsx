@@ -34,7 +34,10 @@ export const App = () => {
   console.log(media);
 
   useEffect(() => {
-    dispatch(getUserData(sid));
+    if (sid) {
+      dispatch(getUserData(sid));
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

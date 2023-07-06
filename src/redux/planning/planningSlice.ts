@@ -1,10 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
 import { createPlanning, getPlanning, updatePlanning } from './operations';
 import { isError, isPending } from '../statusCheckers';
-
 import { getCurrentBook } from '../../helpers';
-import { IPlanningSlice } from '../../interfaces';
+import {
+  IPlanningSlice,
+  IStore,
+  IGetPlanningPayloadAction,
+  ICreatePlanningPayloadAction,
+  IUpdatePlanningPayloadAction,
+} from '../../interfaces';
 
 const initialState = {
   startDate: '',
@@ -50,12 +54,9 @@ const planningSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase<any>(
+    builder.addCase(
       createPlanning.fulfilled,
-      (state, action: PayloadAction<any>) => {
-        console.log('action');
-        console.log(action);
-
+      (state, action: PayloadAction<ICreatePlanningPayloadAction>) => {
         state.startDate = action.payload.startDate;
         state.endDate = action.payload.endDate;
         state.books = action.payload.books;
@@ -69,12 +70,9 @@ const planningSlice = createSlice({
         state.error = null;
       }
     );
-    builder.addCase<any>(
+    builder.addCase(
       getPlanning.fulfilled,
-      (state, action: PayloadAction<any>) => {
-        console.log('action');
-        console.log(action);
-
+      (state, action: PayloadAction<IGetPlanningPayloadAction>) => {
         state.startDate = action.payload.planning.startDate;
         state.endDate = action.payload.planning.endDate;
         state.books = action.payload.planning.books;
@@ -88,16 +86,11 @@ const planningSlice = createSlice({
         state.error = null;
       }
     );
-    builder.addCase<any>(
+    builder.addCase(
       updatePlanning.fulfilled,
-      (state, action: PayloadAction<any>) => {
-        console.log('action');
-        console.log(action);
-
+      (state, action: PayloadAction<IUpdatePlanningPayloadAction>) => {
         const statsArray = action.payload.planning.stats;
-
         state.stats = statsArray;
-
         getCurrentBook(state.books).pagesFinished +=
           statsArray[statsArray.length - 1].pagesCount;
         state.status = 'fulfilled';
@@ -121,15 +114,15 @@ export const planningReducer = planningSlice.reducer;
 
 export const { finishPlanning, deletePlanning } = planningSlice.actions;
 
-export const getIsLoading = (state: any) => state.planning.isLoading;
-export const getError = (state: any) => state.planning.error;
-export const getPlanningFromStore = (state: any) => state.planning;
-export const getStartDate = (state: any) => state.planning.startDate;
-export const getEndDate = (state: any) => state.planning.endDate;
-export const getPlanningLoadingStatus = (state: any) => state.planning.status;
-
-export const getPlanningStats = (state: any) => state.planning.stats;
-export const getPlanningId = (state: any) => state.planning._id;
-export const getPlanningBooks = (state: any) => state.planning.books;
-
-export const getPlanningStatus = (state: any) => state.planning.planningStatus;
+export const getIsLoading = (state: IStore) => state.planning.isLoading;
+export const getError = (state: IStore) => state.planning.error;
+export const getPlanningFromStore = (state: IStore) => state.planning;
+export const getStartDate = (state: IStore) => state.planning.startDate;
+export const getEndDate = (state: IStore) => state.planning.endDate;
+export const getPlanningLoadingStatus = (state: IStore) =>
+  state.planning.status;
+export const getPlanningStats = (state: IStore) => state.planning.stats;
+export const getPlanningId = (state: IStore) => state.planning._id;
+export const getPlanningBooks = (state: IStore) => state.planning.books;
+export const getPlanningStatus = (state: IStore) =>
+  state.planning.planningStatus;

@@ -7,8 +7,6 @@ import dayjs from 'dayjs';
 import { TextField } from '@mui/material';
 import { getPlanningFromStore } from '../../redux/planning/planningSlice';
 import { nanoid } from 'nanoid';
-
-import axios from 'axios';
 import { getPlanningLoadingStatus } from '../../redux/planning/planningSlice';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { getPlanningStats } from '../../redux/planning/planningSlice';
@@ -16,25 +14,16 @@ import { updatePlanning } from '../../redux/planning/operations';
 
 import { getCurrentBook } from '../../helpers';
 
-import { useFormik, validateYupSchema } from 'formik';
-import {
-  finishPlanning,
-  deletePlanning,
-} from '../../redux/planning/planningSlice';
+import { useFormik } from 'formik';
+import { finishPlanning } from '../../redux/planning/planningSlice';
 import * as yup from 'yup';
-
-// import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
+import { IPlanningStat } from '../../interfaces';
 
 export const MyTrainingResults = () => {
-  // const [readingDate, setReadingDate] = useState(dayjs().format('YYYY-MM-DD'));
-  // const [pagesAmount, setPagesAmount] = useState(0);
-
   const planning = useAppSelector(getPlanningFromStore);
   const status = useAppSelector(getPlanningLoadingStatus);
   const stats = useAppSelector(getPlanningStats);
   const dispatch = useAppDispatch();
-
-  // let pagesLimit;
 
   const [pagesLimit, setPagesLimit] = useState(0);
   const currentBook = getCurrentBook(planning.books);
@@ -43,9 +32,7 @@ export const MyTrainingResults = () => {
     if (status === 'fulfilled') {
       if (currentBook) {
         setPagesLimit(currentBook.pagesTotal - currentBook.pagesFinished);
-        // pagesLimit = currentBook.pagesTotal - currentBook.pagesFinished;
       } else {
-        // pagesLimit = 0;
         setPagesLimit(0);
         dispatch(finishPlanning('success'));
       }
@@ -55,7 +42,7 @@ export const MyTrainingResults = () => {
 
   const validationSchema = yup.object({
     pages: yup
-      .number('Enter valid number')
+      .number()
       .min(1, 'Please enter a valid value')
       .max(pagesLimit, `You have only ${pagesLimit} pages left in this book`)
       .required('This field is required'),
@@ -67,17 +54,14 @@ export const MyTrainingResults = () => {
     },
     validationSchema: validationSchema,
     onSubmit: values => {
-      // console.log(values);
-      // e.preventDefault();
+      console.log(values);
+
       dispatch(updatePlanning(values));
       formik.resetForm();
     },
   });
 
-  // console.log('planning');
-  // console.log(planning.stats);
-
-  const statsHandler = stats => {
+  const statsHandler = (stats: IPlanningStat[]) => {
     const statsArray = [...Object.values(stats)];
 
     if (statsArray.length <= 5) {

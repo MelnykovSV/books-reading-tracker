@@ -32,7 +32,7 @@ export interface IAuthState {
   user: {
     name: null | string;
     email: null | string;
-    id: null | string;
+    id?: null | string;
     goingToRead: IBookData[];
     currentlyReading: IBookData[];
     finishedReading: IBookData[];
@@ -155,13 +155,10 @@ export interface IPlanningSingleBook {
 export interface IPlanningSlice {
   startDate: string;
   endDate: string;
-  books: IPlanningSingleBook[];
+  books: IBookData[];
   duration: number | null;
   pagesPerDay: number | null;
-  stats: {
-    date: string;
-    pagesCount: string;
-  }[];
+  stats: IPlanningStat[];
   _id: string;
   status: 'idle' | 'pending' | 'fulfilled' | 'rejected';
   planningStatus: null | 'none' | 'active' | 'success' | 'fail';
@@ -193,4 +190,64 @@ export interface IMyGoalsProps {
 export interface IModalProps {
   modalType: string;
   modalCloseHandler: () => void;
+}
+
+export interface IStore {
+  auth: IAuthState;
+  planning: IPlanningSlice;
+}
+
+export interface IPlanningStat {
+  time: string;
+  pagesCount: string;
+}
+
+export interface IGetPlanningPayloadAction {
+  planning: {
+    books: IBookData[];
+    duration: number;
+    endDate: string;
+    pagesPerDay: number;
+    startDate: string;
+    _id: string;
+    stats: IPlanningStat[];
+  };
+}
+
+export interface ICreatePlanningPayloadAction {
+  books: IBookData[];
+  duration: number;
+  endDate: string;
+  pagesPerDay: number;
+  startDate: string;
+  _id: string;
+  stats: IPlanningStat[];
+}
+
+export interface IUpdatePlanningPayloadAction {
+  planning: {
+    books: string[];
+    duration: number;
+    endDate: string;
+    pagesPerDay: number;
+    startDate: string;
+    _id: string;
+    stats: IPlanningStat[];
+  };
+}
+
+export interface IGetUserDataPayloadAction {
+  refreshedData?: {
+    newAccessToken: string;
+    newRefreshToken: string;
+    newSid: string;
+  } | null;
+  user: {
+    name: string;
+    email: string;
+    // id: string;
+    goingToRead: IBookData[];
+    currentlyReading: IBookData[];
+    finishedReading: IBookData[];
+  };
 }
