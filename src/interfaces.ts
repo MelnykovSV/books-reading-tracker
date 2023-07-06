@@ -192,4 +192,5 @@ export interface IMyGoalsProps {
 
 export interface IModalProps {
   modalType: string;
+  modalCloseHandler: () => void;
 }

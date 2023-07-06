@@ -38,7 +38,15 @@ const planningSlice = createSlice({
       }
     },
     deletePlanning(state) {
-      state.planningStatus = 'none';
+      state.startDate = '';
+      state.endDate = '';
+      state.books = [];
+      state.duration = null;
+      state.pagesPerDay = null;
+      state.stats = [];
+      state._id = '';
+      state.status = 'idle';
+      state.planningStatus = null;
     },
   },
   extraReducers: builder => {

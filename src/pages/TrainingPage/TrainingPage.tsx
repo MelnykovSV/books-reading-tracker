@@ -1,10 +1,11 @@
 import { Container } from './TrainingPage.styled';
 import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
-
 import { MyTraining } from '../../components/MyTraining/MyTraining';
+
 import { MyGoals } from '../../components/MyGoals/MyGoals';
 import { MyTrainingResults } from '../../components/MyTrainingResults/MyTrainingResults';
+import { MyTrainingRegistration } from '../../components/MyTrainingRegistration/MyTrainingRegistration';
 import {
   getPlanningStats,
   getPlanningId,
@@ -96,14 +97,19 @@ const TrainingPage = () => {
 
   return (
     <Container>
-      <MyTraining
-        trainingBookList={trainingBookList}
-        startDate={startDate}
-        endDate={endDate}
-        updateTrainingBookList={updateTrainingBookList}
-        updateStartDate={updateStartDate}
-        updateEndDate={updateEndDate}
-      />
+      {(planningStatus === 'active') | 'success' | 'fail' ? (
+        <MyTraining />
+      ) : (
+        <MyTrainingRegistration
+          trainingBookList={trainingBookList}
+          startDate={startDate}
+          endDate={endDate}
+          updateTrainingBookList={updateTrainingBookList}
+          updateStartDate={updateStartDate}
+          updateEndDate={updateEndDate}
+        />
+      )}
+
       <MyGoals
         trainingBookList={trainingBookList}
         planningStartDate={startDate}
@@ -142,7 +148,14 @@ const TrainingPage = () => {
           height={300}
         />
       ) : null} */}
-      {isModalOpen && <Modal modalType={modalType} />}
+      {isModalOpen && (
+        <Modal
+          modalType={modalType}
+          modalCloseHandler={() => {
+            setIsModalOpen(false);
+          }}
+        />
+      )}
     </Container>
   );
 };
