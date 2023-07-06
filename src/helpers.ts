@@ -1,16 +1,13 @@
-export function processBooksData(array) {
-  // const dataX =
+import { IBookData } from './interfaces';
 
-  const resultingObject = {};
+export function processBooksData(array: any) {
+  const resultingObject = {} as any;
 
-  array.forEach(item => {
+  array.forEach((item: any) => {
     const date = dateGetter(item.time);
     if (!resultingObject.hasOwnProperty(date)) {
-      // return { ...resultingObject, date: item.pagesCount };
       resultingObject[date] = item.pagesCount;
     } else {
-      //   acc[date] += item.pagesCount;
-      // return { ...acc, date: (acc[date] += item.pagesCount) };
       resultingObject[date] += item.pagesCount;
     }
   });
@@ -18,16 +15,15 @@ export function processBooksData(array) {
   return resultingObject;
 }
 
-export function dateGetter(string) {
+export function dateGetter(string: string) {
   const date = string.split(' ')[0];
-  //   const date1 = date.replaceAll('-', '_');
   return date;
 }
 
-export function arraySum(arr, num) {
+export function arraySum(arr: [], num: number) {
   if (num > arr.length || num < 0) {
     console.log('ERROR');
-    return;
+    return 0;
   }
   if (num === 0) {
     return 0;
@@ -42,12 +38,14 @@ export function arraySum(arr, num) {
   return result;
 }
 
-export function getCurrentBook(arr) {
-  const currentBook = arr.find(item => item.pagesTotal !== item.pagesFinished);
+export function getCurrentBook(arr: any) {
+  const currentBook = arr.find(
+    (item: any) => item.pagesTotal !== item.pagesFinished
+  );
   return currentBook;
 }
 
-export function getCurrentBookNumber(arr) {
+export function getCurrentBookNumber(arr: IBookData[]) {
   const currentBookIndex =
     arr.findIndex(item => item.pagesTotal !== item.pagesFinished) + 1;
   console.log('index');

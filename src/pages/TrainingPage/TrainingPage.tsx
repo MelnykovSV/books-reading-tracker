@@ -14,7 +14,7 @@ import {
 } from '../../redux/planning/planningSlice';
 import { useAppSelector } from '../../redux/hooks';
 import { getPlanningLoadingStatus } from '../../redux/planning/planningSlice';
-import { LineChart } from '@mui/x-charts';
+// import { LineChart } from '@mui/x-charts';
 import { Modal } from '../../components/Modal/Modal';
 
 import { processBooksData, arraySum } from '../../helpers';
@@ -70,15 +70,15 @@ const TrainingPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [books]);
 
-  const updateTrainingBookList = value => {
+  const updateTrainingBookList = (value: IBookData[]) => {
     setTrainingBookList(value);
   };
 
-  const updateStartDate = value => {
+  const updateStartDate = (value: string) => {
     setStartDate(value);
   };
 
-  const updateEndDate = value => {
+  const updateEndDate = (value: string) => {
     setEndDate(value);
   };
 
@@ -87,7 +87,7 @@ const TrainingPage = () => {
   if (status === 'fulfilled') {
     console.log(
       Object.values(processBooksData(Object.values(stats))).map(
-        (item, i, arr) => {
+        (item, i, arr: any) => {
           const result = (338 - arraySum(arr, i)) / (10 - i);
           return result;
         }
@@ -97,7 +97,7 @@ const TrainingPage = () => {
 
   return (
     <Container>
-      {(planningStatus === 'active') | 'success' | 'fail' ? (
+      {planningStatus === 'active' || 'success' || 'fail' ? (
         <MyTraining />
       ) : (
         <MyTrainingRegistration
