@@ -101,20 +101,43 @@ const TrainingPage = () => {
 
   return (
     <Container>
-      {planningStatus === 'active' ||
-      planningStatus === 'success' ||
-      planningStatus === 'fail' ? (
-        <MyTraining />
-      ) : (
-        <MyTrainingRegistration
-          trainingBookList={trainingBookList}
-          startDate={startDate}
-          endDate={endDate}
-          updateTrainingBookList={updateTrainingBookList}
-          updateStartDate={updateStartDate}
-          updateEndDate={updateEndDate}
-        />
-      )}
+      {
+        (() => {
+          switch (planningStatus) {
+            case 'active' || 'success' || 'fail':
+              return <MyTraining />;
+
+            case 'none':
+              return (
+                <MyTrainingRegistration
+                  trainingBookList={trainingBookList}
+                  startDate={startDate}
+                  endDate={endDate}
+                  updateTrainingBookList={updateTrainingBookList}
+                  updateStartDate={updateStartDate}
+                  updateEndDate={updateEndDate}
+                />
+              );
+            default:
+              return <div>Loading...</div>;
+          }
+        })()
+
+        // planningStatus === 'active' ||
+        // planningStatus === 'success' ||
+        // planningStatus === 'fail' ? (
+        //   <MyTraining />
+        // ) : (
+        //   <MyTrainingRegistration
+        //     trainingBookList={trainingBookList}
+        //     startDate={startDate}
+        //     endDate={endDate}
+        //     updateTrainingBookList={updateTrainingBookList}
+        //     updateStartDate={updateStartDate}
+        //     updateEndDate={updateEndDate}
+        //   />
+        // )
+      }
 
       <MyGoals
         trainingBookList={trainingBookList}

@@ -103,6 +103,13 @@ const planningSlice = createSlice({
       state.isLoading = true;
     });
     builder.addMatcher(isError, (state, action) => {
+      if (action.payload === 'Request failed with status code 403') {
+        state.status = 'fulfilled';
+        state.error = null;
+        state.isLoading = false;
+        state.planningStatus = 'none';
+        return;
+      }
       state.status = 'rejected';
       state.isLoading = false;
       state.error = action.error.message || 'Something went wrong';
