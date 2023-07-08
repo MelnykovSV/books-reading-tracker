@@ -20,7 +20,7 @@ import { Modal } from '../../components/Modal/Modal';
 import { processBooksData, arraySum } from '../../helpers';
 import { IBookData } from '../../interfaces';
 import { getCurrentBookNumber } from '../../helpers';
-import { getIsLoggedIn, getSid } from '../../redux/auth/authSlice';
+import { getSid } from '../../redux/auth/authSlice';
 import { getPlanning } from '../../redux/planning/operations';
 
 const TrainingPage = () => {
@@ -29,7 +29,7 @@ const TrainingPage = () => {
   const planningId = useAppSelector(getPlanningId);
   const planningStatus = useAppSelector(getPlanningStatus);
   const books = useAppSelector(getPlanningBooks);
-  const isLoggedIn = useAppSelector(getIsLoggedIn);
+
   const sid = useAppSelector(getSid);
 
   const initialState = [] as IBookData[];
