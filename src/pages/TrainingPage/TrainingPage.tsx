@@ -45,6 +45,15 @@ const TrainingPage = () => {
   console.log('planningStatus');
   console.log(planningStatus);
 
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(getPlanning());
+      console.log('something');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn]);
+
   useEffect(() => {
     switch (planningStatus) {
       case 'none':
@@ -62,15 +71,6 @@ const TrainingPage = () => {
       default:
     }
   }, [planningStatus]);
-
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(getPlanning());
-      console.log('something');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
 
   useEffect(() => {
     if (planningStatus === 'active') {
