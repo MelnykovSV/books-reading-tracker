@@ -39,9 +39,8 @@ export const getPlanning = createAsyncThunk(
   '/planning/getPlanning',
   async (_, thunkAPI) => {
     try {
-      console.log('get planning');
       const response = await axios.get('/planning');
-
+      console.log('get planning');
       console.log(response);
       return response.data;
     } catch (error) {

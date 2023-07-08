@@ -3,7 +3,7 @@ import { Container } from './MyTrainingRegistration.styled';
 import { TrainingList } from '../TrainingList/TrainingList';
 
 import dayjs from 'dayjs';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -15,8 +15,8 @@ import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 
 import { getGoingToRead } from '../../redux/auth/authSlice';
 
-import { createPlanning, getPlanning } from '../../redux/planning/operations';
-import { getIsLoggedIn, getCurrentlyReading } from '../../redux/auth/authSlice';
+import { createPlanning } from '../../redux/planning/operations';
+import { getCurrentlyReading } from '../../redux/auth/authSlice';
 
 // const initialState = [] as IBookData[];
 // const initialCurrentBook = {} as IBookData;
@@ -29,18 +29,18 @@ export const MyTrainingRegistration = ({
   updateStartDate,
   updateEndDate,
 }: IMyTrainingProps) => {
-  const isLoggedIn = useAppSelector(getIsLoggedIn);
+  // const isLoggedIn = useAppSelector(getIsLoggedIn);
 
   console.log(trainingBookList);
 
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(getPlanning());
-      console.log('something');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     dispatch(getPlanning());
+  //     console.log('something');
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [isLoggedIn]);
 
   const getCurrentDate = () => {
     return dayjs().format('YYYY-MM-DD');

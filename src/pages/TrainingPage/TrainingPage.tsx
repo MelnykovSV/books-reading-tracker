@@ -12,7 +12,7 @@ import {
   getPlanningStatus,
   getPlanningBooks,
 } from '../../redux/planning/planningSlice';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { getPlanningLoadingStatus } from '../../redux/planning/planningSlice';
 // import { LineChart } from '@mui/x-charts';
 import { Modal } from '../../components/Modal/Modal';
@@ -20,6 +20,8 @@ import { Modal } from '../../components/Modal/Modal';
 import { processBooksData, arraySum } from '../../helpers';
 import { IBookData } from '../../interfaces';
 import { getCurrentBookNumber } from '../../helpers';
+import { getIsLoggedIn } from '../../redux/auth/authSlice';
+import { getPlanning } from '../../redux/planning/operations';
 
 const TrainingPage = () => {
   const stats = useAppSelector(getPlanningStats);
@@ -27,6 +29,7 @@ const TrainingPage = () => {
   const planningId = useAppSelector(getPlanningId);
   const planningStatus = useAppSelector(getPlanningStatus);
   const books = useAppSelector(getPlanningBooks);
+  const isLoggedIn = useAppSelector(getIsLoggedIn);
 
   const initialState = [] as IBookData[];
   const getCurrentDate = () => {
@@ -59,6 +62,15 @@ const TrainingPage = () => {
       default:
     }
   }, [planningStatus]);
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(getPlanning());
+      console.log('something');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn]);
 
   useEffect(() => {
     if (planningStatus === 'active') {
@@ -101,43 +113,67 @@ const TrainingPage = () => {
 
   return (
     <Container>
-      {
-        (() => {
-          switch (planningStatus) {
-            case 'active' || 'success' || 'fail':
-              return <MyTraining />;
+      {(() => {
+        if (
+          planningStatus === 'active' ||
+          planningStatus === 'success' ||
+          planningStatus === 'fail'
+        ) {
+          return <MyTraining />;
+        }
+        if (planningStatus === 'none') {
+          return (
+            <MyTrainingRegistration
+              trainingBookList={trainingBookList}
+              startDate={startDate}
+              endDate={endDate}
+              updateTrainingBookList={updateTrainingBookList}
+              updateStartDate={updateStartDate}
+              updateEndDate={updateEndDate}
+            />
+          );
+        } else {
+          return <div>Loading...</div>;
+        }
+      })()}
+      {/* {
+        // (() => {
+        //   switch (planningStatus) {
+        //     case 'active' || 'success' || 'fail':
+        //       return <MyTraining />;
 
-            case 'none':
-              return (
-                <MyTrainingRegistration
-                  trainingBookList={trainingBookList}
-                  startDate={startDate}
-                  endDate={endDate}
-                  updateTrainingBookList={updateTrainingBookList}
-                  updateStartDate={updateStartDate}
-                  updateEndDate={updateEndDate}
-                />
-              );
-            default:
-              return <div>Loading...</div>;
-          }
-        })()
+        //     case 'none':
+        //       return (
+        //         <MyTrainingRegistration
+        //           trainingBookList={trainingBookList}
+        //           startDate={startDate}
+        //           endDate={endDate}
+        //           updateTrainingBookList={updateTrainingBookList}
+        //           updateStartDate={updateStartDate}
+        //           updateEndDate={updateEndDate}
+        //         />
+        //       );
+        //     default:
+        //       return <div>Loading...</div>;
+        //   }
+        // })()
 
-        // planningStatus === 'active' ||
-        // planningStatus === 'success' ||
-        // planningStatus === 'fail' ? (
-        //   <MyTraining />
-        // ) : (
-        //   <MyTrainingRegistration
-        //     trainingBookList={trainingBookList}
-        //     startDate={startDate}
-        //     endDate={endDate}
-        //     updateTrainingBookList={updateTrainingBookList}
-        //     updateStartDate={updateStartDate}
-        //     updateEndDate={updateEndDate}
-        //   />
-        // )
-      }
+        planningStatus === 'active' ||
+        planningStatus === 'success' ||
+        planningStatus === 'fail' ? (
+          <MyTraining />
+        ) : null
+      } */}
+      {/* {planningStatus === 'none' ? (
+        <MyTrainingRegistration
+          trainingBookList={trainingBookList}
+          startDate={startDate}
+          endDate={endDate}
+          updateTrainingBookList={updateTrainingBookList}
+          updateStartDate={updateStartDate}
+          updateEndDate={updateEndDate}
+        />
+      ) : null} */}
 
       <MyGoals
         trainingBookList={trainingBookList}
