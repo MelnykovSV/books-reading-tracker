@@ -55,3 +55,11 @@ export function getCurrentBookNumber(arr: IBookData[]) {
   }
   return currentBookIndex;
 }
+
+export function timeDifferenceProcessor(t: number) {
+  const d = Math.floor(t / (1000 * 60 * 60 * 24));
+  const h = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const m = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+  const s = Math.floor((t % (1000 * 60)) / 1000);
+  return { d, h, m, s };
+}

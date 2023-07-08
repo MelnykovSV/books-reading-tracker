@@ -19,7 +19,7 @@ import { createPlanning, getPlanning } from '../../redux/planning/operations';
 import { getIsLoggedIn, getCurrentlyReading } from '../../redux/auth/authSlice';
 
 // const initialState = [] as IBookData[];
-const initialCurrentBook = {} as IBookData;
+// const initialCurrentBook = {} as IBookData;
 
 export const MyTrainingRegistration = ({
   trainingBookList,
@@ -50,7 +50,7 @@ export const MyTrainingRegistration = ({
   // const [startDate, setStartDate] = useState(getCurrentDate());
   // const [endDate, setEndDate] = useState('');
 
-  const [currentBook, setCurrentBook] = useState(initialCurrentBook);
+  const [currentBook, setCurrentBook] = useState<IBookData | null>(null);
 
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -90,6 +90,22 @@ export const MyTrainingRegistration = ({
     );
   };
 
+  // useEffect(() => {
+  //   window.addEventListener('beforeunload', alertUser)
+  //   window.addEventListener('unload', handleEndConcert)
+  //   return () => {
+  //     window.removeEventListener('beforeunload', alertUser)
+  //     window.removeEventListener('unload', handleEndConcert)
+  //   }
+  // }, [])
+
+  // const handleEndConcert = async () => {
+  //   await fetcher({
+  //     url: endConcert(concert.id),
+  //     method: 'PUT'
+  //   })
+  // }
+
   return (
     <Container onSubmit={formSubmitHandler}>
       <h2>My training</h2>
@@ -128,6 +144,7 @@ export const MyTrainingRegistration = ({
               setCurrentBook(book);
             }
           }}
+          value={currentBook}
           disablePortal
           isOptionEqualToValue={(option, value) => {
             return option._id === value._id;
@@ -144,6 +161,7 @@ export const MyTrainingRegistration = ({
           onClick={() => {
             if (currentBook) {
               addToTrainingBookListHandler(currentBook);
+              setCurrentBook(null);
             }
           }}
         >

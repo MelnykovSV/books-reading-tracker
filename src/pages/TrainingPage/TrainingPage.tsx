@@ -39,6 +39,9 @@ const TrainingPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
 
+  console.log('planningStatus');
+  console.log(planningStatus);
+
   useEffect(() => {
     switch (planningStatus) {
       case 'none':
@@ -82,6 +85,7 @@ const TrainingPage = () => {
     setEndDate(value);
   };
 
+  // useUnsavedChangesWarning(true);
   console.log('STATS!');
 
   if (status === 'fulfilled') {
@@ -97,7 +101,9 @@ const TrainingPage = () => {
 
   return (
     <Container>
-      {planningStatus === 'active' || 'success' || 'fail' ? (
+      {planningStatus === 'active' ||
+      planningStatus === 'success' ||
+      planningStatus === 'fail' ? (
         <MyTraining />
       ) : (
         <MyTrainingRegistration
