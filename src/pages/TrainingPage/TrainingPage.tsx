@@ -20,7 +20,7 @@ import { Modal } from '../../components/Modal/Modal';
 import { processBooksData, arraySum } from '../../helpers';
 import { IBookData } from '../../interfaces';
 import { getCurrentBookNumber } from '../../helpers';
-import { getIsLoggedIn } from '../../redux/auth/authSlice';
+import { getIsLoggedIn, getSid } from '../../redux/auth/authSlice';
 import { getPlanning } from '../../redux/planning/operations';
 
 const TrainingPage = () => {
@@ -30,6 +30,7 @@ const TrainingPage = () => {
   const planningStatus = useAppSelector(getPlanningStatus);
   const books = useAppSelector(getPlanningBooks);
   const isLoggedIn = useAppSelector(getIsLoggedIn);
+  const sid = useAppSelector(getSid);
 
   const initialState = [] as IBookData[];
   const getCurrentDate = () => {
@@ -47,12 +48,12 @@ const TrainingPage = () => {
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (isLoggedIn) {
+    if (sid) {
       dispatch(getPlanning());
       console.log('something');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
+  }, [sid]);
 
   useEffect(() => {
     switch (planningStatus) {
