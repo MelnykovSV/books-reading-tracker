@@ -17,6 +17,8 @@ import { getGoingToRead } from '../../redux/auth/authSlice';
 
 import { createPlanning } from '../../redux/planning/operations';
 import { getCurrentlyReading } from '../../redux/auth/authSlice';
+import { updateBooksAfterPlanningCreation } from '../../redux/auth/authSlice';
+import { getPlanningBooks } from '../../redux/planning/planningSlice';
 
 // const initialState = [] as IBookData[];
 // const initialCurrentBook = {} as IBookData;
@@ -28,6 +30,7 @@ export const MyTrainingRegistration = ({
   updateTrainingBookList,
   updateStartDate,
   updateEndDate,
+  updateIsFormSubmitted,
 }: IMyTrainingProps) => {
   // const isLoggedIn = useAppSelector(getIsLoggedIn);
 
@@ -51,6 +54,7 @@ export const MyTrainingRegistration = ({
   // const [endDate, setEndDate] = useState('');
 
   const [currentBook, setCurrentBook] = useState<IBookData | null>(null);
+  const planningBooks = useAppSelector(getPlanningBooks);
 
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,6 +65,9 @@ export const MyTrainingRegistration = ({
     };
 
     dispatch(createPlanning(queryBody));
+    // dispatch(updateBooksAfterPlanningCreation(planningBooks));
+    updateIsFormSubmitted(true);
+
     console.log(queryBody);
   };
 

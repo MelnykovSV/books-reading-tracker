@@ -9,6 +9,8 @@ import { ReactComponent as IconHome } from '../../images/icons/home.svg';
 
 import { ReactComponent as IconTraining } from '../../images/icons/library.svg';
 
+import { deletePlanning } from '../../redux/planning/planningSlice';
+
 export const UserPanel = () => {
   const user = useAppSelector(getUser);
 
@@ -16,6 +18,7 @@ export const UserPanel = () => {
 
   const logOutHandler = () => {
     dispatch(logOut());
+    dispatch(deletePlanning());
   };
 
   return (

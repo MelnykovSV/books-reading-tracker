@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createPlanning, getPlanning, updatePlanning } from './operations';
 import { isError, isPending } from '../statusCheckers';
-import { getCurrentBook } from '../../helpers';
+import { getCurrentBook, getCurrentBookNumber } from '../../helpers';
 import {
   IPlanningSlice,
   IStore,
@@ -49,8 +49,8 @@ const planningSlice = createSlice({
       state.pagesPerDay = null;
       state.stats = [];
       state._id = '';
-      state.status = 'idle';
-      state.planningStatus = null;
+      state.status = 'fulfilled';
+      state.planningStatus = 'none';
     },
   },
   extraReducers: builder => {
@@ -136,3 +136,11 @@ export const getPlanningId = (state: IStore) => state.planning._id;
 export const getPlanningBooks = (state: IStore) => state.planning.books;
 export const getPlanningStatus = (state: IStore) =>
   state.planning.planningStatus;
+
+export const detectCurrentBookNumber = (state: IStore) => {
+  if (state.planning.books.length) {
+    return getCurrentBookNumber(state.planning.books);
+  }
+
+  return null;
+};

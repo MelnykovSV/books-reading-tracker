@@ -37,7 +37,31 @@ const initialState: IAuthState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    updateBooksAfterPlanningCreation(
+      state,
+      action: PayloadAction<IBookData[]>
+    ) {
+      state.user.goingToRead = state.user.currentlyReading.filter(
+        item =>
+          !action.payload.some(planningBook => planningBook._id === item._id)
+      );
+      state.user.currentlyReading.push(...action.payload);
+    },
+    updateBooksAfterSuccess(state, action: PayloadAction<IBookData[]>) {
+      state.user.finishedReading.push(...action.payload);
+      state.user.currentlyReading = state.user.currentlyReading.filter(
+        item =>
+          !action.payload.some(planningBook => planningBook._id === item._id)
+      );
+    },
+    updateBookToRead(state, action: PayloadAction<IBookData>) {
+      state.user.finishedReading.push(action.payload);
+      state.user.currentlyReading = state.user.currentlyReading.filter(
+        item => item._id !== action.payload._id
+      );
+    },
+  },
   extraReducers: builder => {
     builder.addCase(
       signUp.fulfilled,
@@ -170,6 +194,12 @@ const authSlice = createSlice({
 // }
 
 export const userReducer = authSlice.reducer;
+export const {
+  updateBooksAfterPlanningCreation,
+  updateBooksAfterSuccess,
+  updateBookToRead,
+} = authSlice.actions;
+
 export const getIsLoggedIn = (state: IStore) => state.auth.isLoggedIn;
 export const getUser = (state: IStore) => state.auth.user;
 export const getAccessToken = (state: IStore) => state.auth.accessToken;

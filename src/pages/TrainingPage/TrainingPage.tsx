@@ -19,9 +19,13 @@ import { Modal } from '../../components/Modal/Modal';
 
 import { processBooksData, arraySum } from '../../helpers';
 import { IBookData } from '../../interfaces';
-import { getCurrentBookNumber } from '../../helpers';
 import { getSid } from '../../redux/auth/authSlice';
 import { getPlanning } from '../../redux/planning/operations';
+import {
+  updateBooksAfterPlanningCreation,
+  updateBookToRead,
+} from '../../redux/auth/authSlice';
+import { detectCurrentBookNumber } from '../../redux/planning/planningSlice';
 
 const TrainingPage = () => {
   const stats = useAppSelector(getPlanningStats);
@@ -29,6 +33,10 @@ const TrainingPage = () => {
   const planningId = useAppSelector(getPlanningId);
   const planningStatus = useAppSelector(getPlanningStatus);
   const books = useAppSelector(getPlanningBooks);
+  const currentBookNumber = useAppSelector(detectCurrentBookNumber);
+
+  console.log('currentBookNumber');
+  console.log(currentBookNumber);
 
   const sid = useAppSelector(getSid);
 
@@ -42,6 +50,19 @@ const TrainingPage = () => {
   const [endDate, setEndDate] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
+
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
+  const updateIsFormSubmitted = (value: boolean) => {
+    setIsFormSubmitted(value);
+  };
+
+  const resetTrainingRegistrationData = () => {
+    setStartDate(getCurrentDate());
+    setEndDate('');
+    setTrainingBookList(initialState);
+  };
 
   console.log('planningStatus');
   console.log(planningStatus);
@@ -58,8 +79,18 @@ const TrainingPage = () => {
   useEffect(() => {
     switch (planningStatus) {
       case 'none':
+        if (!isDataLoaded) {
+          setIsDataLoaded(true);
+        }
         break;
       case 'active':
+        if (!isDataLoaded) {
+          setIsDataLoaded(true);
+        }
+        if (isFormSubmitted) {
+          dispatch(updateBooksAfterPlanningCreation(books));
+        }
+
         break;
       case 'success':
         setModalType('success');
@@ -71,20 +102,30 @@ const TrainingPage = () => {
         break;
       default:
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [planningStatus]);
 
   useEffect(() => {
     if (planningStatus === 'active') {
-      const bookNumber = getCurrentBookNumber(books);
-      if (!bookNumber || bookNumber === 1) {
-        return;
+      // const bookNumber = getCurrentBookNumber(books);
+      // if (!bookNumber || bookNumber === 1) {
+      //   return;
+      // }
+      if (currentBookNumber && currentBookNumber !== 1 && isDataLoaded) {
+        console.log('updateBookToRead');
+        console.log(currentBookNumber);
+
+        dispatch(updateBookToRead(books[currentBookNumber - 2]));
+
+        console.log('MODAL');
+        setModalType('book read');
+
+        setIsModalOpen(true);
       }
-      setModalType('book read');
-      setIsModalOpen(true);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [books]);
+  }, [currentBookNumber]);
 
   const updateTrainingBookList = (value: IBookData[]) => {
     setTrainingBookList(value);
@@ -131,6 +172,7 @@ const TrainingPage = () => {
               updateTrainingBookList={updateTrainingBookList}
               updateStartDate={updateStartDate}
               updateEndDate={updateEndDate}
+              updateIsFormSubmitted={updateIsFormSubmitted}
             />
           );
         } else {
@@ -220,6 +262,7 @@ const TrainingPage = () => {
           modalCloseHandler={() => {
             setIsModalOpen(false);
           }}
+          resetTrainingRegistrationData={resetTrainingRegistrationData}
         />
       )}
     </Container>

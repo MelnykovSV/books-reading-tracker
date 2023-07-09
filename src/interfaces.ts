@@ -179,6 +179,7 @@ export interface IMyTrainingProps {
   updateTrainingBookList: (value: IBookData[]) => void;
   updateStartDate: (value: string) => void;
   updateEndDate: (value: string) => void;
+  updateIsFormSubmitted: (value: boolean) => void;
 }
 
 export interface IMyGoalsProps {
@@ -190,6 +191,7 @@ export interface IMyGoalsProps {
 export interface IModalProps {
   modalType: string;
   modalCloseHandler: () => void;
+  resetTrainingRegistrationData: () => void;
 }
 
 export interface IStore {

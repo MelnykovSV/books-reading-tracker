@@ -11,7 +11,11 @@ import { useNavigate } from 'react-router';
 const modalRoot: Element | DocumentFragment =
   document.querySelector('#modal-root')!;
 
-export const Modal = ({ modalType, modalCloseHandler }: IModalProps) => {
+export const Modal = ({
+  modalType,
+  modalCloseHandler,
+  resetTrainingRegistrationData,
+}: IModalProps) => {
   const navigate = useNavigate();
   // const planningStatus = useAppSelector(getPlanningStatus);
   const dispatch = useAppDispatch();
@@ -24,6 +28,7 @@ export const Modal = ({ modalType, modalCloseHandler }: IModalProps) => {
             type="button"
             onClick={() => {
               modalCloseHandler();
+              resetTrainingRegistrationData();
               dispatch(deletePlanning());
             }}
           >
@@ -34,6 +39,7 @@ export const Modal = ({ modalType, modalCloseHandler }: IModalProps) => {
             onClick={() => {
               modalCloseHandler();
               navigate('/');
+              dispatch(deletePlanning());
             }}
           >
             Back
@@ -52,6 +58,7 @@ export const Modal = ({ modalType, modalCloseHandler }: IModalProps) => {
             type="button"
             onClick={() => {
               modalCloseHandler();
+              resetTrainingRegistrationData();
               dispatch(deletePlanning());
             }}
           >
@@ -62,6 +69,7 @@ export const Modal = ({ modalType, modalCloseHandler }: IModalProps) => {
             onClick={() => {
               modalCloseHandler();
               navigate('/');
+              dispatch(deletePlanning());
             }}
           >
             Back
