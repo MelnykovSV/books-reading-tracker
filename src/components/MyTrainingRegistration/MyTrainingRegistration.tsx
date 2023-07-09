@@ -17,8 +17,6 @@ import { getGoingToRead } from '../../redux/auth/authSlice';
 
 import { createPlanning } from '../../redux/planning/operations';
 import { getCurrentlyReading } from '../../redux/auth/authSlice';
-import { updateBooksAfterPlanningCreation } from '../../redux/auth/authSlice';
-import { getPlanningBooks } from '../../redux/planning/planningSlice';
 
 // const initialState = [] as IBookData[];
 // const initialCurrentBook = {} as IBookData;
@@ -54,7 +52,6 @@ export const MyTrainingRegistration = ({
   // const [endDate, setEndDate] = useState('');
 
   const [currentBook, setCurrentBook] = useState<IBookData | null>(null);
-  const planningBooks = useAppSelector(getPlanningBooks);
 
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
