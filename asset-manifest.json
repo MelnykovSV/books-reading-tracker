@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/books-reading-tracker/static/css/main.e788fc23.css",
-    "main.js": "/books-reading-tracker/static/js/main.fda0f626.js",
-    "static/js/910.03231706.chunk.js": "/books-reading-tracker/static/js/910.03231706.chunk.js",
-    "static/js/259.1e28bb1d.chunk.js": "/books-reading-tracker/static/js/259.1e28bb1d.chunk.js",
+    "main.js": "/books-reading-tracker/static/js/main.e294d2a7.js",
+    "static/js/910.b6947ec8.chunk.js": "/books-reading-tracker/static/js/910.b6947ec8.chunk.js",
+    "static/js/259.6947c452.chunk.js": "/books-reading-tracker/static/js/259.6947c452.chunk.js",
     "static/js/940.cad513e2.chunk.js": "/books-reading-tracker/static/js/940.cad513e2.chunk.js",
     "static/js/998.e6ca5173.chunk.js": "/books-reading-tracker/static/js/998.e6ca5173.chunk.js",
     "static/js/568.3e0666a9.chunk.js": "/books-reading-tracker/static/js/568.3e0666a9.chunk.js",
@@ -60,9 +60,9 @@
     "static/media/delete.svg": "/books-reading-tracker/static/media/delete.8531d922dd06278f9c9a827cfeebc767.svg",
     "static/media/home.svg": "/books-reading-tracker/static/media/home.b3cc0a6a4d8a1f2461a5a0058dafff68.svg",
     "main.e788fc23.css.map": "/books-reading-tracker/static/css/main.e788fc23.css.map",
-    "main.fda0f626.js.map": "/books-reading-tracker/static/js/main.fda0f626.js.map",
-    "910.03231706.chunk.js.map": "/books-reading-tracker/static/js/910.03231706.chunk.js.map",
-    "259.1e28bb1d.chunk.js.map": "/books-reading-tracker/static/js/259.1e28bb1d.chunk.js.map",
+    "main.e294d2a7.js.map": "/books-reading-tracker/static/js/main.e294d2a7.js.map",
+    "910.b6947ec8.chunk.js.map": "/books-reading-tracker/static/js/910.b6947ec8.chunk.js.map",
+    "259.6947c452.chunk.js.map": "/books-reading-tracker/static/js/259.6947c452.chunk.js.map",
     "940.cad513e2.chunk.js.map": "/books-reading-tracker/static/js/940.cad513e2.chunk.js.map",
     "998.e6ca5173.chunk.js.map": "/books-reading-tracker/static/js/998.e6ca5173.chunk.js.map",
     "568.3e0666a9.chunk.js.map": "/books-reading-tracker/static/js/568.3e0666a9.chunk.js.map",
@@ -73,6 +73,6 @@
   },
   "entrypoints": [
     "static/css/main.e788fc23.css",
-    "static/js/main.fda0f626.js"
+    "static/js/main.e294d2a7.js"
   ]
 }
