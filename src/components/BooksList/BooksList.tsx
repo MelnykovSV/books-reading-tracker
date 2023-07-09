@@ -15,7 +15,6 @@ export const BooksList = ({ status }: IBooksListProps) => {
 
   switch (status) {
     case 'going to read':
-      console.log(goingToRead);
       return (
         <Container>
           <h3>Going to read</h3>
@@ -52,7 +51,6 @@ export const BooksList = ({ status }: IBooksListProps) => {
       );
 
     case 'reading now':
-      console.log(currentlyReading);
       return (
         <Container>
           <h3>Reading now</h3>
@@ -89,7 +87,6 @@ export const BooksList = ({ status }: IBooksListProps) => {
       );
 
     case 'read':
-      console.log(goingToRead);
       return (
         <Container>
           <h3>Already read</h3>

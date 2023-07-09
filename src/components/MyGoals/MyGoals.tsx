@@ -17,16 +17,10 @@ export const MyGoals = ({
   planningEndDate,
 }: IMyGoalsProps) => {
   const planning = useAppSelector(getPlanningFromStore);
-  console.log(trainingBookList);
 
   const startDate = useAppSelector(getStartDate);
   const endDate = useAppSelector(getEndDate);
   const planningId = useAppSelector(getPlanningId);
-
-  if (planningId) {
-    console.log('BOOKS COUNTER');
-    console.log(getCurrentBookNumber(planning.books));
-  }
 
   return (
     <Container>

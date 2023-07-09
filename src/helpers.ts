@@ -22,7 +22,6 @@ export function dateGetter(string: string) {
 
 export function arraySum(arr: [], num: number) {
   if (num > arr.length || num < 0) {
-    console.log('ERROR');
     return 0;
   }
   if (num === 0) {
@@ -48,8 +47,7 @@ export function getCurrentBook(arr: any) {
 export function getCurrentBookNumber(arr: IBookData[]) {
   const currentBookIndex =
     arr.findIndex(item => item.pagesTotal !== item.pagesFinished) + 1;
-  console.log('index');
-  console.log(currentBookIndex);
+
   if (currentBookIndex === 0) {
     return arr.length + 1;
   }

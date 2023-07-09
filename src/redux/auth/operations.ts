@@ -41,12 +41,7 @@ export const signIn = createAsyncThunk(
     try {
       const response = await axios.post('auth/login', { email, password });
       token.set(response.data.accessToken);
-      console.log('response.data');
-      console.log(response.data);
-
       const response1 = await axios.get('user/books');
-      console.log('response1.data');
-      console.log(response1.data);
 
       response.data.userData.goingToRead = [...response1.data.goingToRead];
       response.data.userData.currentlyReading = [
@@ -66,11 +61,8 @@ export const signIn = createAsyncThunk(
 
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   const state = thunkAPI.getState() as { auth: IAuthState };
-  console.log('step1');
-  try {
-    console.log('step2');
-    console.log(axios.defaults.headers);
 
+  try {
     // const response = await axios.post('auth/logout');
 
     const response = await fetch(
@@ -83,10 +75,8 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
         },
       }
     );
-    console.log('step3');
+
     token.unset();
-    console.log('step4');
-    console.log(response);
   } catch (error) {
     console.log(error);
     console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
@@ -105,7 +95,6 @@ export const refresh = createAsyncThunk(
 
     try {
       const response = await axios.post('auth/refresh', { sid });
-      console.log(response);
     } catch (error) {
       console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
       return thunkAPI.rejectWithValue(getErrorMessage(error));
@@ -131,21 +120,15 @@ export const getUserData = createAsyncThunk<any, string>(
       }
       if (state.auth.refreshToken) {
         token.set(state.auth.refreshToken);
-        console.log(state.auth.refreshToken);
       }
-      console.log('started');
 
       const {
         data: { newAccessToken, newRefreshToken, newSid },
       } = await axios.post('auth/refresh', { sid });
 
-      console.log(newAccessToken);
-
       token.set(newAccessToken);
 
       const response = await axios.get('user/books');
-
-      console.log(response);
 
       return {
         user: response.data,
@@ -166,7 +149,6 @@ export const addBook = createAsyncThunk(
     { title, author, publishYear, pagesTotal }: IBookFormData,
     thunkAPI
   ) => {
-    console.log(axios.defaults);
     try {
       const response = await axios.post('/book', {
         title,
@@ -174,8 +156,6 @@ export const addBook = createAsyncThunk(
         publishYear,
         pagesTotal,
       });
-
-      console.log(response);
 
       return response.data;
     } catch (error) {
@@ -187,11 +167,9 @@ export const addBook = createAsyncThunk(
 export const deleteBook = createAsyncThunk(
   'auth/deleteBook',
   async (id: string, thunkAPI) => {
-    console.log(axios.defaults);
     try {
       const response = await axios.delete(`/book/${id}`);
 
-      console.log(response);
       return id;
     } catch (error) {
       console.log(error);

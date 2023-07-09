@@ -126,7 +126,6 @@ const authSlice = createSlice({
           state.isLoading = false;
           state.status = 'fulfilled';
           state.error = null;
-          console.log('no data');
           return;
         }
         if (action.payload) {
@@ -138,7 +137,6 @@ const authSlice = createSlice({
             state.refreshToken = action.payload.refreshedData.newRefreshToken;
             state.status = 'fulfilled';
             state.sid = action.payload.refreshedData.newSid;
-            console.log('data');
           }
         }
       }

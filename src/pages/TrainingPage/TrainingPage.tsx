@@ -35,9 +35,6 @@ const TrainingPage = () => {
   const books = useAppSelector(getPlanningBooks);
   const currentBookNumber = useAppSelector(detectCurrentBookNumber);
 
-  console.log('currentBookNumber');
-  console.log(currentBookNumber);
-
   const sid = useAppSelector(getSid);
 
   const initialState = [] as IBookData[];
@@ -64,14 +61,10 @@ const TrainingPage = () => {
     setTrainingBookList(initialState);
   };
 
-  console.log('planningStatus');
-  console.log(planningStatus);
-
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (sid) {
       dispatch(getPlanning());
-      console.log('something');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sid]);
@@ -112,12 +105,8 @@ const TrainingPage = () => {
       //   return;
       // }
       if (currentBookNumber && currentBookNumber !== 1 && isDataLoaded) {
-        console.log('updateBookToRead');
-        console.log(currentBookNumber);
-
         dispatch(updateBookToRead(books[currentBookNumber - 2]));
 
-        console.log('MODAL');
         setModalType('book read');
 
         setIsModalOpen(true);
@@ -140,7 +129,6 @@ const TrainingPage = () => {
   };
 
   // useUnsavedChangesWarning(true);
-  console.log('STATS!');
 
   if (status === 'fulfilled') {
     console.log(

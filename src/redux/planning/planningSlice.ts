@@ -32,12 +32,10 @@ const planningSlice = createSlice({
       switch (action.payload) {
         case 'success':
           state.planningStatus = action.payload;
-          console.log('SUCCESS');
           break;
 
         case 'fail':
           state.planningStatus = action.payload;
-          console.log('FAIL');
           break;
       }
     },
@@ -103,8 +101,6 @@ const planningSlice = createSlice({
       state.isLoading = true;
     });
     builder.addMatcher(isError, (state, action) => {
-      console.log('action');
-      console.log(action);
       if (action.payload === 'Request failed with status code 403') {
         state.status = 'fulfilled';
         state.error = null;

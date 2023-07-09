@@ -54,8 +54,6 @@ export const MyTrainingResults = () => {
     },
     validationSchema: validationSchema,
     onSubmit: values => {
-      console.log(values);
-
       dispatch(updatePlanning(values));
       formik.resetForm();
     },

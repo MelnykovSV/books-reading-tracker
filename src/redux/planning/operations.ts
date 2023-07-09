@@ -7,10 +7,7 @@ export const createPlanning = createAsyncThunk(
   '/planning/createPlanning',
   async (planningData: ICreatePlanningQueryBody, thunkAPI) => {
     try {
-      console.log(planningData);
       const response = await axios.post('/planning', planningData);
-      console.log('response.data');
-      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
@@ -23,10 +20,10 @@ export const updatePlanning = createAsyncThunk(
   '/planning/updatePlanning',
   async (planningData: { pages: number }, thunkAPI) => {
     try {
-      const state = thunkAPI.getState();
-      console.log(state);
+      // const state = thunkAPI.getState();
+
       const response = await axios.patch('/planning', planningData);
-      console.log(response);
+
       return response.data;
     } catch (error) {
       console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
@@ -40,8 +37,7 @@ export const getPlanning = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get('/planning');
-      console.log('get planning');
-      console.log(response);
+
       return response.data;
     } catch (error) {
       console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));

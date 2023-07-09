@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getSid } from '../../redux/auth/authSlice';
 import { Container } from './App.styled';
 import { ModernNormalize } from 'emotion-modern-normalize';
-import { useMediaContext } from '../../mediaContext';
+// import { useMediaContext } from '../../mediaContext';
 import { InfoPage } from '../../pages/InfoPage/InfoPage';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
@@ -29,9 +29,7 @@ export const App = () => {
   const sid = useAppSelector(getSid);
   const dispatch = useAppDispatch();
 
-  const media = useMediaContext();
-
-  console.log(media);
+  // const media = useMediaContext();
 
   useEffect(() => {
     if (sid) {

@@ -32,8 +32,6 @@ export const MyTrainingRegistration = ({
 }: IMyTrainingProps) => {
   // const isLoggedIn = useAppSelector(getIsLoggedIn);
 
-  console.log(trainingBookList);
-
   const dispatch = useAppDispatch();
   // useEffect(() => {
   //   if (isLoggedIn) {
@@ -64,8 +62,6 @@ export const MyTrainingRegistration = ({
     dispatch(createPlanning(queryBody));
     // dispatch(updateBooksAfterPlanningCreation(planningBooks));
     updateIsFormSubmitted(true);
-
-    console.log(queryBody);
   };
 
   const goingToRead = useAppSelector(getGoingToRead);
@@ -77,7 +73,6 @@ export const MyTrainingRegistration = ({
   ];
 
   const addToTrainingBookListHandler = (bookData: IBookData) => {
-    console.log('addToTrainingBookListHandler');
     if (bookData && !trainingBookList.find(item => item._id === bookData._id)) {
       const { title, author, publishYear, pagesTotal, _id, pagesFinished } =
         bookData;
@@ -144,7 +139,6 @@ export const MyTrainingRegistration = ({
         <Autocomplete
           onChange={(event: any, book: IBookData | null) => {
             if (book) {
-              console.log(book);
               setCurrentBook(book);
             }
           }}

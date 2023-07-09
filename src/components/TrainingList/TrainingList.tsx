@@ -38,7 +38,6 @@ export const TrainingList = ({
                   <button
                     type="button"
                     onClick={() => {
-                      console.log(row);
                       removeFromTrainingListHandler(row._id);
                     }}
                   >
