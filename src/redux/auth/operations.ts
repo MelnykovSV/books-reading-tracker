@@ -65,20 +65,16 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     // const response = await axios.post('auth/logout');
 
-    const response = await fetch(
-      'https://bookread-backend.goit.global/auth/logout',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${state.auth.accessToken}`,
-        },
-      }
-    );
+    await fetch('https://bookread-backend.goit.global/auth/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${state.auth.accessToken}`,
+      },
+    });
 
     token.unset();
   } catch (error) {
-    console.log(error);
     console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
     return thunkAPI.rejectWithValue(getErrorMessage(error));
   }
@@ -94,7 +90,7 @@ export const refresh = createAsyncThunk(
     }
 
     try {
-      const response = await axios.post('auth/refresh', { sid });
+      await axios.post('auth/refresh', { sid });
     } catch (error) {
       console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
       return thunkAPI.rejectWithValue(getErrorMessage(error));
@@ -168,7 +164,7 @@ export const deleteBook = createAsyncThunk(
   'auth/deleteBook',
   async (id: string, thunkAPI) => {
     try {
-      const response = await axios.delete(`/book/${id}`);
+      await axios.delete(`/book/${id}`);
 
       return id;
     } catch (error) {
