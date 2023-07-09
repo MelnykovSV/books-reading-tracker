@@ -2,7 +2,7 @@ import { Container } from './SingleBook.styled';
 import { ReactComponent as BookIcon } from '../../images/icons/library.svg';
 import { ISingleBookProps } from '../../interfaces';
 import { useAppDispatch } from '../../redux/hooks';
-import { deleteBook } from '../../redux/auth/operations';
+import { deleteBook, updateBook } from '../../redux/auth/operations';
 // import { Rating, Button } from '@mui/material';
 import Rating from '@mui/material/Rating';
 
@@ -46,7 +46,13 @@ export const SingleBook = ({
             </div>
           </dl>
 
-          <button type="button" className="single-book__resume-button">
+          <button
+            type="button"
+            className="single-book__resume-button"
+            onClick={() => {
+              dispatch(updateBook(id));
+            }}
+          >
             Resume
           </button>
           <button

@@ -10,6 +10,10 @@ import {
   IBookFormData,
 } from '../../interfaces';
 import { token } from '../../api';
+import {
+  IUpdateBookResponseData,
+  IUpdateBookResponseDataWithId,
+} from '../../interfaces';
 
 export const signUp = createAsyncThunk<IUserPayload, ISignUpData>(
   'auth/signUp',
@@ -172,3 +176,20 @@ export const deleteBook = createAsyncThunk(
     }
   }
 );
+
+export const updateBook = createAsyncThunk<
+  IUpdateBookResponseDataWithId,
+  string
+>('auth/updateBook', async (id: string) => {
+  try {
+    const response = await axios.patch(`/book/review/${id}`, {
+      rating: 5,
+      feedback: 'Really good book',
+    });
+    const result = { ...response.data, id };
+
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+});

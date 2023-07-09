@@ -72,6 +72,8 @@ export interface IBookData {
   pagesTotal: number;
   _id: string;
   pagesFinished: number;
+  feedback?: string;
+  rating?: number;
 }
 
 export interface IFormikResetForm {
@@ -252,4 +254,15 @@ export interface IGetUserDataPayloadAction {
     currentlyReading: IBookData[];
     finishedReading: IBookData[];
   };
+}
+
+export interface IUpdateBookResponseData {
+  rating: number;
+  feedback: string;
+}
+
+export interface IUpdateBookResponseDataWithId {
+  rating: number;
+  feedback: string;
+  id: string;
 }
