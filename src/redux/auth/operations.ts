@@ -11,8 +11,8 @@ import {
 } from '../../interfaces';
 import { token } from '../../api';
 import {
-  IUpdateBookResponseData,
   IUpdateBookResponseDataWithId,
+  IUpdateBookData,
 } from '../../interfaces';
 
 export const signUp = createAsyncThunk<IUserPayload, ISignUpData>(
@@ -179,13 +179,18 @@ export const deleteBook = createAsyncThunk(
 
 export const updateBook = createAsyncThunk<
   IUpdateBookResponseDataWithId,
-  string
->('auth/updateBook', async (id: string) => {
+  IUpdateBookData
+>('auth/updateBook', async ({ id, values: { rating, feedback } }) => {
+  console.log({
+    rating,
+    feedback,
+  });
   try {
     const response = await axios.patch(`/book/review/${id}`, {
-      rating: 5,
-      feedback: 'Really good book',
+      rating,
+      feedback,
     });
+    console.log(response);
     const result = { ...response.data, id };
 
     return result;

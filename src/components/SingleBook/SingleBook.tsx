@@ -1,8 +1,10 @@
+import { useState, useEffect } from 'react';
 import { Container } from './SingleBook.styled';
 import { ReactComponent as BookIcon } from '../../images/icons/library.svg';
 import { ISingleBookProps } from '../../interfaces';
-import { useAppDispatch } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { deleteBook, updateBook } from '../../redux/auth/operations';
+import { getFinishedReading } from '../../redux/auth/authSlice';
 // import { Rating, Button } from '@mui/material';
 import Rating from '@mui/material/Rating';
 
@@ -15,8 +17,25 @@ export const SingleBook = ({
   pagesTotal,
   id,
   status,
+  modalOpenHandler,
+  updateFeedbackBookId,
 }: ISingleBookProps) => {
+  const finishedReadingList = useAppSelector(getFinishedReading);
+
+  const [currentRating, setCurrentRating] = useState(
+    finishedReadingList.find(item => item._id === id)?.rating || 0
+  );
+
+  useEffect(() => {
+    setCurrentRating(
+      finishedReadingList.find(item => item._id === id)?.rating || 0
+    );
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [finishedReadingList]);
+
   const dispatch = useAppDispatch();
+
   switch (status) {
     case 'read':
       return (
@@ -41,7 +60,12 @@ export const SingleBook = ({
             <div className="single-book__list-item rating-container">
               <dt className="single-book__list-term">Rating</dt>
               <dd className="single-book__list-def">
-                <Rating name="size-small" defaultValue={2} size="small" />
+                <Rating
+                  name="size-small"
+                  value={currentRating}
+                  size="small"
+                  readOnly
+                />
               </dd>
             </div>
           </dl>
@@ -50,7 +74,10 @@ export const SingleBook = ({
             type="button"
             className="single-book__resume-button"
             onClick={() => {
-              dispatch(updateBook(id));
+              if (updateFeedbackBookId && modalOpenHandler) {
+                updateFeedbackBookId(id);
+                modalOpenHandler();
+              }
             }}
           >
             Resume

@@ -15,7 +15,6 @@ import {
   IBookData,
   IStore,
   IGetUserDataPayloadAction,
-  IUpdateBookResponseData,
 } from '../../interfaces';
 
 const initialState: IAuthState = {
@@ -163,12 +162,10 @@ const authSlice = createSlice({
       state.error = null;
     });
     builder.addCase(updateBook.fulfilled, (state, action) => {
-      // state.user.goingToRead.push(action.payload);
-      //  state.user.finishedReading.forEach(item=>item._id===action.payload.id)
       const newBookArray = state.user.finishedReading.map(item => {
         if (item._id === action.payload.id) {
-          item.feedback = 'not that good book!';
-          item.rating = 3;
+          const { rating = 0, feedback = '' } = action.payload;
+          return { ...item, rating, feedback };
         }
         return item;
       });

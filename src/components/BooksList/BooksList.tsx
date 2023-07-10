@@ -8,7 +8,11 @@ import {
 import { SingleBook } from '../SingleBook/SingleBook';
 import { IBookData, IBooksListProps } from '../../interfaces';
 
-export const BooksList = ({ status }: IBooksListProps) => {
+export const BooksList = ({
+  status,
+  updateFeedbackBookId,
+  modalOpenHandler,
+}: IBooksListProps) => {
   const goingToRead = useAppSelector(getGoingToRead);
   const currentlyReading = useAppSelector(getCurrentlyReading);
   const finishedReading = useAppSelector(getFinishedReading);
@@ -115,6 +119,8 @@ export const BooksList = ({ status }: IBooksListProps) => {
                     pagesTotal={pagesTotal}
                     id={_id}
                     status={status}
+                    updateFeedbackBookId={updateFeedbackBookId}
+                    modalOpenHandler={modalOpenHandler}
                   />
                 )
               )}

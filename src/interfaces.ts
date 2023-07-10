@@ -87,10 +87,15 @@ export interface ISingleBookProps {
   pagesTotal: number;
   id: string;
   status: 'read' | 'going to read' | 'reading now';
+  updateFeedbackBookId?: (id: string) => void;
+  modalOpenHandler?: () => void;
 }
 
 export interface IBooksListProps {
   status: 'read' | 'going to read' | 'reading now';
+  modalHandler?: (value: boolean) => void;
+  updateFeedbackBookId?: (id: string) => void;
+  modalOpenHandler?: () => void;
 }
 
 export interface ITheme {
@@ -257,12 +262,25 @@ export interface IGetUserDataPayloadAction {
 }
 
 export interface IUpdateBookResponseData {
-  rating: number;
-  feedback: string;
+  rating?: number;
+  feedback?: string;
 }
 
 export interface IUpdateBookResponseDataWithId {
-  rating: number;
-  feedback: string;
+  rating?: number;
+  feedback?: string;
   id: string;
+}
+
+export interface IFeedbackFormProps {
+  id: string;
+  modalCloseHandler: () => void;
+}
+
+export interface IUpdateBookData {
+  id: string;
+  values: {
+    rating: number;
+    feedback: string;
+  };
 }
