@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/books-reading-tracker/static/css/main.e788fc23.css",
-    "main.js": "/books-reading-tracker/static/js/main.e923b96f.js",
-    "static/js/643.4368899f.chunk.js": "/books-reading-tracker/static/js/643.4368899f.chunk.js",
-    "static/js/259.4530c20f.chunk.js": "/books-reading-tracker/static/js/259.4530c20f.chunk.js",
+    "main.js": "/books-reading-tracker/static/js/main.9351b88c.js",
+    "static/js/643.4dc85d09.chunk.js": "/books-reading-tracker/static/js/643.4dc85d09.chunk.js",
+    "static/js/740.6f62fa25.chunk.js": "/books-reading-tracker/static/js/740.6f62fa25.chunk.js",
     "static/js/940.cad513e2.chunk.js": "/books-reading-tracker/static/js/940.cad513e2.chunk.js",
     "static/js/998.e6ca5173.chunk.js": "/books-reading-tracker/static/js/998.e6ca5173.chunk.js",
     "static/js/568.3e0666a9.chunk.js": "/books-reading-tracker/static/js/568.3e0666a9.chunk.js",
-    "static/js/620.fe291b77.chunk.js": "/books-reading-tracker/static/js/620.fe291b77.chunk.js",
+    "static/js/394.0d9bd84e.chunk.js": "/books-reading-tracker/static/js/394.0d9bd84e.chunk.js",
     "static/js/925.b33f5d8e.chunk.js": "/books-reading-tracker/static/js/925.b33f5d8e.chunk.js",
-    "static/js/632.aba98f73.chunk.js": "/books-reading-tracker/static/js/632.aba98f73.chunk.js",
+    "static/js/660.5a8f1851.chunk.js": "/books-reading-tracker/static/js/660.5a8f1851.chunk.js",
     "static/js/594.66ba2250.chunk.js": "/books-reading-tracker/static/js/594.66ba2250.chunk.js",
     "static/media/Montserrat-Light.svg": "/books-reading-tracker/static/media/Montserrat-Light.aa8aa3301acfa877e95f.svg",
     "static/media/Montserrat-Medium.svg": "/books-reading-tracker/static/media/Montserrat-Medium.8220662e53cf01204f0f.svg",
@@ -56,23 +56,24 @@
     "static/media/Montserrat-Regular.woff2": "/books-reading-tracker/static/media/Montserrat-Regular.b96ac8b4b103377902ef.woff2",
     "static/media/library.svg": "/books-reading-tracker/static/media/library.298f482c62b7182d7f85065bf67480cb.svg",
     "index.html": "/books-reading-tracker/index.html",
+    "static/media/thumb.svg": "/books-reading-tracker/static/media/thumb.7fdf5153ce83d86a7fd0f669a21685a2.svg",
     "static/media/back.svg": "/books-reading-tracker/static/media/back.6d96b894a0edb0b3c97719fa425b1703.svg",
     "static/media/delete.svg": "/books-reading-tracker/static/media/delete.8531d922dd06278f9c9a827cfeebc767.svg",
     "static/media/home.svg": "/books-reading-tracker/static/media/home.b3cc0a6a4d8a1f2461a5a0058dafff68.svg",
     "main.e788fc23.css.map": "/books-reading-tracker/static/css/main.e788fc23.css.map",
-    "main.e923b96f.js.map": "/books-reading-tracker/static/js/main.e923b96f.js.map",
-    "643.4368899f.chunk.js.map": "/books-reading-tracker/static/js/643.4368899f.chunk.js.map",
-    "259.4530c20f.chunk.js.map": "/books-reading-tracker/static/js/259.4530c20f.chunk.js.map",
+    "main.9351b88c.js.map": "/books-reading-tracker/static/js/main.9351b88c.js.map",
+    "643.4dc85d09.chunk.js.map": "/books-reading-tracker/static/js/643.4dc85d09.chunk.js.map",
+    "740.6f62fa25.chunk.js.map": "/books-reading-tracker/static/js/740.6f62fa25.chunk.js.map",
     "940.cad513e2.chunk.js.map": "/books-reading-tracker/static/js/940.cad513e2.chunk.js.map",
     "998.e6ca5173.chunk.js.map": "/books-reading-tracker/static/js/998.e6ca5173.chunk.js.map",
     "568.3e0666a9.chunk.js.map": "/books-reading-tracker/static/js/568.3e0666a9.chunk.js.map",
-    "620.fe291b77.chunk.js.map": "/books-reading-tracker/static/js/620.fe291b77.chunk.js.map",
+    "394.0d9bd84e.chunk.js.map": "/books-reading-tracker/static/js/394.0d9bd84e.chunk.js.map",
     "925.b33f5d8e.chunk.js.map": "/books-reading-tracker/static/js/925.b33f5d8e.chunk.js.map",
-    "632.aba98f73.chunk.js.map": "/books-reading-tracker/static/js/632.aba98f73.chunk.js.map",
+    "660.5a8f1851.chunk.js.map": "/books-reading-tracker/static/js/660.5a8f1851.chunk.js.map",
     "594.66ba2250.chunk.js.map": "/books-reading-tracker/static/js/594.66ba2250.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e788fc23.css",
-    "static/js/main.e923b96f.js"
+    "static/js/main.9351b88c.js"
   ]
 }
