@@ -29,14 +29,8 @@ const planningSlice = createSlice({
   initialState: initialState,
   reducers: {
     finishPlanning(state, action: PayloadAction<'fail' | 'success'>) {
-      switch (action.payload) {
-        case 'success':
-          state.planningStatus = action.payload;
-          break;
-
-        case 'fail':
-          state.planningStatus = action.payload;
-          break;
+      if (action.payload === 'fail' || action.payload === 'success') {
+        state.planningStatus = action.payload;
       }
     },
     deletePlanning(state) {

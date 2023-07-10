@@ -15,7 +15,7 @@ import {
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { getPlanningLoadingStatus } from '../../redux/planning/planningSlice';
 // import { LineChart } from '@mui/x-charts';
-import { Modal } from '../../components/Modal/Modal';
+import { ModalBody } from '../../components/ModalBody/ModalBody';
 
 import { processBooksData, arraySum } from '../../helpers';
 import { IBookData } from '../../interfaces';
@@ -26,6 +26,10 @@ import {
   updateBookToRead,
 } from '../../redux/auth/authSlice';
 import { detectCurrentBookNumber } from '../../redux/planning/planningSlice';
+import { Modal } from '@mui/material';
+
+import { Box } from '@mui/system';
+import { deletePlanning } from '../../redux/planning/planningSlice';
 
 const TrainingPage = () => {
   const stats = useAppSelector(getPlanningStats);
@@ -53,6 +57,11 @@ const TrainingPage = () => {
 
   const updateIsFormSubmitted = (value: boolean) => {
     setIsFormSubmitted(value);
+  };
+  const modalCloseHandler = () => {
+    setIsModalOpen(false);
+    resetTrainingRegistrationData();
+    dispatch(deletePlanning());
   };
 
   const resetTrainingRegistrationData = () => {
@@ -244,15 +253,18 @@ const TrainingPage = () => {
           height={300}
         />
       ) : null} */}
-      {isModalOpen && (
-        <Modal
-          modalType={modalType}
-          modalCloseHandler={() => {
-            setIsModalOpen(false);
-          }}
-          resetTrainingRegistrationData={resetTrainingRegistrationData}
-        />
-      )}
+
+      <Modal open={isModalOpen} onClose={modalCloseHandler}>
+        <Box>
+          <ModalBody
+            modalType={modalType}
+            modalCloseHandler={() => {
+              setIsModalOpen(false);
+            }}
+            resetTrainingRegistrationData={resetTrainingRegistrationData}
+          />
+        </Box>
+      </Modal>
     </Container>
   );
 };

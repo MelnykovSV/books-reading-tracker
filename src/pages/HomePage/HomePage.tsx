@@ -40,7 +40,6 @@ const HomePage = () => {
       </div>
       <Modal open={isModalOpen} onClose={modalCloseHandler}>
         <Box>
-          <h2>!!!</h2>
           <FeedbackForm
             id={feedbackBookId}
             modalCloseHandler={modalCloseHandler}
