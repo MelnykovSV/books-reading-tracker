@@ -31,13 +31,7 @@ export const FeedbackForm = ({ id, modalCloseHandler }: IFeedbackFormProps) => {
       <Rating
         name="rating"
         id="single-book-rating"
-        // value={3}
         className="rating"
-        // sx={{
-        //   '&.Mui-disabled': {
-        //     opacity: 1,
-        //   },
-        // }}
         onChange={formik.handleChange}
         value={Number(formik.values.rating)}
       ></Rating>

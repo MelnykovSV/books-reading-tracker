@@ -3,7 +3,7 @@ import { Container } from './SingleBook.styled';
 import { ReactComponent as BookIcon } from '../../images/icons/library.svg';
 import { ISingleBookProps } from '../../interfaces';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { deleteBook, updateBook } from '../../redux/auth/operations';
+import { deleteBook } from '../../redux/auth/operations';
 import { getFinishedReading } from '../../redux/auth/authSlice';
 // import { Rating, Button } from '@mui/material';
 import Rating from '@mui/material/Rating';
