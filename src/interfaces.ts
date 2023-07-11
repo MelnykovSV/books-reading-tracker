@@ -208,7 +208,7 @@ export interface IStore {
 
 export interface IPlanningStat {
   time: string;
-  pagesCount: string;
+  pagesCount: number;
 }
 
 export interface IGetPlanningPayloadAction {

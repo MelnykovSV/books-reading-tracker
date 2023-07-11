@@ -24,6 +24,8 @@ export const updatePlanning = createAsyncThunk(
 
       const response = await axios.patch('/planning', planningData);
 
+      console.log(response);
+
       return response.data;
     } catch (error) {
       console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));

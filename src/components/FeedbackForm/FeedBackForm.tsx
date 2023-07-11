@@ -45,10 +45,15 @@ export const FeedbackForm = ({ id, modalCloseHandler }: IFeedbackFormProps) => {
         className="feedback-textarea"
         onChange={formik.handleChange}
         value={formik.values.feedback}
+        required
       ></textarea>
 
       <div className="buttons-container">
-        <button type="button" className="form-button button-back">
+        <button
+          type="button"
+          className="form-button button-back"
+          onClick={modalCloseHandler}
+        >
           Back
         </button>
         <button type="submit" className="form-button button-save">

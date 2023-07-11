@@ -82,14 +82,14 @@ export const SingleBook = ({
           >
             Resume
           </button>
-          <button
+          {/* <button
             className="single-book__delete-button"
             onClick={() => {
               dispatch(deleteBook(id));
             }}
           >
             <DeleteIcon />
-          </button>
+          </button> */}
         </Container>
       );
     case 'reading now':
@@ -113,14 +113,14 @@ export const SingleBook = ({
               <dd className="single-book__list-def">{pagesTotal}</dd>
             </div>
           </dl>
-          <button
+          {/* <button
             className="single-book__delete-button"
             onClick={() => {
               dispatch(deleteBook(id));
             }}
           >
             <DeleteIcon />
-          </button>
+          </button> */}
         </Container>
       );
     case 'going to read':

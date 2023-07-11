@@ -11,10 +11,12 @@ import {
   getPlanningId,
   getPlanningStatus,
   getPlanningBooks,
+  getStartDate,
+  getEndDate,
 } from '../../redux/planning/planningSlice';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { getPlanningLoadingStatus } from '../../redux/planning/planningSlice';
-// import { LineChart } from '@mui/x-charts';
+import { LineChart } from '@mui/x-charts';
 import { ModalBody } from '../../components/ModalBody/ModalBody';
 
 import { processBooksData, arraySum } from '../../helpers';
@@ -31,8 +33,12 @@ import { Modal } from '@mui/material';
 import { Box } from '@mui/system';
 import { deletePlanning } from '../../redux/planning/planningSlice';
 
+import { processPlanningStats } from '../../helpers';
+
 const TrainingPage = () => {
   const stats = useAppSelector(getPlanningStats);
+  const planningStartDate = useAppSelector(getStartDate);
+  const planningEndDate = useAppSelector(getEndDate);
   const status = useAppSelector(getPlanningLoadingStatus);
   const planningId = useAppSelector(getPlanningId);
   const planningStatus = useAppSelector(getPlanningStatus);
@@ -92,6 +98,9 @@ const TrainingPage = () => {
         if (isFormSubmitted) {
           dispatch(updateBooksAfterPlanningCreation(books));
         }
+        console.log(
+          processPlanningStats(stats, planningStartDate, planningEndDate, 300)
+        );
 
         break;
       case 'success':
@@ -109,10 +118,6 @@ const TrainingPage = () => {
 
   useEffect(() => {
     if (planningStatus === 'active') {
-      // const bookNumber = getCurrentBookNumber(books);
-      // if (!bookNumber || bookNumber === 1) {
-      //   return;
-      // }
       if (currentBookNumber && currentBookNumber !== 1 && isDataLoaded) {
         dispatch(updateBookToRead(books[currentBookNumber - 2]));
 
@@ -221,6 +226,31 @@ const TrainingPage = () => {
         planningEndDate={endDate}
       ></MyGoals>
       {planningId && <MyTrainingResults></MyTrainingResults>}
+
+      {
+        <LineChart
+          xAxis={[
+            {
+              data: [1, 2, 3, 4, 5],
+
+              // min: 0,
+              // max: 10,
+            },
+          ]}
+          series={[
+            {
+              data: [14, 14, 14, 15, 16],
+              curve: 'natural',
+            },
+            {
+              data: [11, 0, 0, 0, 12],
+              curve: 'natural',
+            },
+          ]}
+          width={500}
+          height={300}
+        />
+      }
 
       {/* {status === 'fulfilled' ? (
         <LineChart

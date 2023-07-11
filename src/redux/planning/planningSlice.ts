@@ -10,6 +10,8 @@ import {
   IUpdatePlanningPayloadAction,
 } from '../../interfaces';
 
+import { formatPlanningStatsArray } from '../../helpers';
+
 const initialState = {
   startDate: '',
   endDate: '',
@@ -54,7 +56,7 @@ const planningSlice = createSlice({
         state.books = action.payload.books;
         state.duration = action.payload.duration;
         state.pagesPerDay = action.payload.pagesPerDay;
-        state.stats = { ...action.payload.stats };
+        state.stats = formatPlanningStatsArray([...action.payload.stats]);
         state._id = action.payload._id;
         state.status = 'fulfilled';
         state.planningStatus = 'active';
@@ -70,7 +72,9 @@ const planningSlice = createSlice({
         state.books = action.payload.planning.books;
         state.duration = action.payload.planning.duration;
         state.pagesPerDay = action.payload.planning.pagesPerDay;
-        state.stats = { ...action.payload.planning.stats };
+        state.stats = formatPlanningStatsArray([
+          ...action.payload.planning.stats,
+        ]);
         state._id = action.payload.planning._id;
         state.status = 'fulfilled';
         state.planningStatus = 'active';
@@ -82,7 +86,8 @@ const planningSlice = createSlice({
       updatePlanning.fulfilled,
       (state, action: PayloadAction<IUpdatePlanningPayloadAction>) => {
         const statsArray = action.payload.planning.stats;
-        state.stats = statsArray;
+
+        state.stats = formatPlanningStatsArray(statsArray);
         getCurrentBook(state.books).pagesFinished +=
           statsArray[statsArray.length - 1].pagesCount;
         state.status = 'fulfilled';

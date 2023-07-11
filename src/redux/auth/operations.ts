@@ -181,6 +181,7 @@ export const updateBook = createAsyncThunk<
   IUpdateBookResponseDataWithId,
   IUpdateBookData
 >('auth/updateBook', async ({ id, values: { rating, feedback } }) => {
+  console.log(id);
   console.log({
     rating,
     feedback,

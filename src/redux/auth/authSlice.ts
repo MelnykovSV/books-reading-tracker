@@ -156,6 +156,9 @@ const authSlice = createSlice({
       state.user.goingToRead = state.user.goingToRead.filter(
         item => item._id !== action.payload
       );
+      state.user.finishedReading = state.user.finishedReading.filter(
+        item => item._id !== action.payload
+      );
 
       state.isLoading = false;
       state.status = 'fulfilled';
