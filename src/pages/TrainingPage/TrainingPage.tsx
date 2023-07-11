@@ -227,7 +227,7 @@ const TrainingPage = () => {
       ></MyGoals>
       {planningId && <MyTrainingResults></MyTrainingResults>}
 
-      {
+      {status === 'fulfilled' ? (
         <LineChart
           xAxis={[
             {
@@ -239,18 +239,28 @@ const TrainingPage = () => {
           ]}
           series={[
             {
-              data: [14, 14, 14, 15, 16],
+              data: processPlanningStats(
+                stats,
+                planningStartDate,
+                planningEndDate,
+                300
+              )[1] as number[],
               curve: 'natural',
             },
             {
-              data: [11, 0, 0, 0, 12],
+              data: processPlanningStats(
+                stats,
+                planningStartDate,
+                planningEndDate,
+                300
+              )[2] as number[],
               curve: 'natural',
             },
           ]}
           width={500}
           height={300}
         />
-      }
+      ) : null}
 
       {/* {status === 'fulfilled' ? (
         <LineChart
