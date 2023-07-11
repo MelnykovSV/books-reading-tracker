@@ -10,7 +10,8 @@ import {
   IUpdatePlanningPayloadAction,
 } from '../../interfaces';
 
-import { formatPlanningStatsArray } from '../../helpers';
+import { formatPlanningStatsArray, processPlanningStats } from '../../helpers';
+import { createSelector } from '@reduxjs/toolkit';
 
 const initialState = {
   startDate: '',
@@ -139,3 +140,21 @@ export const detectCurrentBookNumber = (state: IStore) => {
 
   return null;
 };
+
+export const getProcessedChartData = createSelector(
+  [getPlanningStats, getStartDate, getEndDate, getPlanningBooks, getPlanningId],
+  (stats, startDate, endDate, planningBooks, id) => {
+    if (id) {
+      const data = processPlanningStats(
+        stats,
+        startDate,
+        endDate,
+        planningBooks.reduce((acc, item) => acc + item.pagesTotal, 0)
+      );
+
+      return data;
+    }
+
+    return [[], [], [0]];
+  }
+);

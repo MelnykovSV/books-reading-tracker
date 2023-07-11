@@ -13,6 +13,7 @@ import {
   getPlanningBooks,
   getStartDate,
   getEndDate,
+  getProcessedChartData,
 } from '../../redux/planning/planningSlice';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { getPlanningLoadingStatus } from '../../redux/planning/planningSlice';
@@ -45,6 +46,8 @@ const TrainingPage = () => {
   const books = useAppSelector(getPlanningBooks);
   const currentBookNumber = useAppSelector(detectCurrentBookNumber);
 
+  const chartData = useAppSelector(getProcessedChartData);
+
   const sid = useAppSelector(getSid);
 
   const initialState = [] as IBookData[];
@@ -57,13 +60,13 @@ const TrainingPage = () => {
   const [endDate, setEndDate] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
-
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   const updateIsFormSubmitted = (value: boolean) => {
     setIsFormSubmitted(value);
   };
+
   const modalCloseHandler = () => {
     setIsModalOpen(false);
     resetTrainingRegistrationData();
@@ -142,8 +145,6 @@ const TrainingPage = () => {
     setEndDate(value);
   };
 
-  // useUnsavedChangesWarning(true);
-
   if (status === 'fulfilled') {
     console.log(
       Object.values(processBooksData(Object.values(stats))).map(
@@ -181,44 +182,6 @@ const TrainingPage = () => {
           return <div>Loading...</div>;
         }
       })()}
-      {/* {
-        // (() => {
-        //   switch (planningStatus) {
-        //     case 'active' || 'success' || 'fail':
-        //       return <MyTraining />;
-
-        //     case 'none':
-        //       return (
-        //         <MyTrainingRegistration
-        //           trainingBookList={trainingBookList}
-        //           startDate={startDate}
-        //           endDate={endDate}
-        //           updateTrainingBookList={updateTrainingBookList}
-        //           updateStartDate={updateStartDate}
-        //           updateEndDate={updateEndDate}
-        //         />
-        //       );
-        //     default:
-        //       return <div>Loading...</div>;
-        //   }
-        // })()
-
-        planningStatus === 'active' ||
-        planningStatus === 'success' ||
-        planningStatus === 'fail' ? (
-          <MyTraining />
-        ) : null
-      } */}
-      {/* {planningStatus === 'none' ? (
-        <MyTrainingRegistration
-          trainingBookList={trainingBookList}
-          startDate={startDate}
-          endDate={endDate}
-          updateTrainingBookList={updateTrainingBookList}
-          updateStartDate={updateStartDate}
-          updateEndDate={updateEndDate}
-        />
-      ) : null} */}
 
       <MyGoals
         trainingBookList={trainingBookList}
@@ -231,7 +194,8 @@ const TrainingPage = () => {
         <LineChart
           xAxis={[
             {
-              data: [1, 2, 3, 4, 5],
+              scaleType: 'point',
+              data: chartData[0] as string[],
 
               // min: 0,
               // max: 10,
@@ -239,21 +203,11 @@ const TrainingPage = () => {
           ]}
           series={[
             {
-              data: processPlanningStats(
-                stats,
-                planningStartDate,
-                planningEndDate,
-                300
-              )[1] as number[],
+              data: chartData[1] as number[],
               curve: 'natural',
             },
             {
-              data: processPlanningStats(
-                stats,
-                planningStartDate,
-                planningEndDate,
-                300
-              )[2] as number[],
+              data: chartData[2] as number[],
               curve: 'natural',
             },
           ]}
@@ -261,38 +215,6 @@ const TrainingPage = () => {
           height={300}
         />
       ) : null}
-
-      {/* {status === 'fulfilled' ? (
-        <LineChart
-          xAxis={[
-            {
-              data: Object.keys(processBooksData(Object.values(stats))).map(
-                (item, i) => i + 1
-              ),
-
-              min: 0,
-              max: 10,
-            },
-          ]}
-          series={[
-            {
-              data: Object.values(processBooksData(Object.values(stats))),
-              curve: 'natural',
-            },
-            {
-              data: Object.values(processBooksData(Object.values(stats))).map(
-                (item, i, arr) => {
-                  const result = (338 - arraySum(arr, i)) / (10 - i);
-                  return result;
-                }
-              ),
-              curve: 'natural',
-            },
-          ]}
-          width={500}
-          height={300}
-        />
-      ) : null} */}
 
       <Modal open={isModalOpen} onClose={modalCloseHandler}>
         <Box>
