@@ -284,3 +284,9 @@ export interface IUpdateBookData {
     feedback: string;
   };
 }
+
+export interface IChartData {
+  name: string;
+  actual: number;
+  plan: number;
+}

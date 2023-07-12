@@ -155,6 +155,6 @@ export const getProcessedChartData = createSelector(
       return data;
     }
 
-    return [[], [], [0]];
+    return [{ name: '', actual: 0, plan: 0 }];
   }
 );

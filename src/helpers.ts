@@ -142,12 +142,18 @@ export function processPlanningStats(
     );
     pagesRead += result[item].actual;
   });
+  console.log(result);
+  const resultArray = [];
 
-  const resultArray = [
-    Object.keys(result),
-    Object.values(result).map(item => item.actual),
-    Object.values(result).map(item => item.plan),
-  ];
+  for (const key in result) {
+    resultArray.push({
+      name: key,
+      actual: result[key].actual,
+      plan: result[key].plan,
+    });
+  }
+
+  console.log(resultArray);
 
   return resultArray;
 }

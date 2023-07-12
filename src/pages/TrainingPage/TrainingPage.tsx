@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { MyTraining } from '../../components/MyTraining/MyTraining';
 
 import { MyGoals } from '../../components/MyGoals/MyGoals';
-import { MyTrainingResults } from '../../components/MyTrainingResults/MyTrainingResults';
+// import { MyTrainingResults } from '../../components/MyTrainingResults/MyTrainingResults';
 import { MyTrainingRegistration } from '../../components/MyTrainingRegistration/MyTrainingRegistration';
 import {
   getPlanningStats,
@@ -17,7 +17,7 @@ import {
 } from '../../redux/planning/planningSlice';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { getPlanningLoadingStatus } from '../../redux/planning/planningSlice';
-import { LineChart } from '@mui/x-charts';
+// import { LineChart } from '@mui/x-charts';
 import { ModalBody } from '../../components/ModalBody/ModalBody';
 
 import { processBooksData, arraySum } from '../../helpers';
@@ -35,6 +35,16 @@ import { Box } from '@mui/system';
 import { deletePlanning } from '../../redux/planning/planningSlice';
 
 import { processPlanningStats } from '../../helpers';
+
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+
+} from 'recharts';
 
 const TrainingPage = () => {
   const stats = useAppSelector(getPlanningStats);
@@ -62,10 +72,18 @@ const TrainingPage = () => {
   const [modalType, setModalType] = useState('');
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [isAnimated, setIsAnimated] = useState(false);
 
   const updateIsFormSubmitted = (value: boolean) => {
     setIsFormSubmitted(value);
   };
+
+  useEffect(() => {
+    setIsAnimated(true);
+    setTimeout(() => {
+      setIsAnimated(false);
+    }, 1000);
+  }, [chartData]);
 
   const modalCloseHandler = () => {
     setIsModalOpen(false);
@@ -188,32 +206,67 @@ const TrainingPage = () => {
         planningStartDate={startDate}
         planningEndDate={endDate}
       ></MyGoals>
-      {planningId && <MyTrainingResults></MyTrainingResults>}
 
-      {status === 'fulfilled' ? (
+      {planningId ? (
         <LineChart
-          xAxis={[
-            {
-              scaleType: 'point',
-              data: chartData[0] as string[],
-
-              // min: 0,
-              // max: 10,
-            },
-          ]}
-          series={[
-            {
-              data: chartData[1] as number[],
-              curve: 'natural',
-            },
-            {
-              data: chartData[2] as number[],
-              curve: 'natural',
-            },
-          ]}
           width={500}
           height={300}
-        />
+          data={chartData}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid />
+          <XAxis dataKey="name" tick={() => null as any} tickSize={0}></XAxis>
+          <YAxis tick={false} />
+          <Tooltip />
+
+          <Line
+            type="monotone"
+            dataKey="actual"
+            stroke="#8884d8"
+            activeDot={{ r: 4 }}
+            isAnimationActive={isAnimated}
+            label={({ x, y, stroke, value }) => {
+              if (value === chartData[chartData.length - 1].actual) {
+                return (
+                  <text
+                    x={x}
+                    y={y}
+                    // dy={-4}
+                    fill={stroke}
+                    fontSize={10}
+                    textAnchor="middle"
+                  >
+                    {value}
+                  </text>
+                );
+              } else {
+                return (
+                  <text
+                    x={x}
+                    y={y}
+                    // dy={-4}
+                    fill={stroke}
+                    fontSize={10}
+                    textAnchor="middle"
+                  ></text>
+                );
+              }
+            }}
+          />
+
+          <Line
+            type="monotone"
+            dataKey="plan"
+            stroke="#82ca9d"
+            isAnimationActive={false}
+            label={true}
+          />
+        </LineChart>
       ) : null}
 
       <Modal open={isModalOpen} onClose={modalCloseHandler}>
