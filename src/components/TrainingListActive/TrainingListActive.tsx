@@ -44,7 +44,7 @@ export const TrainingListActive = () => {
             backgroundColor: 'rgba(177, 181, 194, 0.2)',
             width: 10,
 
-            marginTop: 7,
+            marginTop: 5,
           },
           '&::-webkit-scrollbar-thumb': {
             backgroundColor: '#B1B5C2',
@@ -63,9 +63,15 @@ export const TrainingListActive = () => {
         >
           <TableHead sx={{ color: 'white' }}>
             <TableRow>
-              <TableCell align="left">Book title</TableCell>
-              <TableCell align="left">Author</TableCell>
-              <TableCell align="left">Year</TableCell>
+              <TableCell width={matches ? 500 : 400} align="left">
+                Book title
+              </TableCell>
+              <TableCell width={matches ? 200 : 160} align="left">
+                Author
+              </TableCell>
+              <TableCell width={matches ? 100 : 92} align="left">
+                Year
+              </TableCell>
               <TableCell align="left">Pages</TableCell>
             </TableRow>
           </TableHead>
@@ -74,6 +80,7 @@ export const TrainingListActive = () => {
               <TableRow
                 key={row._id}
                 sx={{
+                  height: matches ? 37 : 62,
                   '&:last-of-type td, &:last-of-type th': { border: 0 },
                   [`& .${tableCellClasses.root}`]: {
                     borderBottom: 'none',
@@ -81,12 +88,17 @@ export const TrainingListActive = () => {
                 }}
               >
                 <TableCell align="left">
-                  <CustomCheckboxReadonly
-                    isChecked={row.pagesTotal === row.pagesFinished}
-                  />
-                  {row.title}
+                  <div className="title-container">
+                    {/* {' '} */}
+                    <CustomCheckboxReadonly
+                      isChecked={row.pagesTotal === row.pagesFinished}
+                    />
+                    <p> {row.title}</p>
+                  </div>
                 </TableCell>
-                <TableCell align="left">{row.author}</TableCell>
+                <TableCell align="left" className="author-container">
+                  <p>{row.author}</p>{' '}
+                </TableCell>
                 <TableCell align="left">{row.publishYear}</TableCell>
                 <TableCell align="left">{row.pagesTotal}</TableCell>
               </TableRow>
