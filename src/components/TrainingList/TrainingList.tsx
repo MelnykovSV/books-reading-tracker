@@ -8,6 +8,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { ITrainingList } from '../../interfaces';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { ReactComponent as BookIcon } from '../../images/icons/library.svg';
+import { ReactComponent as DeleteIcon } from '../../images/icons/delete.svg';
 
 export const TrainingList = ({
   trainingList,
@@ -25,22 +27,21 @@ export const TrainingList = ({
           borderTop: 1,
           borderBottom: 1,
           borderRadius: 0,
-          maxHeight: matches ? 212 : 227,
+
+          height: matches ? 195 : 230,
           borderColor: '#E0E5EB',
           boxShadow: 'none',
           '&::-webkit-scrollbar': {
             width: 5,
-            // height: 100,
           },
           '& MuiTableRow-head': {
             backgroundColor: '#B1B5C2',
-            // height: 100,
           },
           '&::-webkit-scrollbar-track': {
             backgroundColor: 'rgba(177, 181, 194, 0.2)',
             width: 10,
 
-            marginTop: 7,
+            marginTop: 5,
           },
           '&::-webkit-scrollbar-thumb': {
             backgroundColor: '#B1B5C2',
@@ -59,9 +60,15 @@ export const TrainingList = ({
         >
           <TableHead sx={{ color: 'white' }}>
             <TableRow>
-              <TableCell align="left">Book title</TableCell>
-              <TableCell align="left">Author</TableCell>
-              <TableCell align="left">Year</TableCell>
+              <TableCell width={matches ? 500 : 400} align="left">
+                Book title
+              </TableCell>
+              <TableCell width={matches ? 200 : 160} align="left">
+                Author
+              </TableCell>
+              <TableCell width={matches ? 100 : 92} align="left">
+                Year
+              </TableCell>
               <TableCell align="left">Pages</TableCell>
               <TableCell align="left"></TableCell>
             </TableRow>
@@ -70,16 +77,23 @@ export const TrainingList = ({
             {trainingList.map(row => (
               <TableRow
                 key={row._id}
-                // sx={{ '&:last-of-type td, &:last-of-type th': { border: 0 } }}
                 sx={{
+                  height: matches ? 37 : 62,
                   '&:last-of-type td, &:last-of-type th': { border: 0 },
                   [`& .${tableCellClasses.root}`]: {
-                    borderBottom: 'none',
+                    borderBottom: matches ? 'none' : 1,
+                    borderColor: '#E0E5EB',
                   },
                 }}
               >
-                <TableCell align="left">{row.title}</TableCell>
-                <TableCell align="left">{row.author}</TableCell>
+                <TableCell align="left">
+                  <div className="title-container">
+                    <BookIcon className="book-icon" /> <p>{row.title}</p>
+                  </div>
+                </TableCell>
+                <TableCell align="left" className="author-container">
+                  <p>{row.author}</p>
+                </TableCell>
                 <TableCell align="left">{row.publishYear}</TableCell>
                 <TableCell align="left">{row.pagesTotal}</TableCell>
                 <TableCell align="left">
@@ -88,12 +102,33 @@ export const TrainingList = ({
                     onClick={() => {
                       removeFromTrainingListHandler(row._id);
                     }}
+                    className="delete-button"
                   >
-                    D
+                    <DeleteIcon className="delete-icon" />
                   </button>
                 </TableCell>
               </TableRow>
             ))}
+            <TableRow
+              className="last-row"
+              sx={{
+                '&:last-of-type td, &:last-of-type th': { border: 0 },
+                [`& .${tableCellClasses.root}`]: {
+                  borderBottom: 'none',
+                },
+              }}
+            >
+              <TableCell align="left">
+                {' '}
+                <div className="title-container">
+                  <BookIcon className="book-icon" /> ...
+                </div>
+              </TableCell>
+              <TableCell align="left"></TableCell>
+              <TableCell align="left"></TableCell>
+              <TableCell align="left"></TableCell>
+              <TableCell align="left"></TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
