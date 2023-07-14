@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { MyTraining } from '../../components/MyTraining/MyTraining';
 
 import { MyGoals } from '../../components/MyGoals/MyGoals';
-// import { MyTrainingResults } from '../../components/MyTrainingResults/MyTrainingResults';
+import { MyTrainingResults } from '../../components/MyTrainingResults/MyTrainingResults';
 import { MyTrainingRegistration } from '../../components/MyTrainingRegistration/MyTrainingRegistration';
 import {
   getPlanningStats,
@@ -21,7 +21,7 @@ import { getPlanningLoadingStatus } from '../../redux/planning/planningSlice';
 import { ModalBody } from '../../components/ModalBody/ModalBody';
 
 import { processBooksData, arraySum } from '../../helpers';
-import { IBookData } from '../../interfaces';
+import { IBookData, IChartData } from '../../interfaces';
 import { getSid } from '../../redux/auth/authSlice';
 import { getPlanning } from '../../redux/planning/operations';
 import {
@@ -35,6 +35,7 @@ import { Box } from '@mui/system';
 import { deletePlanning } from '../../redux/planning/planningSlice';
 
 import { processPlanningStats } from '../../helpers';
+import { ModernNormalize } from 'emotion-modern-normalize';
 
 import {
   LineChart,
@@ -43,7 +44,10 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-
+  Label,
+  LabelList,
+  Legend,
+  ResponsiveContainer,
 } from 'recharts';
 
 const TrainingPage = () => {
@@ -175,7 +179,8 @@ const TrainingPage = () => {
   }
 
   return (
-    <Container>
+    <Container className="container">
+      <ModernNormalize />
       {(() => {
         if (
           planningStatus === 'active' ||
@@ -219,8 +224,10 @@ const TrainingPage = () => {
             bottom: 5,
           }}
         >
-          <CartesianGrid />
-          <XAxis dataKey="name" tick={() => null as any} tickSize={0}></XAxis>
+          <CartesianGrid horizontal={false} />
+          <XAxis dataKey="name" tick={() => null as any} tickSize={0}>
+            <Label value="Pages of my website" offset={0} position="center" />
+          </XAxis>
           <YAxis tick={false} />
           <Tooltip />
 
@@ -268,6 +275,7 @@ const TrainingPage = () => {
           />
         </LineChart>
       ) : null}
+      {planningId && <MyTrainingResults></MyTrainingResults>}
 
       <Modal open={isModalOpen} onClose={modalCloseHandler}>
         <Box>

@@ -35,30 +35,31 @@ export const Timer = () => {
 
   return (
     <Container>
-      <dl>
-        <div>
-          <dt>
+      <h3>Goals countdown</h3>
+      <dl className="timer-body">
+        <div className="timer-body__item">
+          <dt className="timer-body__value">
             {timeDifferenceProcessor(timeLeft).d.toString().padStart(2, '0')}
           </dt>
-          <dd>Days</dd>
+          <dd className="timer-body__label">Days</dd>
         </div>
-        <div>
-          <dt>
+        <div className="timer-body__item">
+          <dt className="timer-body__value">
             {timeDifferenceProcessor(timeLeft).h.toString().padStart(2, '0')}
           </dt>
-          <dd>Hrs</dd>
+          <dd className="timer-body__label">Hrs</dd>
         </div>
-        <div>
-          <dt>
+        <div className="timer-body__item">
+          <dt className="timer-body__value">
             {timeDifferenceProcessor(timeLeft).m.toString().padStart(2, '0')}
           </dt>
-          <dd>Minutes</dd>
+          <dd className="timer-body__label">Minutes</dd>
         </div>
-        <div>
-          <dt>
+        <div className="timer-body__item">
+          <dt className="timer-body__value">
             {timeDifferenceProcessor(timeLeft).s.toString().padStart(2, '0')}
           </dt>
-          <dd>Seconds</dd>
+          <dd className="timer-body__label">Seconds</dd>
         </div>
       </dl>
     </Container>

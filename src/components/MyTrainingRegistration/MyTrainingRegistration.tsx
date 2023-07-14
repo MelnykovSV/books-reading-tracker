@@ -132,6 +132,7 @@ export const MyTrainingRegistration = ({
             }}
             disablePast
             minDate={dayjs().add(1, 'day')}
+            maxDate={dayjs().add(999, 'day')}
           />
         </LocalizationProvider>
       </div>

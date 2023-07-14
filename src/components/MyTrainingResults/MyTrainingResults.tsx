@@ -18,6 +18,7 @@ import { useFormik } from 'formik';
 import { finishPlanning } from '../../redux/planning/planningSlice';
 import * as yup from 'yup';
 import { IPlanningStat } from '../../interfaces';
+import CssBaseline from '@mui/material/CssBaseline';
 
 export const MyTrainingResults = () => {
   const planning = useAppSelector(getPlanningFromStore);
@@ -73,35 +74,70 @@ export const MyTrainingResults = () => {
 
   return (
     <Container>
+      <CssBaseline />
+      <h2>Result</h2>
       <form onSubmit={formik.handleSubmit}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker label="Date" defaultValue={dayjs()} disabled />
-        </LocalizationProvider>
+        <div className="input-container">
+          <label htmlFor="current-date-input">
+            {' '}
+            Date
+            <TextField
+              id="current-date-input"
+              variant="outlined"
+              name="pages"
+              value={dayjs().format('DD.MM.YYYY')}
+              sx={{
+                '& .MuiInputBase-root': {
+                  height: 42,
+                  fontSize: 14,
+                },
+              }}
+              disabled
+            />
+          </label>
 
-        <TextField
-          id="outlined-basic"
-          label="Amount of pages"
-          variant="outlined"
-          type="number"
-          name="pages"
-          value={formik.values.pages}
-          onChange={formik.handleChange}
-          helperText={formik.touched.pages && formik.errors.pages}
-        />
+          <label htmlFor="outlined-basic">
+            Amount of pages
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              type="number"
+              name="pages"
+              value={formik.values.pages}
+              onChange={formik.handleChange}
+              helperText={formik.touched.pages && formik.errors.pages}
+              sx={{
+                '& .MuiInputBase-root': {
+                  height: 42,
+                  fontSize: 14,
+                },
+              }}
+            />
+          </label>
+        </div>
 
         <button type="submit">Add result</button>
       </form>
 
       <div className="results-container">
         <h3>Statistics</h3>
-        {status === 'fulfilled'
-          ? statsToShow.map(item => (
-              <li key={nanoid()}>
-                <p>{item.time}</p>
-                <p>{item.pagesCount}</p>
-              </li>
-            ))
-          : null}
+        <ul className="results-list">
+          {status === 'fulfilled'
+            ? statsToShow.map(item => (
+                <li className="results-list__item" key={nanoid()}>
+                  <p className="results-list__item-date">
+                    {item.time.split(' ')[0].replaceAll('-', '.')}
+                  </p>
+                  <p className="results-list__item-time">
+                    {item.time.split(' ')[1]}
+                  </p>
+                  <p className="results-list__item-pages">
+                    {item.pagesCount} <span>pages</span>
+                  </p>
+                </li>
+              ))
+            : null}
+        </ul>
       </div>
     </Container>
   );

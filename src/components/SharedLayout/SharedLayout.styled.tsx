@@ -37,4 +37,7 @@ export const Container = styled.div<IStyledProps>`
       }
     }
   }
+  main {
+    background: #f5f7fa;
+  }
 `;
