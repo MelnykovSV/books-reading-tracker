@@ -3,12 +3,7 @@ import styled from '@emotion/styled';
 export const Container = styled.div`
   background-color: #f6f7fb;
   .table-body {
-    height: 186px;
     overflow-y: auto;
-
-    @media screen and (min-width: 1280px) {
-      height: 121px;
-    }
   }
 
   .MuiTableCell-head {
@@ -27,11 +22,6 @@ export const Container = styled.div`
   }
   .MuiTableRow-root:first-of-type .MuiTableCell-body {
     padding-top: 20px;
-  }
-  .MuiTableCell-body:first-of-type {
-    display: flex;
-    align-items: center;
-    gap: 21px;
   }
 
   .title-container {
@@ -107,5 +97,14 @@ export const Container = styled.div`
         text-overflow: ellipsis;
       }
     }
+  }
+
+  tr {
+    overflow: hidden;
+    height: 14px;
+    white-space: nowrap;
+  }
+  td {
+    height: 14px;
   }
 `;

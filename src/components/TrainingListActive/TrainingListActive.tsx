@@ -29,7 +29,8 @@ export const TrainingListActive = () => {
           borderTop: 1,
           borderBottom: 1,
           borderRadius: 0,
-          maxHeight: matches ? 212 : 227,
+          height: matches ? 212 : 227,
+
           borderColor: '#E0E5EB',
           boxShadow: 'none',
           '&::-webkit-scrollbar': {
@@ -81,6 +82,7 @@ export const TrainingListActive = () => {
                 key={row._id}
                 sx={{
                   height: matches ? 37 : 62,
+
                   '&:last-of-type td, &:last-of-type th': { border: 0 },
                   [`& .${tableCellClasses.root}`]: {
                     borderBottom: 'none',
@@ -89,7 +91,6 @@ export const TrainingListActive = () => {
               >
                 <TableCell align="left">
                   <div className="title-container">
-                    {/* {' '} */}
                     <CustomCheckboxReadonly
                       isChecked={row.pagesTotal === row.pagesFinished}
                     />
@@ -97,7 +98,7 @@ export const TrainingListActive = () => {
                   </div>
                 </TableCell>
                 <TableCell align="left" className="author-container">
-                  <p>{row.author}</p>{' '}
+                  <p>{row.author}</p>
                 </TableCell>
                 <TableCell align="left">{row.publishYear}</TableCell>
                 <TableCell align="left">{row.pagesTotal}</TableCell>

@@ -157,3 +157,16 @@ export function processPlanningStats(
 
   return resultArray;
 }
+
+export function calculateLabelCoordinates(act: number, plan: number) {
+  const dif = act - plan;
+
+  if (dif > 0 && dif < 40) {
+    return { actCorrection: 40, planCorrection: 0 };
+  }
+  if (dif <= 0 && dif > -40) {
+    return { actCorrection: 0, planCorrection: 40 };
+  } else {
+    return { actCorrection: 0, planCorrection: 0 };
+  }
+}

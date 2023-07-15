@@ -290,3 +290,12 @@ export interface IChartData {
   actual: number;
   plan: number;
 }
+
+export interface ICustomTooltipData {
+  payload: {
+    name: string;
+    value: number;
+    dataKey: string;
+  }[];
+  label: string;
+}

@@ -112,7 +112,10 @@ export const MyTrainingRegistration = ({
       <div className="date-input-container">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
+          slotProps={{ textField: { size: 'small' } }}
+       
             label="Start"
+            className="datepicker"
             defaultValue={dayjs(getCurrentDate())}
             onChange={newValue => {
               if (newValue) {
@@ -124,7 +127,10 @@ export const MyTrainingRegistration = ({
         </LocalizationProvider>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
+          slotProps={{ textField: { size: 'small' } }}
+        
             label="Finish"
+            className="datepicker"
             onChange={newValue => {
               if (newValue) {
                 updateEndDate(newValue.format('YYYY-MM-DD'));
@@ -138,6 +144,8 @@ export const MyTrainingRegistration = ({
       </div>
       <div className="books-input-container">
         <Autocomplete
+      size='small'
+        className='books-autocomplete'
           onChange={(event: any, book: IBookData | null) => {
             if (book) {
               setCurrentBook(book);
@@ -156,6 +164,7 @@ export const MyTrainingRegistration = ({
           )}
         />
         <button
+        className = 'button-add'
           type="button"
           onClick={() => {
             if (currentBook) {
@@ -166,13 +175,13 @@ export const MyTrainingRegistration = ({
         >
           Add
         </button>
-
-        <button type="submit">Start training</button>
       </div>
       <TrainingList
         trainingList={trainingBookList}
         removeFromTrainingListHandler={removeFromTrainingBookListHandler}
       ></TrainingList>
+
+      {trainingBookList.length ? <button className='button-submit' type="submit">Start training</button>: null}
     </Container>
   );
 };
