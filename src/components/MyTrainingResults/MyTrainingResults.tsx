@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Container } from './MyTrainingResults.styled';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+// import { LocalizationProvider } from '@mui/x-date-pickers';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import { TextField } from '@mui/material';
 import { getPlanningFromStore } from '../../redux/planning/planningSlice';
