@@ -42,6 +42,23 @@ export const MobileTrainingBooksList = ({
         </Container>
       );
     case 'registration':
+      if (trainingList?.length === 0) {
+        return (
+          <Container className="empty-table">
+            <SingleTrainingBook
+              title=""
+              author=""
+              publishYear={0}
+              pagesTotal={0}
+              pagesFinished={0}
+              _id=""
+              key=""
+              type={type}
+              removeFromTrainingListHandler={removeFromTrainingListHandler}
+            />
+          </Container>
+        );
+      }
       return (
         <Container>
           {trainingList?.map(

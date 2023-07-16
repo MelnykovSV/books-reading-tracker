@@ -47,6 +47,7 @@ import {
 import { TrainingListActive } from '../../components/TrainingListActive/TrainingListActive';
 import { Timer } from '../../components/Timer/Timer';
 import { MobileTrainingBooksList } from '../../components/MobileTrainingBooksList/MobileTrainingBooksList';
+// import { TrainingList } from '../../components/TrainingList/TrainingList';
 
 import {
   LineChart,
@@ -218,10 +219,22 @@ const TrainingPage = () => {
 
   let actualYCoordinate = 0;
   let planYCoordinate = 0;
+  const removeFromTrainingBookListHandler = (id: string) => {
+    updateTrainingBookList(
+      trainingBookList.filter((item: IBookData) => item._id !== id)
+    );
+  };
 
   return (
     <Container className="container">
       <ModernNormalize />
+      {!matchesDesktop && (
+        <MyGoals
+          trainingBookList={trainingBookList}
+          planningStartDate={startDate}
+          planningEndDate={endDate}
+        ></MyGoals>
+      )}
 
       {(() => {
         if (
@@ -232,13 +245,14 @@ const TrainingPage = () => {
           return (
             <div className="my-training-container">
               <Timer></Timer>
-              {!matchesDesktop && (
+              {matchesDesktop && (
                 <MyGoals
                   trainingBookList={trainingBookList}
                   planningStartDate={startDate}
                   planningEndDate={endDate}
                 ></MyGoals>
               )}
+
               {matches ? (
                 <TrainingListActive></TrainingListActive>
               ) : (
@@ -249,30 +263,51 @@ const TrainingPage = () => {
         }
         if (planningStatus === 'none') {
           return (
-            <MyTrainingRegistration
-              trainingBookList={trainingBookList}
-              startDate={startDate}
-              endDate={endDate}
-              updateTrainingBookList={updateTrainingBookList}
-              updateStartDate={updateStartDate}
-              updateEndDate={updateEndDate}
-              updateIsFormSubmitted={updateIsFormSubmitted}
-            />
+            <Fragment>
+              {matches && (
+                <MyTrainingRegistration
+                  trainingBookList={trainingBookList}
+                  startDate={startDate}
+                  endDate={endDate}
+                  updateTrainingBookList={updateTrainingBookList}
+                  updateStartDate={updateStartDate}
+                  updateEndDate={updateEndDate}
+                  updateIsFormSubmitted={updateIsFormSubmitted}
+                />
+              )}
+
+              {matchesDesktop && (
+                <MyGoals
+                  trainingBookList={trainingBookList}
+                  planningStartDate={startDate}
+                  planningEndDate={endDate}
+                ></MyGoals>
+              )}
+              {!matches && (
+                <MobileTrainingBooksList
+                  type="registration"
+                  trainingList={trainingBookList}
+                  removeFromTrainingListHandler={
+                    removeFromTrainingBookListHandler
+                  }
+                />
+              )}
+            </Fragment>
           );
         } else {
           return <div>Loading...</div>;
         }
       })()}
 
-      {matchesDesktop && (
+      {/* {matchesDesktop && (
         <MyGoals
           trainingBookList={trainingBookList}
           planningStartDate={startDate}
           planningEndDate={endDate}
         ></MyGoals>
-      )}
+      )} */}
 
-      {planningId ? (
+      {status ? (
         <ResponsiveContainer
           className="responsive-container"
           width="100%"

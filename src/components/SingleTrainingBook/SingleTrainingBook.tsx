@@ -45,32 +45,37 @@ export const SingleTrainingBook = ({
         <Container className="single-training-book registration">
           <div className="single-training-book__title-container">
             <BookIcon className="single-book__icon read" />
-            <h3 className="single-training-book__title">{title}</h3>
-            <button
-              className="single-training-book__delete-button"
-              onClick={() => {
-                if (removeFromTrainingListHandler) {
-                  removeFromTrainingListHandler(_id);
-                }
-                //   dispatch(deleteBook(id));
-              }}
-            >
-              <DeleteIcon />
-            </button>
+            <h3 className="single-training-book__title">{title || '...'}</h3>
+
+            {_id && (
+              <button
+                className="single-training-book__delete-button"
+                onClick={() => {
+                  if (removeFromTrainingListHandler) {
+                    removeFromTrainingListHandler(_id);
+                  }
+                  //   dispatch(deleteBook(id));
+                }}
+              >
+                <DeleteIcon />
+              </button>
+            )}
           </div>
 
           <dl className="single-training-book__list">
             <dt className="single-training-book__list-term">Author:</dt>
-            <dd className="single-training-book__list-description">{author}</dd>
+            <dd className="single-training-book__list-description">
+              {author || '...'}
+            </dd>
 
             <dt className="single-training-book__list-term">Year:</dt>
             <dd className="single-training-book__list-description">
-              {publishYear}
+              {publishYear || '...'}
             </dd>
 
             <dt className="single-training-book__list-term">Pages:</dt>
             <dd className="single-training-book__list-description">
-              {pagesTotal}
+              {pagesTotal || '...'}
             </dd>
           </dl>
         </Container>
