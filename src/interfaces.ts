@@ -86,7 +86,12 @@ export interface ISingleBookProps {
   publishYear: number;
   pagesTotal: number;
   id: string;
-  status: 'read' | 'going to read' | 'reading now';
+  status:
+    | 'read'
+    | 'going to read'
+    | 'reading now'
+    | 'training-active'
+    | 'training-registration';
   updateFeedbackBookId?: (id: string) => void;
   modalOpenHandler?: () => void;
 }
@@ -298,4 +303,21 @@ export interface ICustomTooltipData {
     dataKey: string;
   }[];
   label: string;
+}
+
+export interface IMobileTrainingBooksListProps {
+  type: 'active' | 'registration';
+  trainingList?: IBookData[];
+  removeFromTrainingListHandler?: (id: string) => void;
+}
+
+export interface ISingleTrainingBookProps {
+  title: string;
+  author: string;
+  publishYear: number;
+  pagesTotal: number;
+  pagesFinished: number;
+  _id: string;
+  type: 'active' | 'registration';
+  removeFromTrainingListHandler?: (id: string) => void;
 }

@@ -252,4 +252,10 @@ export const Container = styled.div`
       margin: 0 auto;
     }
   }
+  .single-book__title-container {
+    & > div:first-of-type {
+      align-self: center;
+      background-color: red;
+    }
+  }
 `;

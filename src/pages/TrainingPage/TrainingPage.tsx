@@ -1,7 +1,6 @@
 import { Container } from './TrainingPage.styled';
 import { useState, useEffect, Fragment } from 'react';
 import dayjs from 'dayjs';
-import { MyTraining } from '../../components/MyTraining/MyTraining';
 
 import { MyGoals } from '../../components/MyGoals/MyGoals';
 import { MyTrainingResults } from '../../components/MyTrainingResults/MyTrainingResults';
@@ -17,7 +16,6 @@ import {
 } from '../../redux/planning/planningSlice';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { getPlanningLoadingStatus } from '../../redux/planning/planningSlice';
-// import { LineChart } from '@mui/x-charts';
 import { ModalBody } from '../../components/ModalBody/ModalBody';
 
 import {
@@ -25,7 +23,7 @@ import {
   arraySum,
   calculateLabelCoordinates,
 } from '../../helpers';
-import { IBookData, ICustomTooltipData, IChartData } from '../../interfaces';
+import { IBookData } from '../../interfaces';
 import { getSid } from '../../redux/auth/authSlice';
 import { getPlanning } from '../../redux/planning/operations';
 import {
@@ -46,6 +44,9 @@ import {
   ValueType,
   NameType,
 } from 'recharts/types/component/DefaultTooltipContent';
+import { TrainingListActive } from '../../components/TrainingListActive/TrainingListActive';
+import { Timer } from '../../components/Timer/Timer';
+import { MobileTrainingBooksList } from '../../components/MobileTrainingBooksList/MobileTrainingBooksList';
 
 import {
   LineChart,
@@ -54,11 +55,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Label,
-  LabelList,
-  Legend,
   ResponsiveContainer,
-  Rectangle,
 } from 'recharts';
 
 const CustomTooltip = ({
@@ -82,6 +79,7 @@ const CustomTooltip = ({
                 </li>
               );
             }
+            return null;
           })}
       </ul>
     </div>
@@ -116,6 +114,7 @@ const TrainingPage = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isAnimated, setIsAnimated] = useState(false);
   const matches = useMediaQuery('(min-width:768px)');
+  const matchesDesktop = useMediaQuery('(min-width:1280px)');
 
   const updateIsFormSubmitted = (value: boolean) => {
     setIsFormSubmitted(value);
@@ -223,13 +222,30 @@ const TrainingPage = () => {
   return (
     <Container className="container">
       <ModernNormalize />
+
       {(() => {
         if (
           planningStatus === 'active' ||
           planningStatus === 'success' ||
           planningStatus === 'fail'
         ) {
-          return <MyTraining />;
+          return (
+            <div className="my-training-container">
+              <Timer></Timer>
+              {!matchesDesktop && (
+                <MyGoals
+                  trainingBookList={trainingBookList}
+                  planningStartDate={startDate}
+                  planningEndDate={endDate}
+                ></MyGoals>
+              )}
+              {matches ? (
+                <TrainingListActive></TrainingListActive>
+              ) : (
+                <MobileTrainingBooksList type="active" />
+              )}
+            </div>
+          );
         }
         if (planningStatus === 'none') {
           return (
@@ -248,11 +264,13 @@ const TrainingPage = () => {
         }
       })()}
 
-      <MyGoals
-        trainingBookList={trainingBookList}
-        planningStartDate={startDate}
-        planningEndDate={endDate}
-      ></MyGoals>
+      {matchesDesktop && (
+        <MyGoals
+          trainingBookList={trainingBookList}
+          planningStartDate={startDate}
+          planningEndDate={endDate}
+        ></MyGoals>
+      )}
 
       {planningId ? (
         <ResponsiveContainer
@@ -317,8 +335,10 @@ const TrainingPage = () => {
               activeDot={{ r: 4 }}
               isAnimationActive={isAnimated}
               label={({ x, y, stroke, value }) => {
-                const { actCorrection, planCorrection } =
-                  calculateLabelCoordinates(actualYCoordinate, planYCoordinate);
+                const { actCorrection } = calculateLabelCoordinates(
+                  actualYCoordinate,
+                  planYCoordinate
+                );
 
                 return (
                   <Fragment>
@@ -353,8 +373,10 @@ const TrainingPage = () => {
               dot={{ stroke: '#091E3F', fill: '#091E3F', strokeWidth: 4 }}
               isAnimationActive={false}
               label={({ x, y, stroke, value }) => {
-                const { actCorrection, planCorrection } =
-                  calculateLabelCoordinates(actualYCoordinate, planYCoordinate);
+                const { planCorrection } = calculateLabelCoordinates(
+                  actualYCoordinate,
+                  planYCoordinate
+                );
                 return (
                   <Fragment>
                     <rect

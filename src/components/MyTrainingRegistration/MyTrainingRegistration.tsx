@@ -17,6 +17,8 @@ import { getGoingToRead } from '../../redux/auth/authSlice';
 
 import { createPlanning } from '../../redux/planning/operations';
 import { getCurrentlyReading } from '../../redux/auth/authSlice';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { MobileTrainingBooksList } from '../MobileTrainingBooksList/MobileTrainingBooksList';
 
 // const initialState = [] as IBookData[];
 // const initialCurrentBook = {} as IBookData;
@@ -31,6 +33,7 @@ export const MyTrainingRegistration = ({
   updateIsFormSubmitted,
 }: IMyTrainingProps) => {
   // const isLoggedIn = useAppSelector(getIsLoggedIn);
+  const matches = useMediaQuery('(min-width:768px)');
 
   const dispatch = useAppDispatch();
   // useEffect(() => {
@@ -112,8 +115,7 @@ export const MyTrainingRegistration = ({
       <div className="date-input-container">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
-          slotProps={{ textField: { size: 'small' } }}
-       
+            slotProps={{ textField: { size: 'small' } }}
             label="Start"
             className="datepicker"
             defaultValue={dayjs(getCurrentDate())}
@@ -127,8 +129,7 @@ export const MyTrainingRegistration = ({
         </LocalizationProvider>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
-          slotProps={{ textField: { size: 'small' } }}
-        
+            slotProps={{ textField: { size: 'small' } }}
             label="Finish"
             className="datepicker"
             onChange={newValue => {
@@ -144,8 +145,8 @@ export const MyTrainingRegistration = ({
       </div>
       <div className="books-input-container">
         <Autocomplete
-      size='small'
-        className='books-autocomplete'
+          size="small"
+          className="books-autocomplete"
           onChange={(event: any, book: IBookData | null) => {
             if (book) {
               setCurrentBook(book);
@@ -164,7 +165,7 @@ export const MyTrainingRegistration = ({
           )}
         />
         <button
-        className = 'button-add'
+          className="button-add"
           type="button"
           onClick={() => {
             if (currentBook) {
@@ -176,12 +177,25 @@ export const MyTrainingRegistration = ({
           Add
         </button>
       </div>
-      <TrainingList
-        trainingList={trainingBookList}
-        removeFromTrainingListHandler={removeFromTrainingBookListHandler}
-      ></TrainingList>
 
-      {trainingBookList.length ? <button className='button-submit' type="submit">Start training</button>: null}
+      {matches ? (
+        <TrainingList
+          trainingList={trainingBookList}
+          removeFromTrainingListHandler={removeFromTrainingBookListHandler}
+        ></TrainingList>
+      ) : (
+        <MobileTrainingBooksList
+          type="registration"
+          trainingList={trainingBookList}
+          removeFromTrainingListHandler={removeFromTrainingBookListHandler}
+        />
+      )}
+
+      {trainingBookList.length ? (
+        <button className="button-submit" type="submit">
+          Start training
+        </button>
+      ) : null}
     </Container>
   );
 };

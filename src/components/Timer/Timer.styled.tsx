@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Container = styled.div`
   margin: 0 auto;
-  width: fit-content;
+  width: 100%;
   margin-bottom: 36px;
   h3 {
     color: #898f9f;
@@ -13,12 +13,15 @@ export const Container = styled.div`
   .timer-body {
     display: flex;
     gap: 28px;
-    padding-left: 45px;
-    padding-right: 45px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-bottom: 8px;
     background: #fff;
     box-shadow: 4px 4px 8px 0px rgba(36, 42, 55, 0.15);
-    width: fit-content;
+    width: min(100%, 280px);
+    align-items: center;
+    justify-content: center;
     .timer-body__item {
       position: relative;
       &:not(:last-of-type)::after {

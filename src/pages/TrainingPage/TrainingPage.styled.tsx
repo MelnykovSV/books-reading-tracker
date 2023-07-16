@@ -6,13 +6,19 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 100%;
   align-items: start;
-
+  padding-top: 32px;
   padding-bottom: 49px;
+  row-gap: 20px;
 
+  @media screen and (min-width: 768px) {
+    /* column-gap: 32px; */
+    row-gap: 32px;
+  }
   @media screen and (min-width: 1280px) {
     grid-template-columns: 928px 288px;
     column-gap: 32px;
     row-gap: 40px;
+    align-items: stretch;
   }
 
   .responsive-container {
@@ -115,6 +121,12 @@ export const Container = styled.div`
       font-size: 12px;
       font-weight: 600;
       text-transform: uppercase;
+    }
+  }
+
+  .my-training-container {
+    & > div:not(last-of-type) {
+      margin-bottom: 20px;
     }
   }
 `;
