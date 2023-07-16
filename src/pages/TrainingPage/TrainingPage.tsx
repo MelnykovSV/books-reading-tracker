@@ -60,6 +60,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
+import { ReactComponent as BackIcon } from '../../images/icons/back.svg';
 
 const CustomTooltip = ({
   payload,
@@ -331,7 +332,13 @@ const TrainingPage = () => {
               )}
               {!matches && isMobileFormOpen && (
                 <Fragment>
-                  <h2>Mobile form</h2>
+                  <button
+                    className="book-form__close-button"
+                    type="button"
+                    onClick={closeMobileForm}
+                  >
+                    <BackIcon />
+                  </button>
                   <MyTrainingRegistration
                     trainingBookList={trainingBookList}
                     startDate={startDate}
@@ -341,9 +348,6 @@ const TrainingPage = () => {
                     updateEndDate={updateEndDate}
                     updateIsFormSubmitted={updateIsFormSubmitted}
                   />
-                  <button type="button" onClick={closeMobileForm}>
-                    Close form
-                  </button>
                 </Fragment>
               )}
             </Fragment>

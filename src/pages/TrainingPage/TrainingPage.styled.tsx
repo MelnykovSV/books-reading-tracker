@@ -152,4 +152,20 @@ export const Container = styled.div`
       fill: #ffffff;
     }
   }
+
+  .book-form__close-button {
+    cursor: pointer;
+    border: none;
+    background-color: #f6f7fb;
+    height: 36px;
+    margin-bottom: 20px;
+    width: fit-content;
+    svg {
+      display: block;
+    }
+
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+  }
 `;

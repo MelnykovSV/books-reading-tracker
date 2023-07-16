@@ -9,6 +9,8 @@ import Modal from '@mui/material/Modal';
 import { FeedbackForm } from '../../components/FeedbackForm/FeedBackForm';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
+import { ReactComponent as PlusIcon } from '../../images/icons/plus.svg';
+
 // import dayjs from 'dayjs';
 
 const HomePage = () => {
@@ -42,11 +44,7 @@ const HomePage = () => {
       <div className="container">
         {(matches || isMobileFormOpen) && (
           <Fragment>
-            <h2>Form!!!</h2>
-            <BookForm></BookForm>
-            <button type="button" onClick={closeMobileForm}>
-              Close form
-            </button>
+            <BookForm formCloseHandler={closeMobileForm}></BookForm>
           </Fragment>
         )}
 
@@ -74,9 +72,15 @@ const HomePage = () => {
               />
             </Box>
           </Modal>
-          <button type="button" onClick={openMobileForm}>
-            Open form
-          </button>
+          {!matches && !isMobileFormOpen && (
+            <button
+              type="button"
+              className="form-open-button"
+              onClick={openMobileForm}
+            >
+              <PlusIcon />
+            </button>
+          )}
         </Fragment>
       )}
     </Container>

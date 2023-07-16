@@ -7,7 +7,11 @@ import { useAppDispatch } from '../../redux/hooks';
 import { addBook } from '../../redux/auth/operations';
 import { IFormikResetForm } from '../../interfaces';
 
-export const BookForm = () => {
+export const BookForm = ({
+  formCloseHandler,
+}: {
+  formCloseHandler: () => void;
+}) => {
   const dispatch = useAppDispatch();
   const schema = yup.object().shape({
     title: yup
@@ -60,7 +64,11 @@ export const BookForm = () => {
         className="book-form"
       >
         <FormikForm>
-          <button className="book-form__close-button">
+          <button
+            className="book-form__close-button"
+            type="button"
+            onClick={formCloseHandler}
+          >
             <BackIcon />
           </button>
           <label
