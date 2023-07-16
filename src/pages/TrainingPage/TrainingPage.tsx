@@ -47,7 +47,9 @@ import {
 import { TrainingListActive } from '../../components/TrainingListActive/TrainingListActive';
 import { Timer } from '../../components/Timer/Timer';
 import { MobileTrainingBooksList } from '../../components/MobileTrainingBooksList/MobileTrainingBooksList';
-// import { TrainingList } from '../../components/TrainingList/TrainingList';
+
+import { ReactComponent as PlusIcon } from '../../images/icons/plus.svg';
+import { createPlanning } from '../../redux/planning/operations';
 
 import {
   LineChart,
@@ -116,6 +118,15 @@ const TrainingPage = () => {
   const [isAnimated, setIsAnimated] = useState(false);
   const matches = useMediaQuery('(min-width:768px)');
   const matchesDesktop = useMediaQuery('(min-width:1280px)');
+
+  const [isMobileFormOpen, setisMobileFormOpen] = useState(false);
+
+  const openMobileForm = () => {
+    setisMobileFormOpen(true);
+  };
+  const closeMobileForm = () => {
+    setisMobileFormOpen(false);
+  };
 
   const updateIsFormSubmitted = (value: boolean) => {
     setIsFormSubmitted(value);
@@ -228,7 +239,7 @@ const TrainingPage = () => {
   return (
     <Container className="container">
       <ModernNormalize />
-      {!matchesDesktop && (
+      {!matchesDesktop && (matches || !isMobileFormOpen) && (
         <MyGoals
           trainingBookList={trainingBookList}
           planningStartDate={startDate}
@@ -245,13 +256,13 @@ const TrainingPage = () => {
           return (
             <div className="my-training-container">
               <Timer></Timer>
-              {matchesDesktop && (
+              {/* {matchesDesktop && (
                 <MyGoals
                   trainingBookList={trainingBookList}
                   planningStartDate={startDate}
                   planningEndDate={endDate}
                 ></MyGoals>
-              )}
+              )} */}
 
               {matches ? (
                 <TrainingListActive></TrainingListActive>
@@ -283,14 +294,57 @@ const TrainingPage = () => {
                   planningEndDate={endDate}
                 ></MyGoals>
               )}
-              {!matches && (
-                <MobileTrainingBooksList
-                  type="registration"
-                  trainingList={trainingBookList}
-                  removeFromTrainingListHandler={
-                    removeFromTrainingBookListHandler
-                  }
-                />
+              {!matches && !isMobileFormOpen && (
+                <Fragment>
+                  <MobileTrainingBooksList
+                    type="registration"
+                    trainingList={trainingBookList}
+                    removeFromTrainingListHandler={
+                      removeFromTrainingBookListHandler
+                    }
+                  />
+                  <button
+                    type="button"
+                    className="form-open-button"
+                    onClick={openMobileForm}
+                  >
+                    <PlusIcon />
+                  </button>
+
+                  {trainingBookList.length && endDate ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const queryBody = {
+                          startDate,
+                          endDate,
+                          books: trainingBookList.map(item => item._id),
+                        };
+                        dispatch(createPlanning(queryBody));
+                        updateIsFormSubmitted(true);
+                      }}
+                    >
+                      Submit ref
+                    </button>
+                  ) : null}
+                </Fragment>
+              )}
+              {!matches && isMobileFormOpen && (
+                <Fragment>
+                  <h2>Mobile form</h2>
+                  <MyTrainingRegistration
+                    trainingBookList={trainingBookList}
+                    startDate={startDate}
+                    endDate={endDate}
+                    updateTrainingBookList={updateTrainingBookList}
+                    updateStartDate={updateStartDate}
+                    updateEndDate={updateEndDate}
+                    updateIsFormSubmitted={updateIsFormSubmitted}
+                  />
+                  <button type="button" onClick={closeMobileForm}>
+                    Close form
+                  </button>
+                </Fragment>
               )}
             </Fragment>
           );
@@ -299,23 +353,21 @@ const TrainingPage = () => {
         }
       })()}
 
-      {/* {matchesDesktop && (
+      {matchesDesktop && planningId && (
         <MyGoals
           trainingBookList={trainingBookList}
           planningStartDate={startDate}
           planningEndDate={endDate}
         ></MyGoals>
-      )} */}
+      )}
 
-      {status ? (
+      {status && (matches || !isMobileFormOpen) ? (
         <ResponsiveContainer
           className="responsive-container"
           width="100%"
           height={matches ? 340 : 290}
         >
           <LineChart
-            // width={500}
-            // height={300}
             data={chartData}
             margin={{
               top: 5,
@@ -336,7 +388,7 @@ const TrainingPage = () => {
               }}
             />
 
-            <YAxis tick={false} padding={{ top: 20, bottom: 40 }} />
+            <YAxis tick={false} padding={{ top: 40, bottom: 40 }} />
             <Tooltip content={<CustomTooltip />} />
 
             <Line
@@ -374,12 +426,13 @@ const TrainingPage = () => {
                   actualYCoordinate,
                   planYCoordinate
                 );
+                console.log(x, y);
 
                 return (
                   <Fragment>
                     <rect
                       x={x - 40}
-                      y={y - 34 + actCorrection}
+                      y={y - 37 + actCorrection}
                       width={50}
                       height={30}
                       fill="#F5F7FA"
@@ -387,7 +440,7 @@ const TrainingPage = () => {
                     <text
                       x={x}
                       y={y}
-                      dy={-14 + actCorrection}
+                      dy={-17 + actCorrection}
                       dx={-15}
                       fill={'#ff6b08'}
                       fontSize={10}
@@ -412,11 +465,12 @@ const TrainingPage = () => {
                   actualYCoordinate,
                   planYCoordinate
                 );
+                console.log(x, y);
                 return (
                   <Fragment>
                     <rect
                       x={x - 40}
-                      y={y - 34 + planCorrection}
+                      y={y - 37 + planCorrection}
                       width={50}
                       height={30}
                       fill="#F5F7FA"
@@ -424,7 +478,7 @@ const TrainingPage = () => {
                     <text
                       x={x}
                       y={y}
-                      dy={-14 + planCorrection}
+                      dy={-17 + planCorrection}
                       dx={-15}
                       fill={'black'}
                       fontSize={10}

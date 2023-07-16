@@ -152,6 +152,7 @@ export const getProcessedChartData = createSelector(
         planningBooks.reduce((acc, item) => acc + item.pagesTotal, 0)
       );
 
+
       return data;
     }
 

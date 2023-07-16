@@ -18,7 +18,6 @@ import { getGoingToRead } from '../../redux/auth/authSlice';
 import { createPlanning } from '../../redux/planning/operations';
 import { getCurrentlyReading } from '../../redux/auth/authSlice';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { MobileTrainingBooksList } from '../MobileTrainingBooksList/MobileTrainingBooksList';
 
 // const initialState = [] as IBookData[];
 // const initialCurrentBook = {} as IBookData;
@@ -178,20 +177,21 @@ export const MyTrainingRegistration = ({
         </button>
       </div>
 
-      {matches ? (
-        <TrainingList
-          trainingList={trainingBookList}
-          removeFromTrainingListHandler={removeFromTrainingBookListHandler}
-        ></TrainingList>
-      ) : (
-        <MobileTrainingBooksList
-          type="registration"
-          trainingList={trainingBookList}
-          removeFromTrainingListHandler={removeFromTrainingBookListHandler}
-        />
-      )}
+      {
+        matches ? (
+          <TrainingList
+            trainingList={trainingBookList}
+            removeFromTrainingListHandler={removeFromTrainingBookListHandler}
+          ></TrainingList>
+        ) : null
+        // <MobileTrainingBooksList
+        //   type="registration"
+        //   trainingList={trainingBookList}
+        //   removeFromTrainingListHandler={removeFromTrainingBookListHandler}
+        // />
+      }
 
-      {trainingBookList.length ? (
+      {trainingBookList.length && matches ? (
         <button className="button-submit" type="submit">
           Start training
         </button>

@@ -148,8 +148,8 @@ export function processPlanningStats(
   for (const key in result) {
     resultArray.push({
       name: key,
-      actual: result[key].actual,
-      plan: result[key].plan,
+      actual: result[key].actual as number | null,
+      plan: result[key].plan || null,
     });
   }
 
@@ -161,11 +161,11 @@ export function processPlanningStats(
 export function calculateLabelCoordinates(act: number, plan: number) {
   const dif = act - plan;
 
-  if (dif > 0 && dif < 40) {
-    return { actCorrection: 40, planCorrection: 0 };
+  if (dif > 0 && dif < 43) {
+    return { actCorrection: 43, planCorrection: 0 };
   }
-  if (dif <= 0 && dif > -40) {
-    return { actCorrection: 0, planCorrection: 40 };
+  if (dif <= 0 && dif > -43) {
+    return { actCorrection: 0, planCorrection: 43 };
   } else {
     return { actCorrection: 0, planCorrection: 0 };
   }
